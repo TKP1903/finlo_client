@@ -78,6 +78,7 @@ input{
     gap: 10px;
     color: gray;
     font-size: 15px;
+    cursor: pointer;
 }
 .google_icon{
     width: 30px;

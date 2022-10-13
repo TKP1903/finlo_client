@@ -1,0 +1,107 @@
+.document_container {
+    width: 70%;
+    margin: 80px 0 0 0;
+}
+.page_heading {
+    width: 100%;
+    text-align: center;
+
+}
+.documents_block{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 50px;
+}
+.upload_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1C76BD;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+.icon{
+    width: 20px;
+    height: 20px;
+    color: #fff;
+}
+.file_upload{
+    border: none;
+    width: 100px;
+}
+
+.custom-file-input {
+    color: transparent;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Add Folder';
+    color: #fff;
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-size: large;
+    padding: 5px;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active {
+    outline: 0;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+  }
+  
+
+  .folder_block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+  .folder
+  {
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba( 255, 255, 255, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.158);
+    backdrop-filter: blur( 4.5px );
+    -webkit-backdrop-filter: blur( 4.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+/* .folder:hover{
+  background-color: #1C76BD;
+  color: #fff;
+} */
+  .folder_name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .submit_button{
+    color: #fff;
+    background-color: #1C76BD;
+    padding: 5px 15px;
+    border: 2px solid #1C76BD;
+    border-radius: 5px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }

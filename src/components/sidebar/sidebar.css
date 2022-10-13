@@ -96,6 +96,7 @@
     color: var(--first-color-alt);
     transition: 0.5s;
     margin-bottom: 1.5rem;
+    cursor: pointer;
   }
   
   .nav-link:hover {
