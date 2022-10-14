@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./documents.css";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
 import {
   BsFillFolderFill,
   BsFolderCheck,
@@ -91,6 +94,7 @@ const DocumentsPage = () => {
               </div>
             ))}
         </div>
+        
         <div className="folder_content_main">
           <div className="folder_content">
             <h1><AiOutlineFolderOpen className="folder_content_icon"/>2022 Tax_files
