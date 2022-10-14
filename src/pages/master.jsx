@@ -11,6 +11,7 @@ const Master = () => {
     <div>
       {type === "home" && <HomePage />}
       {type === "documents" && <DocumentsPage />}
+        
     </div>
   );
 };

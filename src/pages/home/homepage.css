@@ -65,3 +65,38 @@
     font-size: 1rem;
     font-weight: bold;
 }
+
+.recent-uploads table {
+    width: 100%;
+    
+}
+
+.recent-uploads td{
+    text-align: center;
+    padding: 5px;
+}
+.recent-uploads button{
+    background-color: #1C76BD;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.recent-uploads h1{
+    font-size: 15px;
+    font-weight: 600;
+    font-family: sans-serif;
+    background:#1C76BD;
+    color: #fff;
+    padding: 10px;
+    top: -20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.recent-uploads {
+    width: 95%;
+}

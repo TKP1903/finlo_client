@@ -16,7 +16,9 @@ const DashBoard1 = () => {
           <span>Make Payment</span>
         </Link>
       </div>
-      <div></div>
+      <div>
+        
+      </div>
     </div>
   );
 };

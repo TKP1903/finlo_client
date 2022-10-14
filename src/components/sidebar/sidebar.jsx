@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import logo from "../../assets/finlo_logo.png"
 
 import { GoThreeBars } from "react-icons/go";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
@@ -9,15 +10,16 @@ import { ImProfile } from "react-icons/im";
 import { MdPayment } from "react-icons/md";
 import Master from "../../pages/master";
 
+
 const Sidebar = () => {
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const { type } = useParams();
-
   const logouthandler = () => {
     localStorage.removeItem("FinloUser");
     navigate("/");
   };
+
   return (
     <main className={show ? "space-toggle" : null}>
       <header className={`header ${show ? "space-toggle" : null}`}>
@@ -30,10 +32,9 @@ const Sidebar = () => {
         <nav className="nav">
           <div>
             <Link to="/" className="nav-logo">
-              <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>
-                F
+              <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F
               </i>
-              <span className="nav-logo-name">Finlo</span>
+              <span className="nav-logo-name"><img src={logo} alt="" style={{width:"100px"}} /></span>
             </Link>
 
             <div className="nav-list">

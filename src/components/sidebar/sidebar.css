@@ -6,6 +6,7 @@
     --first-color-alt: #fff;
     --white-color: #D6EBFC;
   }
+
   a {
     text-decoration: none;
   }
@@ -69,13 +70,16 @@
     column-gap: 2rem;
     padding: 0.5rem 0 0.5rem 1.5rem;
   }
+
   .nav-link-icon{
     width: 1.2rem;
     height: 1.2rem;
   }
+
   .nav-logo {
     margin-bottom: 2rem;
   }
+
   .show-logo-icon{
     color: #1C76BD;
   }
