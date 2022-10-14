@@ -7,8 +7,10 @@ import {
   BsThreeDotsVertical,
   BsFillCloudArrowUpFill,
 } from "react-icons/bs";
+import {AiOutlineFolderOpen} from "react-icons/ai";
 import axios from "axios";
 import { useEffect } from "react";
+
 
 const DocumentsPage = () => {
   const [userDocs, setUserDocs] = useState();
@@ -89,7 +91,14 @@ const DocumentsPage = () => {
               </div>
             ))}
         </div>
-        <div>
+        <div className="folder_content_main">
+          <div className="folder_content">
+            <h1><AiOutlineFolderOpen className="folder_content_icon"/>2022 Tax_files
+            <BsThreeDotsVertical className="folder_content_icon2"   /></h1>
+          </div>   
+        </div>
+        
+        <div className="upload-btn"> 
           <button className="submit_button" onClick={uploadFile}>
             <BsFillCloudArrowUpFill className="icon" />
             Upload
