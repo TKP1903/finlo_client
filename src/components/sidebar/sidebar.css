@@ -156,11 +156,13 @@
     .space-toggle {
       padding-left: calc(var(--nav-width) + 188px);
     }
+    
     .btn-logout{
       color: #1C76BD;
       padding-left: 20px;
-
+      cursor: pointer;
     }
+
     .log-avator{
       width: 60%;
       display: flex;
@@ -169,6 +171,7 @@
       align-items: center;
       padding-left: 10%;
     }
+
     .useravatar{
       padding-left: 80px;
     }
