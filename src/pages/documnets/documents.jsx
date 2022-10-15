@@ -144,7 +144,6 @@ const DocumentsPage = () => {
         </div>
 
         {/* New folder modal */}
-       
 
         <div className="folder_content_main">
           <div className="folder_content">
@@ -155,7 +154,6 @@ const DocumentsPage = () => {
             }     
           </div>   
         </div>
-        
         <div className="upload-btn"> 
           <button className="submit_button" onClick={uploadFile}>
             <BsFillCloudArrowUpFill className="icon" />
