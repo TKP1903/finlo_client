@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/finlo_logo.png"
+import UserAvatar from "react-user-avatar";
 
 import { GoThreeBars } from "react-icons/go";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
@@ -26,9 +27,14 @@ const Sidebar = () => {
         <div className="header-toggle" onClick={() => setShow(!show)}>
           <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
         </div>
-        <div className="btn-logout" onClick={logouthandler}>
-            <IoMdLogOut className="nav-link-icon" />
-            <span className="nav-link-name">Logout</span>
+        <div className="log-avator">
+        <div className="useravatar">
+          <UserAvatar size="42" name="Will Binns-Smith"  />
+          </div>
+          <div className="btn-logout" onClick={logouthandler}>
+              <IoMdLogOut className="nav-link-icon" />
+              <span className="nav-link-name">Logout</span>
+          </div>
         </div>
       </header>
 
