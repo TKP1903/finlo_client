@@ -82,7 +82,7 @@ const DocumentsPage = () => {
   }
   const handleClick = event => {
     event.preventDefault();
-    alert("Folder Create")
+    alert("Folder Create Successfully") ;
   }
 
   return (
