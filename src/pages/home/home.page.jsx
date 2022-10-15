@@ -15,34 +15,61 @@ const HomePage = () => {
       <div>
         <div className="dashboard_block">
           <Link to="" className="card1">
-            <MdOutlineMiscellaneousServices style={{width:"40px",height:"50px",padding:"10px"}}/>
+            <MdOutlineMiscellaneousServices
+              style={{ width: "40px", height: "50px", padding: "10px" }}
+            />
             <span>Services we offer</span>
           </Link>
           <Link to="/documents" className="card2">
-            <MdOutlineUploadFile style={{width:"40px",height:"50px",padding:"10px"}} />
+            <MdOutlineUploadFile
+              style={{ width: "40px", height: "50px", padding: "10px" }}
+            />
             <span>Upload Documents</span>
           </Link>
           <Link to="" className="card3">
-            <MdPayment style={{width:"40px",height:"50px",padding:"10px"}} />
+            <MdPayment
+              style={{ width: "40px", height: "50px", padding: "10px" }}
+            />
             <span>Make Payment</span>
           </Link>
         </div>
         <div className="recent-uploads">
-        <h1>Recent uploads</h1>
-            <table>
-                <tr>
-                  <th>Doc Name</th>
-                  <th>Uploaded By</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-                <tr>
-                  <td>FY 22-23.docx</td>
-                  <td>john</td>
-                  <td>10/06/2022</td>
-                  <td><button>Action</button><button >Delete</button></td>
-                </tr>
-            </table>
+          <h1>Recent uploads</h1>
+          <table>
+            <tr>
+              <th>Doc Name</th>
+              <th>Uploaded By</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>FY 22-23.docx</td>
+              <td>john</td>
+              <td>10/06/2022</td>
+              <td>
+                <button>Action</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>FY 22-23.docx</td>
+              <td>john</td>
+              <td>10/06/2022</td>
+              <td>
+                <button>Action</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>FY 22-23.docx</td>
+              <td>john</td>
+              <td>10/06/2022</td>
+              <td>
+                <button>Action</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </>

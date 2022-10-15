@@ -1,9 +1,16 @@
 .login_container{
     width: 100vw;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+.login_block{
+    background: rgba( 255, 255, 255, 0.05 );
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.103);
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    padding: 50px 10px;
 }
 .logo{
     width: 200px;
@@ -30,12 +37,15 @@ label{
     font-size: medium;
     font-weight: normal;
 }
+.error_text {
+    color: red;
+    font-size: 1rem;
+}
 input{
     width: 300px;
     height: 30px;
+    border: 1px solid rgba(11, 11, 11, 0.655);
     border-radius: 5px;
-    border: 2px solid gray;
-    /* color: gray; */
     padding-left: 5px;
 }
 .signin_button{
@@ -96,4 +106,11 @@ input{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.errormsg {
+    color: #fff;
+    background-color: red;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
 }

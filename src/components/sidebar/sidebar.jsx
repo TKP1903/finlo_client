@@ -32,9 +32,12 @@ const Sidebar = () => {
         <nav className="nav">
           <div>
             <Link to="/" className="nav-logo">
-              <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F
+              <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>
+                F
               </i>
-              <span className="nav-logo-name"><img src={logo} alt="" style={{width:"100px"}} /></span>
+              <span className="nav-logo-name">
+                <img src={logo} alt="" style={{ width: "100px" }} />
+              </span>
             </Link>
 
             <div className="nav-list">
@@ -42,23 +45,23 @@ const Sidebar = () => {
                 <IoHome className="nav-link-icon" />
                 <span className="nav-link-name">Home</span>
               </Link>
-              <Link to="/dashboard" className="nav-link">
+              <Link to="/" className="nav-link">
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Profile</span>
               </Link>
-              <Link to="/dashboard" className="nav-link">
+              <Link to="/documents" className="nav-link">
                 <IoDocumentSharp className="nav-link-icon" />
                 <span className="nav-link-name">Documents</span>
               </Link>
-              <Link to="/dashboard" className="nav-link">
+              <Link to="/" className="nav-link">
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Contract Proposal</span>
               </Link>
-              <Link to="/dashboard" className="nav-link">
+              <Link to="/" className="nav-link">
                 <MdPayment className="nav-link-icon" />
                 <span className="nav-link-name">Payments</span>
               </Link>
-              <Link to="/dashboard" className="nav-link">
+              <Link to="/" className="nav-link">
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Referral Program</span>
               </Link>
