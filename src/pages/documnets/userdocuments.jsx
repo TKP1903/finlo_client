@@ -54,15 +54,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           className="file-upload"
         >
           <BsFillFolderFill className="icon" />
-          Choose File
-          <input
-            id="inputTag"
-            type="file"
-            style={{ display: "none" }}
-            onChange={(e) => {
-              setUserDocs(e.target.files[0]);
-            }}
-          />
+          Back
         </label>
 
         <div className="upload-btn">

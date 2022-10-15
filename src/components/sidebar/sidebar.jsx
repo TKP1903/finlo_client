@@ -29,10 +29,10 @@ const Sidebar = () => {
         </div>
         <div className="log-avator">
         <div className="useravatar">
-          <UserAvatar size="42" name="Will Binns-Smith"  />
+          <UserAvatar size="42" name="Will Binns-Smith" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" />
           </div>
           <div className="btn-logout" onClick={logouthandler}>
-              <IoMdLogOut className="nav-link-icon" />
+              <IoMdLogOut className="nav-link-icon nav-link2" />
               <span className="nav-link-name">Logout</span>
           </div>
         </div>

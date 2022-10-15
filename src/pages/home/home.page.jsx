@@ -7,8 +7,6 @@ import {MdOutlineUploadFile} from "react-icons/md";
 import {MdPayment} from "react-icons/md";
 
 
-
-
 const HomePage = () => {
   return (
     <>
@@ -16,19 +14,19 @@ const HomePage = () => {
         <div className="dashboard_block">
           <Link to="" className="card1">
             <MdOutlineMiscellaneousServices
-              style={{ width: "40px", height: "50px", padding: "10px" }}
+              style={{ width: "80px", height: "70px", padding: "10px" }}
             />
             <span>Services We Offer</span>
           </Link>
           <Link to="/documents" className="card2">
             <MdOutlineUploadFile
-              style={{ width: "40px", height: "50px", padding: "10px" }}
+              style={{ width: "80px", height: "70px", padding: "10px" }}
             />
             <span>Upload Documents</span>
           </Link>
           <Link to="" className="card3">
             <MdPayment
-              style={{ width: "40px", height: "50px", padding: "10px" }}
+              style={{ width: "80px", height: "70px", padding: "10px" }}
             />
             <span>Make Payment</span>
           </Link>
@@ -43,7 +41,7 @@ const HomePage = () => {
               <th>File size</th>
               <th>Action</th>
             </tr>
-            <tr >
+            <tr>
               <td>FY 22-23</td>
               <td>23/06/2022 12:00 PM</td>
               <td>docx</td>
