@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./documents.css";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+
 
 import {
   BsFillFolderFill,
@@ -63,6 +62,28 @@ const DocumentsPage = () => {
   useEffect(() => {
     getUserFiles(1);
   }, []);
+
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+  const [folder_name, setFolder_name] = useState('');
+  const [create, setCreatefolder] = useState('');
+  
+  const handleChange = event => {
+    setFolder_name(event.target.value);
+  }
+  const handleClick = event => {
+    event.preventDefault();
+  }
+
   return (
     <div className="document_container">
       <h3 className="page_heading">Documents</h3>
@@ -70,12 +91,36 @@ const DocumentsPage = () => {
         <div className="upload_block">
           <span className="upload_button">
             <BsFillFolderFill className="icon" />
-            <input
-              type="file"
-              className="file_upload custom-file-input"
-              onChange={(e) => setUserDocs(e.target.files[0])}
-            />
+             <div className="folder_creation">
+            <button onClick={toggleModal} className="btn-modal">
+              Create New folder
+            </button>
+
+            {modal && (
+              <div className="modal">
+                <div onClick={toggleModal} className="overlay"></div>
+                <div className="modal-content">
+                  <div>
+                    Folder Name : <input type="text" name="folder_name" value={folder_name}  />
+  
+                  </div>
+                  <div className="btn-section">
+                  <button className="btn_overlay" onClick={handleClick}>Create</button>
+                  <button className="btn_overlay" onClick={toggleModal}>close</button>
+                  </div>
+                  <input
+                  type="file"
+                  className="file_upload custom-file-input"
+                  onChange={(e) => setUserDocs(e.target.files[0])} placeholder="Upload files" className="btn-file"
+                />
+                </div>
+                
+              </div>
+            )}
+            
+        </div>
           </span>
+          
         </div>
         <div className="folder_block">
           {userFiles.length > 0 &&
@@ -94,11 +139,17 @@ const DocumentsPage = () => {
               </div>
             ))}
         </div>
-        
+
+        {/* New folder modal */}
+       
+
         <div className="folder_content_main">
           <div className="folder_content">
-            <h1><AiOutlineFolderOpen className="folder_content_icon"/>2022 Tax_files
+            { create?
+            <h1><AiOutlineFolderOpen className="folder_content_icon"/>{folder_name}
             <BsThreeDotsVertical className="folder_content_icon2"   /></h1>
+            :null
+            }     
           </div>   
         </div>
         
