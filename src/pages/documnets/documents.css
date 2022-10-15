@@ -95,8 +95,7 @@
     padding-left: 70%;
     cursor: pointer;
   }
-  .folder_creation{
-  }
+  
 
   .btn-modal {
     padding: 10px 20px;
@@ -136,6 +135,7 @@
 }
 .btn-section{
   padding-top: 10px;
+  margin-left: 130px;
 }
 
 .btn_overlay{
@@ -148,6 +148,7 @@
   cursor: pointer;
   margin-left: 10px;
 }
+
 .btn-file{
   border: none;
   padding-top: 20px;

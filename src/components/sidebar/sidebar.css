@@ -156,4 +156,12 @@
     .space-toggle {
       padding-left: calc(var(--nav-width) + 188px);
     }
+
+    .btn-logout{
+      margin: 350px;
+      color: #1C76BD;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
   }

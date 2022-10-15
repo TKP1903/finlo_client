@@ -26,6 +26,10 @@ const Sidebar = () => {
         <div className="header-toggle" onClick={() => setShow(!show)}>
           <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
         </div>
+        <div className="btn-logout" onClick={logouthandler}>
+            <IoMdLogOut className="nav-link-icon" />
+            <span className="nav-link-name">Logout</span>
+        </div>
       </header>
 
       <aside className={`sidebar ${show ? "show" : null}`}>
@@ -67,14 +71,8 @@ const Sidebar = () => {
               </Link>
             </div>
           </div>
-
-          <div className="nav-link" onClick={logouthandler}>
-            <IoMdLogOut className="nav-link-icon" />
-            <span className="nav-link-name">Logout</span>
-          </div>
         </nav>
       </aside>
-
       <div>
         <Master />
       </div>

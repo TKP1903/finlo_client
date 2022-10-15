@@ -36,39 +36,40 @@ const HomePage = () => {
         <div className="recent-uploads">
           <h1>Recent uploads</h1>
           <table>
-            <tr>
-              <th>Doc Name</th>
-              <th>Uploaded By</th>
-              <th>Date</th>
+            <tr className="tr-header">
+              <th>File Name</th>
+              <th>Uploaded Date & Time  </th>
+              <th>File type</th>
+              <th>File size</th>
               <th>Action</th>
             </tr>
             <tr>
-              <td>FY 22-23.docx</td>
-              <td>john</td>
-              <td>10/06/2022</td>
+              <td>FY 22-23</td>
+              <td>23/06/2022 12:00 PM</td>
+              <td>docx</td>
+              <td>1.06 MB</td>
               <td>
-                <button>Action</button>
                 <button>Delete</button>
               </td>
-            </tr>
+            </tr>     
             <tr>
-              <td>FY 22-23.docx</td>
-              <td>john</td>
-              <td>10/06/2022</td>
+              <td>FY 22-23</td>
+              <td>23/06/2022 5:00 PM</td>
+              <td>docx</td>
+              <td>1.58 MB</td>
               <td>
-                <button>Action</button>
                 <button>Delete</button>
               </td>
-            </tr>
+            </tr>     
             <tr>
-              <td>FY 22-23.docx</td>
-              <td>john</td>
-              <td>10/06/2022</td>
+              <td>FY 22-23</td>
+              <td>23/06/2022 4:00 AM</td>
+              <td>docx</td>
+              <td>4.06 MB</td>
               <td>
-                <button>Action</button>
                 <button>Delete</button>
               </td>
-            </tr>
+            </tr>        
           </table>
         </div>
       </div>

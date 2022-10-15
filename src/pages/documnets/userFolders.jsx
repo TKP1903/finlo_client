@@ -92,7 +92,7 @@ const UserFoldersPage = ({ documentshandler }) => {
             <BsFillFolderFill className="icon" />
             <div className="folder_creation">
               <button onClick={toggleModal} className="btn-modal">
-                Create New folder
+                New folder
               </button>
 
               {modal && (
@@ -112,7 +112,7 @@ const UserFoldersPage = ({ documentshandler }) => {
                         Create
                       </button>
                       <button className="btn_overlay" onClick={toggleModal}>
-                        close
+                        Close
                       </button>
                     </div>
                     {/* <div>
