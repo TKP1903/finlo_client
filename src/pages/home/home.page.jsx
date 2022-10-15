@@ -18,7 +18,7 @@ const HomePage = () => {
             <MdOutlineMiscellaneousServices
               style={{ width: "40px", height: "50px", padding: "10px" }}
             />
-            <span>Services we offer</span>
+            <span>Services We Offer</span>
           </Link>
           <Link to="/documents" className="card2">
             <MdOutlineUploadFile
@@ -34,7 +34,7 @@ const HomePage = () => {
           </Link>
         </div>
         <div className="recent-uploads">
-          <h1>Recent uploads</h1>
+          <h1>Recent Uploads</h1>
           <table>
             <tr className="tr-header">
               <th>File Name</th>
@@ -43,7 +43,7 @@ const HomePage = () => {
               <th>File size</th>
               <th>Action</th>
             </tr>
-            <tr>
+            <tr >
               <td>FY 22-23</td>
               <td>23/06/2022 12:00 PM</td>
               <td>docx</td>

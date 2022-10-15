@@ -64,7 +64,7 @@
 }
 
 .recent-uploads table {
-    width: 100%;
+    width: 95%;
     
 }
 
@@ -84,13 +84,11 @@
 }
 
 .recent-uploads h1{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
     font-family: sans-serif;
-    background:#1C76BD;
-    color: #fff;
-    padding: 10px;
-    top: -20px;
+    color: #1C76BD;
+    padding: 5px;
 }
 
 .recent-uploads tr {
@@ -100,11 +98,9 @@
 .tr-header{
  background-color: #1C76BD;
  color: #fff;
- height: 50px;
-}
-
-
-
-.card1:hover{
-
+ height: 35px;
 } 
+
+.recent-uploads td{
+ background-color: #f3f3f3;
+}
