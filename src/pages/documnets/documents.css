@@ -161,7 +161,7 @@
     line-height: 1.4;
     background: #f1f1f1;
     padding: 14px 28px;
-    border-radius: 3px;
+    border-radius: 8px;
     max-width: 600px;
     min-width: 300px;
 }
@@ -181,7 +181,7 @@
 }
 .btn-file{
   border: none;
-  
+  padding-top: 20px;
 }
 
   

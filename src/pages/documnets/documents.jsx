@@ -108,11 +108,13 @@ const DocumentsPage = () => {
                   <button className="btn_overlay" onClick={handleClick}>Create</button>
                   <button className="btn_overlay" onClick={toggleModal}>close</button>
                   </div>
-                  <input
-                  type="file"
-                  className="file_upload custom-file-input"
-                  onChange={(e) => setUserDocs(e.target.files[0])} placeholder="Upload files" className="btn-file"
-                />
+                  <div>
+                    <input
+                      type="file"
+                      className="btn-file"
+                      onChange={(e) => setUserDocs(e.target.files[0])} placeholder="Upload files"
+                   />
+                  </div>
                 </div>
                 
               </div>
