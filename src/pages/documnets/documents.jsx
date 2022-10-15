@@ -109,13 +109,13 @@ const DocumentsPage = () => {
                   <button className="btn_overlay" onClick={handleClick}>Create</button>
                   <button className="btn_overlay" onClick={toggleModal}>close</button>
                   </div>
-                  <div>
+                  {/* <div>
                     <input
                       type="file"
                       className="btn-file"
                       onChange={(e) => setUserDocs(e.target.files[0])} placeholder="Upload files"
                    />
-                  </div>
+                  </div> */}
                 </div>
                 
               </div>
@@ -150,7 +150,7 @@ const DocumentsPage = () => {
           <div className="folder_content">
             { create?
             <h1><AiOutlineFolderOpen className="folder_content_icon"/>{folder_name}
-            <BsThreeDotsVertical className="folder_content_icon2"   /></h1>
+            <BsThreeDotsVertical className="folder_content_icon2" /></h1>
             :null
             }     
           </div>   
