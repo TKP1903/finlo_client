@@ -66,7 +66,7 @@ const UserFoldersPage = ({ documentshandler }) => {
     }
   };
   useEffect(() => {
-    getUserFiles(1);
+    getUserFiles(0);
   }, []);
 
   const toggleModal = () => {
