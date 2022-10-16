@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import logo from "../../assets/finlotax(white) .png"
+import logo from "../../assets/finlo_logo.png"
 import UserAvatar from "react-user-avatar";
 
 import { GoThreeBars } from "react-icons/go";
@@ -32,7 +32,7 @@ const Sidebar = () => {
           <UserAvatar size="42" name="Will Binns-Smith" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" />
           </div>
           <div className="btn-logout" onClick={logouthandler}>
-              <IoMdLogOut className="nav-link-icon nav-link2" />
+              <IoMdLogOut className="nav-link-icon" style={{}} />
               <span className="nav-link-name">Logout</span>
           </div>
         </div>
@@ -46,8 +46,9 @@ const Sidebar = () => {
                 F
               </i>
               <span className="nav-logo-name">
-                <img src={logo} alt="" style={{ width: "100px" }} />
+                 <img src={logo} alt="" style={{ width: "100px" }} />
               </span>
+              
             </Link>
 
             <div className="nav-list">

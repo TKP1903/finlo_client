@@ -45,10 +45,9 @@ const HomePage = () => {
       <div>
         <div className="dashboard_block">
           <Link to="" className="card1">
-            <MdOutlineMiscellaneousServices
-              style={{ width: "80px", height: "100px", padding: "10px" }}
-            />
-            <span>Services We Offer</span>
+          <MdOutlineMiscellaneousServices
+              style={{ width: "80px", height: "100px", padding: "10px" }} />
+            <span>Services We Offer</span> 
           </Link>
           <Link to="/documents" className="card2">
             <MdOutlineUploadFile

@@ -1,11 +1,11 @@
 .dashboard_block{
     max-width: 100%;
-    margin: 100px 0 0 0;
-    padding: 25px 50px;
+    margin: 80px 0 0 0;
+    padding: 25px 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 10px;
     
 }
 /* .homepage_block span{
@@ -24,7 +24,7 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 } */
 .card1 {
-    width: 50%;
+    width: 60%;
     height: 200px;
     display: flex;
     align-items: center;
@@ -33,11 +33,11 @@
     background: linear-gradient(114.08deg, #6D17CB -16.6%, #2876F9 110.16%);
     box-shadow: 5px 7px 13px rgba(0, 0, 0, 0.08);
     border-radius: 22px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 .card2 {
-    width: 50%;
+    width: 60%;
     height: 200px;
     display: flex;
     align-items: center;
@@ -46,11 +46,11 @@
     background: linear-gradient(97.62deg, #FF0B9D -18.83%, #F42B03 114.11%);
     box-shadow: 5px 7px 13px rgba(0, 0, 0, 0.08);
     border-radius: 22px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 .card3 {
-    width: 50%;
+    width: 60%;
     height: 200px;
     display: flex;
     align-items: center;
@@ -59,23 +59,23 @@
     background: linear-gradient(90deg, #5F0A87 -5.05%, #B82C8E 117%);
     box-shadow: 5px 7px 13px rgba(0, 0, 0, 0.08);
     border-radius: 22px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .card1:hover {
-    background-position: right center;
-    transition: all .8s ease-in-out;
+    background-color: #f9f9f9 !important;
 }
 
 .recent-uploads table {
-    width: 95%;
+    width: 99%;
     
 }
 
 .recent-uploads td{
-    text-align: center;
+    text-align: left;
     padding: 5px;
+    padding-left: 20px;
 }
 .recent-uploads button{
     background-color: #1C76BD;
@@ -100,12 +100,18 @@
     width: 95%;
 }
 
-.tr-header{
- background-color: #1C76BD;
+.tr-header th{
+ background-color: #1C76BD !important;
  color: #fff;
- height: 35px;
+ height: 30px;
+ text-align: left;
+ padding-left: 20px;
 } 
 
-.recent-uploads td{
+tr {
  background-color: #f3f3f3;
+}
+
+tr:nth-child(even) {
+    background: rgb(239, 239, 239);
 }

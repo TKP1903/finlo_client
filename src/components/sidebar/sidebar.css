@@ -75,24 +75,29 @@
 
   .nav-link-icon{
     width: 1.2rem;
-    height: 1.2rem;
+    height: 0.8rem;
   }
 
   .nav-logo {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--white-color);
+    height: 45px;
   }
 
   .show-logo-icon{
-    color: #1C76BD;
+    color: var(--white-color);
   }
   
   .nav-logo-icon {
-    font-size: 1.25rem;
-    color: var(--white-color);
+    font-size: 1.2rem;
+    padding-top: 110%;
+    color: var(--first-color);
     cursor: pointer;
+    transition: 0.4s ease-in-out;
   }
   
   .nav-logo-name {
+    padding-top: 5%;
     font-weight: 700;
     color: var(--white-color);
   }
@@ -147,7 +152,7 @@
   
     .sidebar {
       left: 0;
-      padding: 1rem 0 0 0;
+      padding: 0 0 0 0;
     }
   
     .show {
@@ -155,16 +160,15 @@
     }
   
     .space-toggle {
-      padding-left: calc(var(--nav-width) + 188px);
+      padding-left: calc(var(--nav-width) + 160px);
     }
     
     .btn-logout{
       color: #1C76BD;
       padding-left: 20px;
       cursor: pointer;
-      justify-self: center;
-      align-items: center;
-      text-align: center;
+      padding-top: 2px;
+      
     }
 
     .log-avator{
@@ -173,14 +177,13 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      text-align: center;
       padding-left: 10%;
     }
 
     .useravatar{
-      padding-left: 80px;
+      padding-left: 70px;
     }
 
-    .nav-link2{
-      
-    }
+    
   }
