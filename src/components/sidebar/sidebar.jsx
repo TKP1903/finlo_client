@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import logo from "../../assets/finlo_logo.png"
+import logo from "../../assets/finlotax(white) .png"
 import UserAvatar from "react-user-avatar";
 
 import { GoThreeBars } from "react-icons/go";

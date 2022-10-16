@@ -50,9 +50,10 @@
     left: -30%;
     height: 100vh;
     width: var(--nav-width);
-    background-color: var(--first-color);
+    background-color: #165d97;
     padding-top: 1rem;
     transition: 0.5s;
+    
   }
   
   .nav {

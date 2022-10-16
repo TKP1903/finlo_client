@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
 
-
 import {
   BsFillFolderFill,
   BsFolderCheck,
   BsThreeDotsVertical,
-  BsFillCloudArrowUpFill,
+  BsFillCloudArrowUpFill,BsUpload
 } from "react-icons/bs";
 import axios from "axios";
+
+
 const UserDocumentsPage = ({ documentshandler, folders }) => {
+  const [modal, setModal] = useState(false);
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
   console.log(folders.name);
@@ -48,6 +50,20 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   useEffect(() => {
     getUserFiles(1);
   }, []);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if (modal) {
+    document.body.classList.add("active-modal");
+  } else {
+    document.body.classList.remove("active-modal");
+  }
+
+
+
+
   return (
     <div className="user_files_container">
       <div></div>
@@ -88,7 +104,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                       />
                     </div>
                     <div className="btn-section">
-                      <button className="btn_overlay" onClick={CreateFolder}>
+                      <button className="btn_overlay" >
                         Upload 
                       </button>
                       <button className="btn_overlay" onClick={toggleModal}>
