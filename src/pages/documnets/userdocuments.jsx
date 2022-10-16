@@ -2,22 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
 
+
 import {
   BsFillFolderFill,
   BsFolderCheck,
   BsThreeDotsVertical,
-<<<<<<< HEAD
-  BsFillCloudArrowUpFill,BsUpload
-=======
   BsFillCloudArrowUpFill,
   BsUpload,
->>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
 } from "react-icons/bs";
 import axios from "axios";
-
-
 const UserDocumentsPage = ({ documentshandler, folders }) => {
-  const [modal, setModal] = useState(false);
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
   const [modal, setModal] = useState(false);
@@ -65,13 +59,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   } else {
     document.body.classList.remove("active-modal");
   }
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
   return (
     <div className="user_files_container">
       <div></div>
@@ -90,37 +77,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             <BsFillCloudArrowUpFill className="icon" />
             Upload
           </button>
-<<<<<<< HEAD
-        </div>
-        <div>
-        <div className="upload_block">
-          <span className="upload_button">
-            <BsUpload className="icon" />
-            <div className="folder_creation">
-              <button onClick={toggleModal} className="btn-modal">
-                Upload
-              </button>
-
-              {modal && (
-                <div className="modal" style={{ zIndex: "2" }}>
-                  <div onClick={toggleModal} className="overlay"></div>
-                  <div className="modal-content">
-                    <div>
-                      Upload Files <br />
-                      <input
-                        type="file"
-                        className="upload-input"
-                      />
-                    </div>
-                    <div className="btn-section">
-                      <button className="btn_overlay" >
-                        Upload 
-                      </button>
-                      <button className="btn_overlay" onClick={toggleModal}>
-                        Cancel
-                      </button>
-                    </div>
-=======
           {modal && (
             <div className="modal" style={{ zIndex: "2" }}>
               <div onClick={toggleModal} className="overlay"></div>
@@ -132,7 +88,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                     className="upload-input"
                     onChange={(e) => setUserDocs(e.target.files[0])}
                   />
->>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
                 </div>
                 <div className="btn-section">
                   <button className="btn_overlay" onClick={uploadFile}>
