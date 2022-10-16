@@ -62,7 +62,9 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   return (
     <div className="user_files_container">
       <div></div>
-      <div className="file_upload_section ">
+      <div className="file_upload_section "   onClick={() => {
+          documentshandler(false, true, "", "");
+        }}>
         <label
           for="inputTag"
           style={{ cursor: "pointer" }}

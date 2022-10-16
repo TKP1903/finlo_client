@@ -63,6 +63,11 @@
     font-weight: bold;
 }
 
+.card1:hover {
+    background-position: right center;
+    transition: all .8s ease-in-out;
+}
+
 .recent-uploads table {
     width: 95%;
     
