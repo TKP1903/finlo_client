@@ -1,6 +1,8 @@
 import React ,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./homepage.css";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 import {MdOutlineMiscellaneousServices} from "react-icons/md";
 import {MdOutlineUploadFile} from "react-icons/md";
@@ -18,7 +20,6 @@ const HomePage = () => {
   } else {
     document.body.classList.remove("active-modal");
   }
-
 
   return (
     <>
@@ -81,6 +82,7 @@ const HomePage = () => {
               </td>
             </tr>        
           </table>
+          
         </div>
         <div className="folder_creation">
               {modal && (

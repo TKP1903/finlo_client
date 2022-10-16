@@ -6,7 +6,7 @@ import {
   BsFillFolderFill,
   BsFolderCheck,
   BsThreeDotsVertical,
-  BsFillCloudArrowUpFill,
+  BsUpload,
 } from "react-icons/bs";
 import { AiOutlineFolderOpen } from "react-icons/ai";
 import axios from "axios";
@@ -123,6 +123,41 @@ const UserFoldersPage = ({ documentshandler }) => {
         </div>
 
         {/* New folder modal */}
+        <div>
+        <div className="upload_block">
+          <span className="upload_button">
+            <BsUpload className="icon" />
+            <div className="folder_creation">
+              <button onClick={toggleModal} className="btn-modal">
+                Upload
+              </button>
+
+              {modal && (
+                <div className="modal" style={{ zIndex: "2" }}>
+                  <div onClick={toggleModal} className="overlay"></div>
+                  <div className="modal-content">
+                    <div>
+                      Upload Files <br />
+                      <input
+                        type="file"
+                        className="upload-input"
+                      />
+                    </div>
+                    <div className="btn-section">
+                      <button className="btn_overlay" onClick={CreateFolder}>
+                        Upload 
+                      </button>
+                      <button className="btn_overlay" onClick={toggleModal}>
+                        Cancel
+                      </button>
+                    </div>
+                </div>
+            </div>
+              )}
+            </div>
+          </span>
+        </div>
+        </div>
 
         <div className="folder_block">
           {userFolders.length > 0

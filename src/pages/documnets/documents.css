@@ -154,4 +154,7 @@
   padding-top: 20px;
 }
 
-  
+.upload-input{
+  border: none;
+  padding: 10px;
+}  

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
+
+
 import {
   BsFillFolderFill,
   BsFolderCheck,
@@ -22,6 +24,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       console.log(error);
     }
   };
+
+
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -77,7 +81,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                 <span>
                   <BsThreeDotsVertical
                     className="icon"
-                    style={{ color: "#000" }}
+                    style={{ color: "#000" }} 
                   />
                 </span>
               </div>
