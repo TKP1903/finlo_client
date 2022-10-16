@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./homepage.css";
 
@@ -8,6 +8,18 @@ import {MdPayment} from "react-icons/md";
 
 
 const HomePage = () => {
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if (modal) {
+    document.body.classList.add("active-modal");
+  } else {
+    document.body.classList.remove("active-modal");
+  }
+
+
   return (
     <>
       <div>
@@ -47,7 +59,7 @@ const HomePage = () => {
               <td>docx</td>
               <td>1.06 MB</td>
               <td>
-                <button>Delete</button>
+                <button onClick={toggleModal}>Delete</button>
               </td>
             </tr>     
             <tr>
@@ -56,7 +68,7 @@ const HomePage = () => {
               <td>docx</td>
               <td>1.58 MB</td>
               <td>
-                <button>Delete</button>
+                <button onClick={toggleModal}>Delete</button>
               </td>
             </tr>     
             <tr>
@@ -65,10 +77,30 @@ const HomePage = () => {
               <td>docx</td>
               <td>4.06 MB</td>
               <td>
-                <button>Delete</button>
+                <button onClick={toggleModal}>Delete</button>
               </td>
             </tr>        
           </table>
+        </div>
+        <div className="folder_creation">
+              {modal && (
+                <div className="modal" style={{ zIndex: "1" }}>
+                  <div onClick={toggleModal} className="overlay"></div>
+                  <div className="modal-content">
+                    <div>
+                      Are You Sure Want To Delete The Folder ?
+                    </div>
+                    <div className="btn-section">
+                      <button className="btn_overlay">
+                        Delete
+                      </button>
+                      <button className="btn_overlay" onClick={toggleModal}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
         </div>
       </div>
     </>

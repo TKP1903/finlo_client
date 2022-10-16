@@ -115,15 +115,8 @@ const UserFoldersPage = ({ documentshandler }) => {
                         Close
                       </button>
                     </div>
-                    {/* <div>
-                    <input
-                      type="file"
-                      className="btn-file"
-                      onChange={(e) => setUserDocs(e.target.files[0])} placeholder="Upload files"
-                   />
-                  </div> */}
-                  </div>
                 </div>
+            </div>
               )}
             </div>
           </span>
