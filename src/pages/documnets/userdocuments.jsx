@@ -6,7 +6,12 @@ import {
   BsFillFolderFill,
   BsFolderCheck,
   BsThreeDotsVertical,
+<<<<<<< HEAD
   BsFillCloudArrowUpFill,BsUpload
+=======
+  BsFillCloudArrowUpFill,
+  BsUpload,
+>>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
 } from "react-icons/bs";
 import axios from "axios";
 
@@ -15,7 +20,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [modal, setModal] = useState(false);
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
-  console.log(folders.name);
+  const [modal, setModal] = useState(false);
+
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
@@ -26,7 +32,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       console.log(error);
     }
   };
-
 
   const uploadFile = async () => {
     let formData = new FormData();
@@ -39,6 +44,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         formData
       );
       if (response.status === 200) {
+        toggleModal();
         alert("File uploaded successfully");
         getUserFiles(1);
       }
@@ -46,7 +52,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       alert("Cant upload file");
     }
   };
-  console.log(userDocs);
   useEffect(() => {
     getUserFiles(1);
   }, []);
@@ -60,10 +65,13 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   } else {
     document.body.classList.remove("active-modal");
   }
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
   return (
     <div className="user_files_container">
       <div></div>
@@ -78,10 +86,11 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         </label>
 
         <div className="upload-btn">
-          <button className="submit_button" onClick={uploadFile}>
+          <button className="submit_button" onClick={toggleModal}>
             <BsFillCloudArrowUpFill className="icon" />
             Upload
           </button>
+<<<<<<< HEAD
         </div>
         <div>
         <div className="upload_block">
@@ -111,13 +120,67 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                         Cancel
                       </button>
                     </div>
+=======
+          {modal && (
+            <div className="modal" style={{ zIndex: "2" }}>
+              <div onClick={toggleModal} className="overlay"></div>
+              <div className="modal-content">
+                <div>
+                  Upload Files <br />
+                  <input
+                    type="file"
+                    className="upload-input"
+                    onChange={(e) => setUserDocs(e.target.files[0])}
+                  />
+>>>>>>> 1dbccf6cc5adfaca85db48319dabc56c4304d8ce
                 </div>
+                <div className="btn-section">
+                  <button className="btn_overlay" onClick={uploadFile}>
+                    Upload
+                  </button>
+                  <button className="btn_overlay" onClick={toggleModal}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
-              )}
-            </div>
-          </span>
+          )}
         </div>
-        </div>
+        {/* <div>
+          <div className="upload_block">
+            <span className="upload_button">
+              <BsUpload className="icon" />
+              <div className="folder_creation">
+                <button onClick={toggleModal} className="btn-modal">
+                  Upload
+                </button>
+
+                {modal && (
+                  <div className="modal" style={{ zIndex: "2" }}>
+                    <div onClick={toggleModal} className="overlay"></div>
+                    <div className="modal-content">
+                      <div>
+                        Upload Files <br />
+                        <input type="file" className="upload-input" />
+                      </div>
+                      <div className="btn-section">
+                        <button
+                          className="btn_overlay"
+                          // onClick={CreateFolder}
+                        >
+                          Upload
+                        </button>
+                        <button className="btn_overlay" onClick={toggleModal}>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </span>
+          </div>
+        </div> */}
       </div>
       <div className="file_sections">
         <div className="folder_block">
@@ -132,7 +195,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                 <span>
                   <BsThreeDotsVertical
                     className="icon"
-                    style={{ color: "#000" }} 
+                    style={{ color: "#000" }}
                   />
                 </span>
               </div>

@@ -1,26 +1,45 @@
-import React ,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./homepage.css";
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import axios from "axios";
 
-import {MdOutlineMiscellaneousServices} from "react-icons/md";
-import {MdOutlineUploadFile} from "react-icons/md";
-import {MdPayment} from "react-icons/md";
-
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
+import { MdOutlineUploadFile } from "react-icons/md";
+import { MdPayment } from "react-icons/md";
 
 const HomePage = () => {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
+  const [userFiles, setUserFiels] = useState([]);
+  const getUserFiles = async (user_id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/file/get-recent-user-docs/${user_id}}`
+      );
+      console.log(response?.data?.data);
+      setUserFiels(response?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  if (modal) {
-    document.body.classList.add("active-modal");
-  } else {
-    document.body.classList.remove("active-modal");
-  }
-
+  const deleteFile = async (user_id, documentName) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/file/delete-file`,
+        {
+          data: {
+            user_id: user_id,
+            fileName: documentName,
+          },
+        }
+      );
+      getUserFiles(user_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(userFiles);
+  useEffect(() => {
+    getUserFiles(0);
+  }, []);
   return (
     <>
       <div>
@@ -49,60 +68,31 @@ const HomePage = () => {
           <table>
             <tr className="tr-header">
               <th>File Name</th>
-              <th>Uploaded Date & Time  </th>
+              <th>Uploaded Date & Time </th>
               <th>File type</th>
               <th>File size</th>
               <th>Action</th>
             </tr>
-            <tr>
-              <td>FY 22-23</td>
-              <td>23/06/2022 12:00 PM</td>
-              <td>docx</td>
-              <td>1.06 MB</td>
-              <td>
-                <button onClick={toggleModal}>Delete</button>
-              </td>
-            </tr>     
-            <tr>
-              <td>FY 22-23</td>
-              <td>23/06/2022 5:00 PM</td>
-              <td>docx</td>
-              <td>1.58 MB</td>
-              <td>
-                <button onClick={toggleModal}>Delete</button>
-              </td>
-            </tr>     
-            <tr>
-              <td>FY 22-23</td>
-              <td>23/06/2022 4:00 AM</td>
-              <td>docx</td>
-              <td>4.06 MB</td>
-              <td>
-                <button onClick={toggleModal}>Delete</button>
-              </td>
-            </tr>        
+            {userFiles.map((data) => (
+              <tr>
+                <td>{data.document_name}</td>
+                <td>
+                  {data.date} {data.time}
+                </td>
+                <td>{data.document_type}</td>
+                <td>{data.document_size}</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      deleteFile(data.customer_id, data.document_name)
+                    }
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </table>
-          
-        </div>
-        <div className="folder_creation">
-              {modal && (
-                <div className="modal" style={{ zIndex: "1" }}>
-                  <div onClick={toggleModal} className="overlay"></div>
-                  <div className="modal-content">
-                    <div>
-                      Are You Sure Want To Delete The Folder ?
-                    </div>
-                    <div className="btn-section">
-                      <button className="btn_overlay">
-                        Delete
-                      </button>
-                      <button className="btn_overlay" onClick={toggleModal}>
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
         </div>
       </div>
     </>
