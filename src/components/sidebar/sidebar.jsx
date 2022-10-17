@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./sidebar.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams ,NavLink} from "react-router-dom";
 import logo from "../../assets/finlo_logo.png"
 import UserAvatar from "react-user-avatar";
 
@@ -47,32 +47,31 @@ const Sidebar = () => {
               </i>
               <span className="nav-logo-name">
                  <img src={logo} alt="" style={{ width: "100px" }} />
-              </span>
-              
+              </span> 
             </Link>
 
-            <div className="nav-list">
-              <Link to="/home" className="nav-link active">
+            <div className="nav-list" >
+              <NavLink to="/home" className="nav-link " activeClassName="active">
                 <IoHome className="nav-link-icon" />
-                <span className="nav-link-name">Home</span>
-              </Link>
-              <Link to="/" className="nav-link">
+                <span className="nav-link-name ">Home</span>
+              </NavLink>
+              <Link to="/" className="nav-link" >
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Profile</span>
               </Link>
-              <Link to="/documents" className="nav-link">
+              <NavLink to="/documents" className="nav-link" >
                 <IoDocumentSharp className="nav-link-icon" />
                 <span className="nav-link-name">Documents</span>
-              </Link>
-              <Link to="/" className="nav-link">
+              </NavLink>
+              <Link to="/" className="nav-link" >
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Contract Proposal</span>
               </Link>
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link" >
                 <MdPayment className="nav-link-icon" />
                 <span className="nav-link-name">Payments</span>
               </Link>
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link" >
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Referral Program</span>
               </Link>

@@ -8,6 +8,21 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 
 const HomePage = () => {
+   
+  //  modal delete button 
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if (modal) {
+    document.body.classList.add("active-modal");
+  } else {
+    document.body.classList.remove("active-modal");
+  };
+
+
+ 
   const [userFiles, setUserFiels] = useState([]);
   const getUserFiles = async (user_id) => {
     try {
@@ -67,7 +82,7 @@ const HomePage = () => {
           <table>
             <tr className="tr-header">
               <th>File Name</th>
-              <th>Uploaded Date & Time </th>
+              <th>Uploaded Date & Time</th>
               <th>File type</th>
               <th>File size</th>
               <th>Action</th>
@@ -81,17 +96,35 @@ const HomePage = () => {
                 <td>{data.document_type}</td>
                 <td>{data.document_size}</td>
                 <td>
-                  <button
-                    onClick={() =>
-                      deleteFile(data.customer_id, data.document_name)
-                    }
-                  >
+                  <button onClick={toggleModal}> 
                     Delete
                   </button>
                 </td>
               </tr>
             ))}
           </table>
+          <div className="folder_creation">
+              {modal && (
+                <div className="modal" style={{ zIndex: "1" }}>
+                  <div onClick={toggleModal} className="overlay"></div>
+                  <div className="modal-content">
+                    <div>
+                      Are You Sure Want To Delete The Folder ?
+                    </div>
+                    <div className="btn-section">
+                    {userFiles.map((data) => (
+                      <button className="btn_overlay" onClick={() => deleteFile(data.customer_id, data.document_name) }  >
+                        Delete
+                      </button>
+                    ))}
+                      <button className="btn_overlay" onClick={toggleModal}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+        </div>
         </div>
       </div>
     </>
