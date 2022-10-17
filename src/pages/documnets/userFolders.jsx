@@ -19,6 +19,7 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [modal, setModal] = useState(false);
   const [folder_name, setFolder_name] = useState("");
   const [create, setCreatefolder] = useState("");
+  const [editFolder, setEditFolder] = useState(false);
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
@@ -83,6 +84,7 @@ const UserFoldersPage = ({ documentshandler }) => {
   const handleChange = (event) => {
     setFolder_name(event.target.value);
   };
+  console.log(editFolder);
 
   return (
     <div className="document_container">
@@ -128,13 +130,13 @@ const UserFoldersPage = ({ documentshandler }) => {
         <div className="folder_block">
           {userFolders.length > 0
             ? userFolders.map((data) => (
-                <div
-                  className="folder"
-                  onClick={() => {
-                    documentshandler(true, false, "", `${data.folder_name}`);
-                  }}
-                >
-                  <span className="folder_name">
+                <div className="folder">
+                  <span
+                    className="folder_name"
+                    onClick={() => {
+                      documentshandler(true, false, "", `${data.folder_name}`);
+                    }}
+                  >
                     <BsFolderCheck className="icon" style={{ color: "#000" }} />
                     {data.folder_name}
                   </span>
@@ -142,6 +144,7 @@ const UserFoldersPage = ({ documentshandler }) => {
                     <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
+                      onClick={() => setEditFolder(!editFolder)}
                     />
                   </span>
                 </div>
