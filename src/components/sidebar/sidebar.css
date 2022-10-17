@@ -39,7 +39,7 @@
   }
   
   .header-toggle {
-    font-size: 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
     color: var(--first-color);
   }
@@ -89,11 +89,23 @@
   }
   
   .nav-logo-icon {
-    font-size: 1rem;
-    padding-top: 110%;
+    font-size: 0.3rem;
+    padding-top: 10% !important;
     color: var(--first-color);
     cursor: pointer;
     transition: 0.4s ease-in-out;
+    margin-bottom: 4px;
+  }
+
+  .nav-logo-icon1 {
+    font-size: 0.3rem;
+    padding-top: 10% !important;
+    color: var(--first-color);
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    margin-bottom: 4px;
+    height: 1.2rem;
+    width: 1rem;
   }
   
   .nav-logo-name {

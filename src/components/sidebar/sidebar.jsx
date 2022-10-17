@@ -32,7 +32,7 @@ const Sidebar = () => {
           <UserAvatar size="42" name="Will Binns-Smith" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" />
           </div>
           <div className="btn-logout" onClick={logouthandler}>
-              <IoMdLogOut className="nav-link-icon" style={{}} />
+              <IoMdLogOut className="nav-link-icon1"  />
               <span className="nav-link-name">Logout</span>
           </div>
         </div>

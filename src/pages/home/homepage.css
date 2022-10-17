@@ -35,6 +35,8 @@
     border-radius: 22px;
     font-size: 1.5rem;
     font-weight: bold;
+    background-size: 300% 100%;
+    transition:all 0.8s ease-in-out; 
 }
 .card2 {
     width: 60%;
@@ -48,6 +50,8 @@
     border-radius: 22px;
     font-size: 1.5rem;
     font-weight: bold;
+    background-size: 300% 100%;
+    transition:all 0.8s ease-in-out; 
 }
 .card3 {
     width: 60%;
@@ -56,15 +60,33 @@
     align-items: center;
     justify-content: center;
     color: #fff;    
-    background: linear-gradient(90deg, #5F0A87 -5.05%, #B82C8E 117%);
+    background: linear-gradient(90deg, #710ba0 -5.05%, #B82C8E 117%);
     box-shadow: 5px 7px 13px rgba(0, 0, 0, 0.08);
     border-radius: 22px;
     font-size: 1.5rem;
     font-weight: bold;
+    background-size: 300% 100%;
+    transition:all 0.8s ease-in-out; 
 }
 
 .card1:hover {
-    background-color: #f9f9f9 !important;
+    background-position: 100% 0;
+    transition: all 0.5s ease-out;
+    background-image: linear-gradient(to right, #2879f9, #6d17cb, #6d17cb, #5811ff);
+    box-shadow: 0 10px 15px 0 rgba(73, 28, 255, 0.75);
+}
+
+.card2:hover {
+    background-position: 100% 0;
+    transition: all 0.5s ease-out;
+    background-image: linear-gradient(to right,#f4034f,#de00ae #dc03f4, #ff0b9da5 );
+    box-shadow: 0 10px 15px 0 rgba(255, 0, 119, 0.75);
+}
+.card3:hover {
+    background-position: 100% 0;
+    transition: all 0.5s ease-out;
+    background-image: linear-gradient(to right, #b82c82, #6d17cb, #6d17cb, #9d19e4);
+    box-shadow: 0 10px 15px 0 rgba(90, 8, 205, 0.75);
 }
 
 .recent-uploads table {
