@@ -70,6 +70,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    cursor: pointer;
   }
   .upload-btn{
     padding-top: 18px;

@@ -6,10 +6,10 @@ import axios from "axios";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
+import { API_URL } from "../../key";
 
 const HomePage = () => {
-   
-  //  modal delete button 
+  //  modal delete button
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -19,15 +19,13 @@ const HomePage = () => {
     document.body.classList.add("active-modal");
   } else {
     document.body.classList.remove("active-modal");
-  };
+  }
 
-
- 
   const [userFiles, setUserFiels] = useState([]);
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/file/get-recent-user-docs/${user_id}}`
+        `${API_URL}file/get-recent-user-docs/${user_id}`
       );
       console.log(response?.data?.data);
       setUserFiels(response?.data?.data);
@@ -37,15 +35,12 @@ const HomePage = () => {
   };
   const deleteFile = async (user_id, documentName) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:4000/file/delete-file`,
-        {
-          data: {
-            user_id: user_id,
-            fileName: documentName,
-          },
-        }
-      );
+      const response = await axios.delete(`${API_URL}file/delete-file`, {
+        data: {
+          user_id: user_id,
+          fileName: documentName,
+        },
+      });
       getUserFiles(user_id);
     } catch (error) {
       console.log(error);
@@ -60,9 +55,10 @@ const HomePage = () => {
       <div>
         <div className="dashboard_block">
           <Link to="" className="card1">
-          <MdOutlineMiscellaneousServices
-              style={{ width: "80px", height: "100px", padding: "10px" }} />
-            <span>Services We Offer</span> 
+            <MdOutlineMiscellaneousServices
+              style={{ width: "80px", height: "100px", padding: "10px" }}
+            />
+            <span>Services We Offer</span>
           </Link>
           <Link to="/documents" className="card2">
             <MdOutlineUploadFile
@@ -96,35 +92,36 @@ const HomePage = () => {
                 <td>{data.document_type}</td>
                 <td>{data.document_size}</td>
                 <td>
-                  <button onClick={toggleModal}> 
-                    Delete
-                  </button>
+                  <button onClick={toggleModal}>Delete</button>
                 </td>
               </tr>
             ))}
           </table>
           <div className="folder_creation">
-              {modal && (
-                <div className="modal" style={{ zIndex: "1" }}>
-                  <div onClick={toggleModal} className="overlay"></div>
-                  <div className="modal-content">
-                    <div>
-                      Are You Sure Want To Delete The Folder ?
-                    </div>
-                    <div className="btn-section">
+            {modal && (
+              <div className="modal" style={{ zIndex: "1" }}>
+                <div onClick={toggleModal} className="overlay"></div>
+                <div className="modal-content">
+                  <div>Are You Sure Want To Delete The Folder ?</div>
+                  <div className="btn-section">
                     {userFiles.map((data) => (
-                      <button className="btn_overlay" onClick={() => deleteFile(data.customer_id, data.document_name) }  >
+                      <button
+                        className="btn_overlay"
+                        onClick={() =>
+                          deleteFile(data.customer_id, data.document_name)
+                        }
+                      >
                         Delete
                       </button>
                     ))}
-                      <button className="btn_overlay" onClick={toggleModal}>
-                        Cancel
-                      </button>
-                    </div>
+                    <button className="btn_overlay" onClick={toggleModal}>
+                      Cancel
+                    </button>
                   </div>
                 </div>
-              )}
-        </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

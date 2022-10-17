@@ -11,6 +11,7 @@ import {
 import { AiOutlineFolderOpen } from "react-icons/ai";
 import axios from "axios";
 import { useEffect } from "react";
+import { API_URL } from "../../key";
 
 const UserFoldersPage = ({ documentshandler }) => {
   const [userDocs, setUserDocs] = useState();
@@ -21,7 +22,7 @@ const UserFoldersPage = ({ documentshandler }) => {
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/file/get-user-folders/${user_id}`
+        `${API_URL}file/get-user-folders/${user_id}`
       );
       console.log(response?.data?.data);
       setUserFolders(response?.data?.data);
@@ -34,14 +35,14 @@ const UserFoldersPage = ({ documentshandler }) => {
     formData.append("file", userDocs);
     try {
       const response = await axios.post(
-        `http://localhost:4000/file/uploadfile/${user_id}`,
+        `${API_URL}file/uploadfile/${user_id}`,
         formData,
         { data: "username" }
         // { headers: { "Content-Type": "multipart/form-data" } }
       );
       // const response = await axios({
       //   method: "post",
-      //   url: "http://localhost:4000/file/uploadfile",
+      //   url: "${API_URL}file/uploadfile",
       //   data: formData,
       //   headers: { "Content-Type": "multipart/form-data" },
       // });
@@ -58,7 +59,7 @@ const UserFoldersPage = ({ documentshandler }) => {
     setModal(!modal);
     try {
       const response = await axios.post(
-        `http://localhost:4000/file/uploadfolder/${user_id}/${folder_name}`
+        `${API_URL}file/uploadfolder/${user_id}/${folder_name}`
       );
       getUserFiles(1);
     } catch (error) {
@@ -94,7 +95,6 @@ const UserFoldersPage = ({ documentshandler }) => {
               <button onClick={toggleModal} className="btn-modal">
                 New folder
               </button>
-
               {modal && (
                 <div className="modal" style={{ zIndex: "1" }}>
                   <div onClick={toggleModal} className="overlay"></div>
@@ -115,17 +115,15 @@ const UserFoldersPage = ({ documentshandler }) => {
                         Close
                       </button>
                     </div>
+                  </div>
                 </div>
-            </div>
               )}
             </div>
           </span>
         </div>
 
         {/* New folder modal */}
-        <div>
-        
-        </div>
+        <div></div>
 
         <div className="folder_block">
           {userFolders.length > 0

@@ -11,6 +11,7 @@ import {
   BsUpload,
 } from "react-icons/bs";
 import axios from "axios";
+import { API_URL } from "../../key";
 const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
@@ -19,7 +20,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/file/get-user-docs/${user_id}/${folders.name}`
+        `${API_URL}file/get-user-docs/${user_id}/${folders.name}`
       );
       setUserFiels(response?.data?.data);
     } catch (error) {
@@ -34,7 +35,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     const user_id = 0;
     try {
       const response = await axios.post(
-        `http://localhost:4000/file/uploadfile/${user_id}/${folders.name}`,
+        `${API_URL}file/uploadfile/${user_id}/${folders.name}`,
         formData
       );
       if (response.status === 200) {
@@ -62,13 +63,14 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   return (
     <div className="user_files_container">
       <div></div>
-      <div className="file_upload_section "   onClick={() => {
-          documentshandler(false, true, "", "");
-        }}>
+      <div className="file_upload_section">
         <label
           for="inputTag"
           style={{ cursor: "pointer" }}
           className="file-upload"
+          onClick={() => {
+            documentshandler(false, true, "", "");
+          }}
         >
           <BsFillFolderFill className="icon" />
           Back

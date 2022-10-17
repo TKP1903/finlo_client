@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { API_URL } from "../../key";
 
 const LoginPage = () => {
   const [inputs, setInputs] = useState({
@@ -65,10 +66,7 @@ const LoginPage = () => {
         });
       }
       if (emailError.state === false && passwordError.state === false) {
-        const result = await axios.post(
-          "http://localhost:4000/auth/login",
-          inputs
-        );
+        const result = await axios.post(`${API_URL}auth/login`, inputs);
         if (result.status === 200) {
           navigate("/home");
         }
@@ -99,9 +97,9 @@ const LoginPage = () => {
     fetchData();
   }, [error.state]);
   const googleAuth = async () => {
-    // const googleAuth = await axios.get("http://localhost:4000/auth/google");
-    window.location.href = "http://localhost:4000/auth/google";
-    // window.location.href = "http://localhost:4000/auth/google";
+    // const googleAuth = await axios.get(`${API_URL}auth/google"`;
+    window.location.href = `${API_URL}auth/google`;
+    // window.location.href = `${API_URL}auth/google`;
     console.log(googleAuth);
   };
   return (
