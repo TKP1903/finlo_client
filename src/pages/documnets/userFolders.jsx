@@ -154,8 +154,13 @@ const UserFoldersPage = ({ documentshandler }) => {
                     <BsFolderCheck className="icon" style={{ color: "#000" }} />
                     {data.folder_name}
                   </span>
+<<<<<<< HEAD
                   <span>
                     {/* <BsThreeDotsVertical
+=======
+                  <span className="editFolder">
+                    <BsThreeDotsVertical
+>>>>>>> 5cc8641533acf233318eb269440462e1c911e4ce
                       className="icon"
                       style={{ color: "#000" }}
                       onClick={() => setEditFolder(!editFolder)}

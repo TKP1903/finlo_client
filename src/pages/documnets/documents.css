@@ -160,6 +160,7 @@
   padding: 10px;
 }  
 
+<<<<<<< HEAD
 .three-dots:after {
   cursor: pointer;
   color: rgb(0, 0, 0);
@@ -194,3 +195,6 @@ a{
   max-height: 100vh;
 }
 
+=======
+ 
+>>>>>>> 5cc8641533acf233318eb269440462e1c911e4ce
