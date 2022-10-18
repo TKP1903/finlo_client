@@ -75,6 +75,7 @@ import { API_URL } from "../../key";
           status: true,
         });
       }
+      console.log(firstnameError.name)
       if (inputs.LastName.length === 0) {
         console.log("lastname");
         setLastnameError({
