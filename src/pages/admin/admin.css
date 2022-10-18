@@ -1,0 +1,223 @@
+/* admin page */
+
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--first-color);
+}
+
+.admin-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page-body h2 {
+    align-self: flex-start;
+}
+
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page-form {
+    display: flex;
+    align-self: center;
+    flex-direction: row;
+    border: 1px solid var(--first-color);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
+    background-color: var(--white-color);
+}
+
+/* media query for width of form on big screens */
+@media screen and (min-width: 800px) {
+    .admin-page-form {
+        width: 60%;
+    }
+}
+/* media query for small screens */
+@media screen and (max-width: 600px) {
+    .admin-page-form {
+        width: 109%;
+        margin-left: -4%;
+    }
+    /* give more width to the from inputs and less to the labels */
+    .admin-page-form .form-labels {
+        width: 30%;
+    }
+    .admin-page-form .form-inputs {
+        width: 70%;
+    }
+}
+
+/* seperate columns for lables and inputs */
+.admin-page-form .form-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page-form .form-column .form-labels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.admin-page-form .form-column .form-labels label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.admin-page-form .form-column .form-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    width: 40%;
+    background-color: white;
+}
+
+.admin-page-form .form-column .form-inputs input {
+    width: 100%;
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.admin-page-form .form-column select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid var(--first-color);
+
+    border-radius: 5px;
+    outline: none;
+}
+
+/* styling form buttons */
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.form-buttons button {
+    width: 110px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--white-color);
+    background-color: var(--first-color);
+}
+
+.admin-page .searchArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-page .searchArea .searchBox {
+    border: 1px solid black;
+}
+
+.searchBox input {
+    display: grid-inline;
+    width: 80%;
+    border: none;
+    text-indent: 10%;
+    font-size: large;
+}
+
+.searchBox .searchIcon {
+    vertical-align: middle;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color:rgba(31, 38, 135, 0.518)
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.admin-page .searchResults {
+    padding: 10px;
+    text-align: left;
+}
+
+.searchResults th, td {
+    border: none;
+    padding: 15px;
+}
+
+.searchResults td {
+    border-bottom: 1px solid;
+    color: rgba(31, 38, 135, 0.518);
+}
+
+.searchResults tr:last-child > td {
+    border-bottom: none;
+}
+
+.searchResults thead {
+    background: var(--white-color);
+    border: none;
+}
+
+.searchResults tbody, td {
+    background: white;
+}
+
+.admin-page-footer {
+    font-size: 1rem;
+    color:rgba(31, 38, 135, 0.718);
+}

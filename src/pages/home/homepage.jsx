@@ -8,8 +8,19 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
+
+const AdminButton = () => {
+  return (
+    <Link to="/admin" className = "btn-admin" style={{color: "white"}}>
+      Admin
+    </Link>
+  );
+};
+
 const HomePage = () => {
   //  modal delete button
+  const [isAdmin, setIsAdmin] = useState(true);
+
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -47,26 +58,31 @@ const HomePage = () => {
     }
   };
   console.log(userFiles);
+
   useEffect(() => {
     getUserFiles(0);
+    setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
   }, []);
+
+
   return (
     <>
-      <div>
+      <div className="home-page-body">
+        { isAdmin ? <AdminButton /> : null}
         <div className="dashboard_block">
-          <Link to="" className="card1">
+          <Link to="" className="gradientCard gradientBlue">
             <MdOutlineMiscellaneousServices
               style={{ width: "80px", height: "100px", padding: "10px" }}
             />
             <span>Services We Offer</span>
           </Link>
-          <Link to="/documents" className="card2">
+          <Link to="/documents" className="gradientCard gradientRed">
             <MdOutlineUploadFile
               style={{ width: "90px", height: "100px", padding: "10px" }}
             />
             <span>Upload Documents</span>
           </Link>
-          <Link to="" className="card3">
+          <Link to="" className="gradientCard gradientGreen">
             <MdPayment
               style={{ width: "80px", height: "100px", padding: "10px" }}
             />
@@ -107,10 +123,8 @@ const HomePage = () => {
                     {userFiles.map((data) => (
                       <button
                         className="btn_overlay"
-                        onClick={() =>
-                          deleteFile(data.customer_id, data.document_name)
-                        }
-                      >
+                        onClick={() => deleteFile(data.customer_id, data.document_name)
+                        }>
                         Delete
                       </button>
                     ))}

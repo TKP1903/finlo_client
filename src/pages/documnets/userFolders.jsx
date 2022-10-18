@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./documents.css";
+import Dropdown from "react-bootstrap/Dropdown";
+
 
 import {
   BsFillFolderFill,
@@ -19,6 +21,8 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [modal, setModal] = useState(false);
   const [folder_name, setFolder_name] = useState("");
   const [create, setCreatefolder] = useState("");
+  const [editFolder, setEditFolder] = useState(false);
+
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
@@ -28,7 +32,9 @@ const UserFoldersPage = ({ documentshandler }) => {
       setUserFolders(response?.data?.data);
     } catch (error) {}
   };
+  
   const user_id = 0;
+  
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -38,7 +44,6 @@ const UserFoldersPage = ({ documentshandler }) => {
         `${API_URL}file/uploadfile/${user_id}`,
         formData,
         { data: "username" }
-        // { headers: { "Content-Type": "multipart/form-data" } }
       );
       // const response = await axios({
       //   method: "post",
@@ -83,6 +88,22 @@ const UserFoldersPage = ({ documentshandler }) => {
   const handleChange = (event) => {
     setFolder_name(event.target.value);
   };
+  console.log(editFolder);
+
+// dropdown toggle 
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+      <span className="threedots" />
+    </a>
+  ));
 
   return (
     <div className="document_container">
@@ -122,9 +143,6 @@ const UserFoldersPage = ({ documentshandler }) => {
           </span>
         </div>
 
-        {/* New folder modal */}
-        <div></div>
-
         <div className="folder_block">
           {userFolders.length > 0
             ? userFolders.map((data) => (
@@ -142,7 +160,16 @@ const UserFoldersPage = ({ documentshandler }) => {
                     <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
-                    />
+                      onClick={() => setEditFolder(!editFolder)}
+                    /> */}
+                    <div class="dropdown-container" tabindex="-1">
+                      <div class="three-dots"></div>
+                      <div class="dropdown">
+                        <a href="#"><div>Rename</div></a>
+                        <a href="#"><div>Delete</div></a>
+                      </div>
+                    </div>
+                    
                   </span>
                 </div>
                 // <div

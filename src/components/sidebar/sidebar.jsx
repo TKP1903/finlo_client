@@ -79,7 +79,7 @@ const Sidebar = () => {
           </div>
         </nav>
       </aside>
-      <div>
+      <div className="master-wrap">
         <Master />
       </div>
     </main>

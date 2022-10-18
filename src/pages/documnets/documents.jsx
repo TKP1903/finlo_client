@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserDocumentsPage from "./userdocuments";
 import UserFoldersPage from "./userFolders";
 
-const Docuents = () => {
+const Documents = () => {
   const [folders, setFolders] = useState({
     name: "",
     state: true,
@@ -34,4 +34,4 @@ const Docuents = () => {
   );
 };
 
-export default Docuents;
+export default Documents;

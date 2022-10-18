@@ -68,6 +68,8 @@ const LoginPage = () => {
       if (emailError.state === false && passwordError.state === false) {
         const result = await axios.post(`${API_URL}auth/login`, inputs);
         if (result.status === 200) {
+          console.log (result);
+          localStorage.setItem ('email', inputs.email);
           navigate("/home");
         }
       }
