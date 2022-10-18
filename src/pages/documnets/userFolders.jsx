@@ -114,7 +114,7 @@ const UserFoldersPage = ({ documentshandler }) => {
             <BsFillFolderFill className="icon" />
             <div className="folder_creation">
               <button onClick={toggleModal} className="btn-modal">
-                New folder
+                Add folder
               </button>
               {modal && (
                 <div className="modal" style={{ zIndex: "1" }}>

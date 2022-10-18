@@ -3,7 +3,7 @@ import "./documents.css";
 import "./userDocuments.css";
 
 
-import { BsFillCloudArrowUpFill} from "react-icons/bs";
+import { BsFillCloudArrowUpFill,BsFileEarmark,BsThreeDotsVertical } from "react-icons/bs";
 import {BiArrowBack} from "react-icons/bi";
 import axios from "axios";
 import { API_URL } from "../../key";
@@ -147,6 +147,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             </div>
           )}
         </div>
+
+        {/* Upload modal */}
         {/* <div>
           <div className="upload_block">
             <span className="upload_button">
@@ -210,58 +212,10 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
  */}
 
       {/* Table */}
-      <div className="recent-uploads">
-          <h1>File Uploaded</h1>
-          <table>
-            <tr className="tr-header">
-              <th>File Name</th>
-              <th>Uploaded Date & Time</th>
-              <th>File type</th>
-              <th>File size</th>
-              <th>Action</th>
-            </tr>
-            {userFiles.map((data) => (
-              <tr>
-                <td>{data.document_name}</td>
-                <td>
-                  {data.date} {data.time}
-                </td>
-                <td>{data.document_type}</td>
-                <td>{data.document_size}</td>
-                <td>
-                  {/* <button onClick={toggleModal1}>Rename</button> */}
-                  <button onClick={toggleModal2}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </table>
-          <div className="folder_creation">
-            {modal2 && (
-              <div className="modal" style={{ zIndex: "5" }}>
-                <div onClick={toggleModal} className="overlay"></div>
-                <div className="modal-content">
-                  <div>Are You Sure Want To Delete The Folder ?</div>
-                  <div className="btn-section">
-                    {userFiles.map((data) => (
-                      <button
-                        className="btn_overlay"
-                        onClick={() => deleteFile(data.customer_id, data.document_name)
-                        }>
-                        Delete
-                      </button>
-                    ))}
-                    <button className="btn_overlay" onClick={toggleModal2}>
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+     
         {/* table end */}
 
-      {/* <div className="file_sections">
+      <div className="file_sections">
         <div className="folder_block">
           {userFiles.length > 0 &&
             userFiles.map((data) => (
@@ -281,7 +235,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
