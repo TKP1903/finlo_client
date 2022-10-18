@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
-
 const SignupPage = () => {
   const [inputs, setInputs] = useState({
     FirstName: "",
@@ -123,8 +122,8 @@ const SignupPage = () => {
           });
         }
       }
-        if (inputs.mobileNo.length === 0) {
-          console.log('mobile No')
+      if (inputs.mobileNo.length === 0) {
+        console.log("mobile No");
         setMobileNoError({
           name: "Please enter your mobileNo",
           state: true,
@@ -289,10 +288,69 @@ const SignupPage = () => {
                   {stateError.name}
                 </label>
               ) : (
-                <label>State</label>
+                <div>
+                  <label>State</label>
+                  <div className="input_block">
+                    <form>
+                      <label>
+                        <select
+                          name="State"
+                          className="StateInput"
+                          onChange={handleChange}
+                        >
+                          <option value="">--Select State</option>
+                          <option value="Andhra Pradesh">Andhra Pradesh</option>
+                          <option value="Arunachal Pradesh">
+                            Arunachal Pradesh
+                          </option>
+                          <option value="Assam">Assam</option>
+                          <option value="Bihar">Bihar</option>
+                          <option value="Chhattisgarh">Chhattisgarh</option>
+                          <option value="Goa">Goa</option>
+                          <option value="Gujarat">Gujarat</option>
+                          <option value="Harayana">Harayana</option>
+                          <option value="Himachal Pradesh">
+                            Himachal Pradesh
+                          </option>
+                          <option value="Karnataka">Karnataka</option>
+                          <option value="Kerala">Kerala</option>
+                          <option value="MadhyaPradesh">MadhyaPradesh</option>
+                          <option value="Maharashtra">Maharashtra</option>
+                          <option value="Manipur">Manipur</option>
+                          <option value="Meghalaya">Meghalaya</option>
+                          <option value="Mizoram">Mizoram</option>
+                          <option value="Nagaland">Nagaland</option>
+                          <option value="Odisha">Odisha</option>
+                          <option value="Punjab">Punjab</option>
+                          <option value="Rajasthan">Rajasthan</option>
+                          <option value="Sikkim">Sikkim</option>
+                          <option value="Tamil Nadu">Tamil Nadu</option>
+                          <option value="Telangana">Telangana</option>
+                          <option value="Punjab">Tripura</option>
+                          <option value="Uttarkhand">Uttarkhand</option>
+                          <option value="Punjab">West Bengal</option>
+                          <option value="Andaman and Nicobar Islands">
+                            Andaman and Nicobar Islands
+                          </option>
+                          <option value="Chandigarh">Chandigarh</option>
+                          <option value="Dadra and Nagar Haveli andDaman & Diu">
+                            Dadra and Nagar Haveli and Daman & Diu
+                          </option>
+                          <option value="The Government of NCT of Delhi">
+                            The Government of NCT of Delhi
+                          </option>
+                          <option value="Jammu & Kashmir">
+                            Jammu & Kashmir
+                          </option>
+                          <option value="Ladakh">Ladakh</option>
+                          <option value="Lakshadweep">Lakshadweep</option>
+                          <option value="Puducherry">Puducherry</option>
+                        </select>
+                      </label>
+                    </form>
+                  </div>
+                </div>
               )}
-
-              <input type="text" name="State" onChange={handleChange} />
             </div>
             <div className="input_block">
               {zipCodeError.state ? (
