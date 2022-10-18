@@ -1,7 +1,7 @@
 import "./App.css";
 
 import LoginPage from "./pages/login/login";
-import SignupPage from "./pages/singup/SignUp";
+import SignupPage from "./pages/signup/SignUp";
 import Sidebar from "./components/sidebar/sidebar";
 import { Route, Routes } from "react-router-dom";
 import GoogleAuth from "./pages/googleAuth";
