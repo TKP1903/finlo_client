@@ -6,7 +6,6 @@ import HomePage from "../pages/home/home.page";
 import Docuents from "./documnets/documents";
 import UserDocumentsPage from "./documnets/userdocuments";
 import DocumentsPage from "./documnets/userFolders";
-
 const Master = () => {
   const { type } = useParams();
   console.log({ type });

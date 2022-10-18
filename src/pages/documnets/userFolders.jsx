@@ -128,17 +128,17 @@ const UserFoldersPage = ({ documentshandler }) => {
         <div className="folder_block">
           {userFolders.length > 0
             ? userFolders.map((data) => (
-                <div
-                  className="folder"
-                  onClick={() => {
-                    documentshandler(true, false, "", `${data.folder_name}`);
-                  }}
-                >
-                  <span className="folder_name">
+                <div className="folder">
+                  <span
+                    className="folder_name"
+                    onClick={() => {
+                      documentshandler(true, false, "", `${data.folder_name}`);
+                    }}
+                  >
                     <BsFolderCheck className="icon" style={{ color: "#000" }} />
                     {data.folder_name}
                   </span>
-                  <span>
+                  <span className="editFolder">
                     <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
