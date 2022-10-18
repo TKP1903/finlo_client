@@ -167,11 +167,14 @@
 
 .admin-page .searchArea .searchBox {
     border: 1px solid black;
+    width: 60%;
 }
 
 .searchBox input {
     display: grid-inline;
-    width: 80%;
+    width: 90%;
+    height: 2rem;
+    
     border: none;
     text-indent: 10%;
     font-size: large;
@@ -190,8 +193,11 @@ table {
 }
 
 .admin-page .searchResults {
-    padding: 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
+    border: 1px solid var(--first-color);
     text-align: left;
+
+    margin-top: 10px;
 }
 
 .searchResults th, td {
