@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./documents.css";
+import Dropdown from "react-bootstrap/Dropdown";
+
 
 import {
   BsFillFolderFill,
@@ -86,6 +88,21 @@ const UserFoldersPage = ({ documentshandler }) => {
   };
   console.log(editFolder);
 
+// dropdown toggle 
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={e => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+      <span className="threedots" />
+    </a>
+  ));
+
   return (
     <div className="document_container">
       <h3 className="page_heading">Documents</h3>
@@ -124,9 +141,6 @@ const UserFoldersPage = ({ documentshandler }) => {
           </span>
         </div>
 
-        {/* New folder modal */}
-        <div></div>
-
         <div className="folder_block">
           {userFolders.length > 0
             ? userFolders.map((data) => (
@@ -141,11 +155,19 @@ const UserFoldersPage = ({ documentshandler }) => {
                     {data.folder_name}
                   </span>
                   <span>
-                    <BsThreeDotsVertical
+                    {/* <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
                       onClick={() => setEditFolder(!editFolder)}
-                    />
+                    /> */}
+                    <div class="dropdown-container" tabindex="-1">
+                      <div class="three-dots"></div>
+                      <div class="dropdown">
+                        <a href="#"><div>Rename</div></a>
+                        <a href="#"><div>Delete</div></a>
+                      </div>
+                    </div>
+                    
                   </span>
                 </div>
                 // <div

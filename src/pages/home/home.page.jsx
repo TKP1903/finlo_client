@@ -107,10 +107,8 @@ const HomePage = () => {
                     {userFiles.map((data) => (
                       <button
                         className="btn_overlay"
-                        onClick={() =>
-                          deleteFile(data.customer_id, data.document_name)
-                        }
-                      >
+                        onClick={() => deleteFile(data.customer_id, data.document_name)
+                        }>
                         Delete
                       </button>
                     ))}
