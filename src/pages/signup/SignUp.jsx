@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
-const SignupPage = () => {
+ const SignupPage = () => {
   const [inputs, setInputs] = useState({
     FirstName: "",
     LastName: "",
@@ -379,4 +379,6 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default SignupPage
+
+
