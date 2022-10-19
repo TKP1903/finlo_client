@@ -224,6 +224,8 @@ const RegisterForm = () => {
   );
 };
 
+
+
 // 2 dummuy clients for debug
 const dummyClients = [
   {
@@ -270,8 +272,35 @@ const dummyClients = [
   },
 ];
 
+
+for (let i = 0; i < 10; i++) {
+  dummyClients.push({
+    ...dummyClients[0],
+    id: dummyClients.length + 1,
+  });     
+}
+
 const performSearch = async (text) => {
   return dummyClients;
+};
+
+
+const Filter = ({type, label, options, onChange}) => {
+  return (
+    <div className="filter">
+      <label className = "filter-label" htmlFor={type}>{label}</label>
+      <div className="filter-input">
+        <select name={type} id={type} onChange={onChange}>
+          <option value="">All</option>
+          {options.map((option) => (
+            <option value={option} key={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  );
 };
 
 const SearchArea = () => {
@@ -314,39 +343,39 @@ const SearchArea = () => {
     // setClients(dummyClients);
   }, [searchText]);
 
-  const Filters = () => {
-    return (
-      <div className="filters">
-        <div className="filter">
-          <label htmlFor="filter-country"> Country: </label>
-          <select name="country" id="filter-country">
-            {/* { countries options list } */}
-            
-          </select>
-        </div>
-        <div className="filter">
-          <label htmlFor="filter-state"> State: </label>
-          <select name="state" id="filter-state">
-              {/* { states options list } */}
-          </select>
-        </div>
-        <div className="filter">
-          <label htmlFor="filter-city"> City: </label>
-          <select name="city" id="filter-city">
-            {/* { cities options list } */}
-          </select>
-        </div>
-        <div className="filter">
-          <label htmlFor="status"> Status: </label>
-          <select name="status" id="status">
-            <option value="active"> Active </option>
-            <option value="inactive"> Inactive </option>
-          </select>
-        </div>
-        <button type="submit"> Apply Filters </button>
-      </div>
-    );
-  };
+  // const Filters = () => {
+  //   return (
+  //     <div className="filters">
+  //       <div className="filter">
+  //         <label htmlFor="filter-country"> Country: </label>
+  //         <select name="country" id="filter-country">
+  //           {/* { countries options list } */}
+
+  //         </select>
+  //       </div>
+  //       <div className="filter">
+  //         <label htmlFor="filter-state"> State: </label>
+  //         <select name="state" id="filter-state">
+  //             {/* { states options list } */}
+  //         </select>
+  //       </div>
+  //       <div className="filter">
+  //         <label htmlFor="filter-city"> City: </label>
+  //         <select name="city" id="filter-city">
+  //           {/* { cities options list } */}
+  //         </select>
+  //       </div>
+  //       <div className="filter">
+  //         <label htmlFor="status"> Status: </label>
+  //         <select name="status" id="status">
+  //           <option value="active"> Active </option>
+  //           <option value="inactive"> Inactive </option>
+  //         </select>
+  //       </div>
+  //       <button type="submit"> Apply Filters </button>
+  //     </div>
+  //   );
+  // };
   const ResultsTable = ({ clients, className }) => {
     if (!Array.isArray(clients) || clients.length === 0) {
       return (
@@ -377,14 +406,14 @@ const SearchArea = () => {
             client.status == "active" ? "client-active" : "client-inactive"
           }
         >
-          <td id="client-firstName"> {client.firstName} </td>
-          <td id="client-lastName"> {client.lastName} </td>
-          <td id="client-email"> {client.email} </td>
-          <td id="client-phone"> {client.phone} </td>
-          <td id="client-city"> {client.city} </td>
-          <td id="client-state"> {client.state} </td>
-          <td id="client-country"> {client.country} </td>
-          <td id="client-active-status">
+          <td className="client-firstName"> {client.firstName} </td>
+          <td className="client-lastName"> {client.lastName} </td>
+          <td className="client-email"> {client.email} </td>
+          <td className="client-phone"> {client.phone} </td>
+          <td className="client-city"> {client.city} </td>
+          <td className="client-state"> {client.state} </td>
+          <td className="client-country"> {client.country} </td>
+          <td className="client-active-status">
             {" "}
             {client.status == "active" ? "Active" : "Inactive"}{" "}
           </td>
@@ -398,14 +427,77 @@ const SearchArea = () => {
       <table className={className}>
         <thead>
           <tr>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Email </th>
-            <th> Phone </th>
-            <th> City </th>
-            <th> State </th>
-            <th> Country </th>
-            <th> Status </th>
+            <th> 
+              <Filter
+                type = "filter-firstName"
+                label = "First Name"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-lastName"
+                label = "Last Name"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-email"
+                label = "Email"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-phone"
+                label = "Phone"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-city"
+                label = "City"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-state"
+                label = "State"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-country"
+                label = "Country"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+              
+            </th>
+            <th> 
+              <Filter
+                type = "filter-status"
+                label = "Status"
+                options = {[]}
+                onChange = {()=>{}}
+              />
+            </th>
             {/* <th> Sales </th>
             <th> Branch Office </th>
             <th> Employee </th> */}
@@ -427,7 +519,7 @@ const SearchArea = () => {
   };
   return (
     <div className="searchArea">
-      <h2> Search Resuts: </h2>
+      <h1> Clients </h1>
       <div className="searchBox">
         <input
           type="text"
@@ -450,7 +542,7 @@ const SearchArea = () => {
           <MdSearch />
         </div>
       </div>
-      <Filters />
+      {/* <Filters /> */}
       <ResultsTable className="searchResults" clients={clients} />
     </div>
   );

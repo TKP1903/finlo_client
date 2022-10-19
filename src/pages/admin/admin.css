@@ -1,6 +1,8 @@
 /* admin page */
-:root {
-    --debug-mode: 1;
+select,
+button,
+label {
+    cursor: pointer;
 }
 
 .admin-page {
@@ -60,24 +62,26 @@
     border: 1px solid var(--first-color);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
     background-color: var(--white-color);
+
+    width: 100%;
 }
 
 /* media query for width of form on big screens */
 @media screen and (min-width: 800px) {
     .admin-page-form {
-        /* width: 60%; */
+        width: 70%;
     }
 }
+
 /* media query for small screens */
 @media screen and (max-width: 600px) {
-    .admin-page-form {
-        width: 109%;
-        margin-left: -4%;
-    }
+    .admin-page-form {}
+
     /* give more width to the from inputs and less to the labels */
     .admin-page-form .form-labels {
         width: 30%;
     }
+
     .admin-page-form .form-inputs {
         width: 70%;
     }
@@ -163,7 +167,7 @@
     background-color: var(--first-color);
 }
 
-.admin-page .searchArea {
+.searchArea {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,23 +177,39 @@
     height: 100%;
 }
 
+.searchArea>h1 {
+    align-self: flex-start;
+    color: var(--first-color);
+}
+
+
 .searchBox {
+
+    align-self: flex-start;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 0px;
-    border: 1px solid black;
-    width: 60%;
-    max-width: fit-content;
+    border: 1px solid var(--first-color);
+
+    border-radius: 5px;
+    width: fit-content;
+
+    background-color: var(--white-color);
 }
 
-.searchBox input, .searchBox input:focus, .searchBox input:active {
+.searchBox input,
+.searchBox input:focus,
+.searchBox input:active {
     display: inline-grid;
     height: 2rem;
     border: none;
     text-indent: 10%;
     font-size: large;
+
+    width: 20rem;
 }
 
 
@@ -198,72 +218,16 @@
     vertical-align: middle;
     font-size: 1.5rem;
     cursor: pointer;
-    color:rgba(31, 38, 135, 0.518)
+    color: rgba(31, 38, 135, 0.518);
+
+    width: 2rem;
 }
 
-.searchArea .filters {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1vw;
-    width: 80%;
-    height: 100%;
-
-    margin: 1%;
-}
-
-.searchArea .filters .filter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-
-.searchArea .filters .filter select {
-    display: inline-flex;
-    width: 100%;
-    height: 2rem;
-    border: 1px solid var(--first-color);
-    border-radius: 5px;
-    outline: none;
-    background-color: transparent;
-
-    cursor: pointer;
-}
-
-.searchArea .filters .filter select:focus {
-    background-color: var(--white-color);
-    /* color: var(--white-color); */
-}
-
-.searchArea .filters .filter select option {
+.searchResults .filters .filter select option {
     background-color: var(--white-color);
     color: var(--first-color);
 
     font-size: 1.1rem;
-}
-
-.searchArea .filters button[type="submit"] {
-    display: inline-flex;
-    width: 25rem;
-    height: fit-content;
-
-    align-self: end;
-    justify-self: center;
-
-    /* padding: 0.5rem; */
-    font-size: 1rem;
-    
-    border: 1px solid var(--first-color);
-    border-radius: 5px;
-    outline: none;
-    
-    background-color: var(--first-color);
-    color: var(--white-color);
-    cursor: pointer;
 }
 
 .admin-page table {
@@ -275,13 +239,102 @@
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
     border: 1px solid var(--first-color);
     text-align: left;
-
     margin-top: 10px;
+
+    width: 100%;
 }
 
-.searchResults th, td {
+/* make the table srollabble vertically */
+.admin-page .searchResults {
+    display: block;
+    /* overflow-x: auto; */
+    overflow-y: auto;
+    height: 400px;
+    width: fit-content;
+}
+
+/* fix the table header */
+.admin-page .searchResults thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    font-weight: bold;
+}
+
+/* shadow at the bottom of the header */
+
+.searchResults .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    align-content: flex-end;
+    gap: 1vw;
+}
+
+.searchResults .filter-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    width: 100%;
+    height: 100%;
+}
+
+.searchResults .filter-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+}
+
+.searchResults .filter-input select {
+
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+
+    color: rgba(31, 38, 135, 0.718);
+    background-color: var(--white-color);
+    border-color: rgba(31, 38, 135, 0.718);
+
+    cursor: pointer;
+}
+
+.searchResults .filter-input select option {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.searchResults .filter-input select:focus {
+    background-color: var(--white-color);
+    /* color: var(--white-color); */
+}
+
+.searchResults .filter-input options {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.searchResults th {
+    min-width: 5rem;
+}
+
+.searchResults th, 
+.searchResults td {
     border: none;
     padding: 15px;
+
+    width: 9rem;
 }
 
 .searchResults td {
@@ -289,20 +342,48 @@
     color: rgba(31, 38, 135, 0.518);
 }
 
-.searchResults tr:last-child > td {
+.searchResults tr:last-child>td {
     border-bottom: none;
 }
 
-.searchResults thead > tr > th {
+.searchResults thead>tr>th {
     background: var(--white-color);
     border: none;
 }
 
-.searchResults tbody, td {
+.searchResults tbody,
+td {
     background: white;
+}
+
+
+/* set the text color to --first-color */
+.searchResults .client-firstName,
+.searchResults .client-lastName,
+.searchResults .client-email {
+    color: var(--first-color);
+    border-color: inherit;
+}
+
+.searchResults tr > td{
+    background-color: var(--white-color);
+}
+
+.searchResults tr.client-inactive>td {
+    background-color: var(--friendly-red);
+}
+
+.searchResults tr.client-active>td.client-active-status {
+    color: green;
+    border-color: inherit;
+}
+
+td.client-active-status {
+    color: red;
+    border-color: inherit;
 }
 
 .admin-page-footer {
     font-size: 1rem;
-    color:rgba(31, 38, 135, 0.718);
+    color: rgba(31, 38, 135, 0.718);
 }
