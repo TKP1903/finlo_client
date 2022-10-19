@@ -15,7 +15,7 @@ function App() {
       {/* <Sidebar /> */}
       <Routes>
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/profile" element={<Profile />} />
+        
         <Route path="/" element={<LoginPage />} />
         <Route path="/userd" element={<UserDocumentsPage />} />
         <Route path="/google/:token" element={<GoogleAuth />} />
