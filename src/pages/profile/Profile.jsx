@@ -1,29 +1,9 @@
 import React from "react";
-import "./profile.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./profile.css"; 
 import { useState } from "react";
 
 function Profile() {
-  const [edit, setEdit] = useState(false);
-
-  // const [name, setName] = useState({
-  //   Name: "",
-  // });
-  // const [spouse, setSpouse] = useState({
-  //   Spouse: "",
-  // });
-  // const [email, setEmail] = useState({
-  //   Email: "",
-  // });
-  // const [phone, setPhone] = useState({
-  //   Phone: "",
-  // });
-  // const [city, setCity] = useState({
-  //   City: "",
-  // });
-  // const [zipcode, setZipcode] = useState({
-  //   Zipcode: "",
-  // });
+  const [edit, setEdit] = useState(false); 
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -42,9 +22,9 @@ function Profile() {
 
   return (
     <div>
-      <div className="Title">Profile</div>
       <div className="profileContainer">
-        <div className="flex_1">
+        <div className="col1">
+          <div className="Title">Profile</div>
           <div className="personal_info">
             <div className="header_box">
               <span className="titleName"> Personal</span>
@@ -131,6 +111,10 @@ function Profile() {
               </div>
             </div>
           </div>
+          <div className="Business_info"></div>
+          <div className="endTitle">Finlo Inc, 2022</div>
+        </div>
+        <div className="col2">
           <div className="subtables">
             <div className="Tainfo">
               <div className="header2">Tax Associate Info:</div>
