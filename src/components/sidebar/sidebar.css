@@ -6,6 +6,12 @@
   --first-color-alt: #fff;
   --white-color: #D6EBFC;
   --friendly-red: #FFCCCC;
+  
+  --mui-red: #d32f2f;
+  --mui-red-light: #e57373;
+  --mui-red-dark: #9a0007;
+
+  
 }
 
 a {

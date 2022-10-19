@@ -1,10 +1,12 @@
 import React from "react";
-import "./profile.css"; 
+// import "./profile.css"; 
 import { useState } from "react";
 
 function Profile() {
-  const [edit, setEdit] = useState(false); 
+  import ("./profile.css");
 
+  const [edit, setEdit] = useState(false); 
+  
   const [inputs, setInputs] = useState({
     name: "",
     spouse: "",
@@ -19,7 +21,7 @@ function Profile() {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   //console.log(inputs);
-
+  
   return (
     <div>
       <div className="profileContainer">
