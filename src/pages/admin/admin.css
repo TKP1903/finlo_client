@@ -204,8 +204,66 @@ label {
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
+
+    background-color: transparent;
+    
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    outline: none;
+    
+    cursor: pointer;
+
+    color: var(--first-color);
 }
 
+.search-area .table-options-button:hover,
+.search-area .table-options-button:active,
+.search-area .table-options-button:focus {
+    /* background-color: var(--first-color); */
+    background-color: rgba(0, 0, 0, 0.07);
+    /* color: var(--white-color); */
+    filter: brightness(0.8);
+    transition: all 0.15s ease-in-out;
+}
+
+.search-area .table-options-button svg {
+    font-size: 1.5rem;
+}
+
+.button-text {
+    border: none!important;
+    background-color: transparent!important;
+}
+.button-text:hover {
+    color: var(--first-color)!important;
+    border: none!important;
+    background-color: rgba(0, 0, 0, 0.07)!important;
+    filter: brightness(0.8);
+}
+
+.button-contained {
+    color: white!important;
+    border: 1px solid var(--first-color)!important;
+    background: var(--first-color)!important;
+}
+
+.button-contained:hover {
+    filter: brightness(0.8);
+}
+
+.button-outlined {
+    background-color: none!important;
+    background: transparent!important;
+}
+
+.table-options-buttons .delete-btn {
+    color: var(--mui-red)!important;
+    border-color: var(--mui-red)!important;
+}
+
+.table-options-buttons .delete-btn:hover {
+    
+}
 
 .search-box {
 
@@ -245,6 +303,10 @@ label {
     color: rgba(31, 38, 135, 0.518);
 
     width: 2rem;
+}
+
+.searchIcon svg {
+    font-size: 2rem;
 }
 
 .searchResults .filters .filter select option {

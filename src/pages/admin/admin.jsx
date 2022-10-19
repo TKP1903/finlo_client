@@ -6,9 +6,9 @@ import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 import { API_URL } from "../../key";
 import axios from "axios";
 
-// import "./admin.css";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+// import "./admin.css";  // imported in Admin component
 
+// ? change this api ?
 const countriesAPI = "https://restcountries.com/v2/all?fields=name";
 // const countriesAPI = "https://www.universal-tutorial.com/api/";
 // const countriesAPI = {
@@ -25,7 +25,20 @@ const countriesAPI = "https://restcountries.com/v2/all?fields=name";
 //   // })(),
 // };
 
-/*
+/**
+ * Fetches the Auth tokens needed for the API calls
+ * @param {} no params
+ * @return {JSX} RegisterForm
+ */
+const fetchAuthTokens = async () => {
+  // const response = await axios.post(`${countriesAPI.url}getaccesstoken`, {
+  //   email: countriesAPI.userEmail,
+  //   api_token: countriesAPI.token,
+  // });
+  // return response.data.auth_token;
+};
+/** 
+ * Fetches the list of countries
  * @param no params
  * @return Promise<Array>
  *  [
@@ -51,9 +64,10 @@ const fetchCountries = async () => {
   }
 };
 
-/*
+/**
+ * Fetches the list of states for a country
  * @params {String} country
- *
+ * @return {Promise<Array>} states
  */
 const fetchStates = async (country) => {
   try {
@@ -69,14 +83,19 @@ const fetchStates = async (country) => {
   }
 };
 
+/**
+* Fetches a list of cities for a state 
+* @param {String} state
+* @return {Promise<Array>} cities
+*/
 const fetchCities = async (state) => {
   try {
-    const response = await axios.get(`${countriesAPI.url}cities/${state}`, {
+    const {cities} = await axios.get(`${countriesAPI.url}cities/${state}`, {
       headers: {
         Authorization: `Bearer ${await countriesAPI.authToken}`,
       },
     });
-    return response.data;
+    return cities;
   } catch (err) {
     console.log(err);
     return [];
@@ -306,20 +325,19 @@ const SearchArea = () => {
   useEffect(() => {
     const getSearchResults = async () => {
       const results = await performSearch(searchText);
-      setClients(() => makeClientsFromResults(results));
-      // set filtered clients to all clients
-      setFilteredClients(() => clients);
+      const newClients = makeClientsFromResults(results);
+      setClients(newClients);
+      setFilteredClients(newClients);
     };
     getSearchResults();
-    
-
+  
     // setClients(dummyClients);
   }, [searchText]);
 
   const resetFilters = () => {
     setFilteredClients(() => clients);
     // set select elements to default option (all)
-
+    // TODO :: reset select elements
   };
 
   const ResultsTable = ({ clients, className }) => {
@@ -362,8 +380,8 @@ const SearchArea = () => {
     *   Country : String
     *   Status : Active/Inactive
     * 
-  //  *   Sales : String
-  //  *   Employee : String
+    // ! *  Sales : String
+    // ! *  Employee : String
     */
 
     const makeFilterOptions = (clients, type) => {
@@ -377,13 +395,14 @@ const SearchArea = () => {
     const filterOnChange = (setFilteredClients, clients, type) => {
       return (e) => {
         const value = e.target.value;
+        // debugger;
         if (value === "" || value === "All") {
           setFilteredClients([...clients]);
         } else {
-          const filteredClients = clients.filter((client) => {
+          const newFilteredClients = filteredClients.filter((client) => {
             return client[type] === value;
           });
-          setFilteredClients(filteredClients);
+          setFilteredClients(newFilteredClients);
         }
       };
     };
@@ -414,8 +433,6 @@ const SearchArea = () => {
       );
     });
 
-
-    resetFilters ();
     return (
       <table className={className}>
         <thead>
@@ -546,7 +563,7 @@ const SearchArea = () => {
         <SearchBox className="search-box" />
         <div className="table-options-buttons">
           <button 
-            className="reset-filters"
+            className="table-options-button reset-filters button-text"
             onClick={resetFilters}
           > 
             Reset Filters 
@@ -557,7 +574,7 @@ const SearchArea = () => {
           <button className="table-options-button delete-btn">
             <MdDelete /> Delete
           </button>
-          <button className="table-options-button edit-btn">
+          <button className="table-options-button edit-btn button-contained">
             <MdEdit /> Edit
           </button>
         </div>
