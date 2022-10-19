@@ -1,14 +1,13 @@
 .profileContainer {
   
-  height: 100vh;
-  width: 100%;
+  height: 70vh;
+  width: 90%;
   max-width: 1024px;
   display: flex;
   flex-direction: column;
-   gap:100px;
-  align-items: center;
-  
-  margin-left: 300px;
+  gap:100px;
+  align-items: center; 
+  margin-left: 100px;
   margin-right: 50px;
    
 }
@@ -16,15 +15,16 @@
   font-weight: bold;
   font-size: 30px;
   height: 50px;
-  display: flex;
-   margin-bottom: 70px;
+   align-items: center;
+   display: flex;
+   margin-bottom: 50px;
   justify-content: center;
   
 }
 .personal_info,.Business_info{
   height: 250px;
   width: 500px;
-  box-shadow: 0 8px 45px 0 rgba(1, 2, 18, 0.567);
+  box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567);
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -102,7 +102,8 @@ input {
   gap: 50px;
   height: 200px;
   align-items: center;
-  justify-content: space-around;
+  justify-content:flex-start;
+
   /* margin-left: 80px; */
  
 }
@@ -111,7 +112,8 @@ input {
   width: 100%;
   display: flex;
   flex-direction: row; 
-   
+   justify-content: flex-start;
+   margin-left: 170px;
 }
 .subtables{
   display: flex;
@@ -123,17 +125,23 @@ input {
   width: 300px;
   height: 100px;
   background-color: white;
-  box-shadow: 0 8px 30px 0 rgba(1, 2, 18, 0.567);
+  box-shadow: 0 5px 20px 0 rgba(1, 2, 18, 0.567);
   border-radius: 10px;
   overflow: hidden;
 }
 
-.header2{
+.header2{ 
   height: 30px;
-  background-color:  #d9ffcc;
+  background-color:  #99e6ff;
+  display: flex;
+  align-items: center;
+  
 }
 .labels2{
-  margin-left: 20px;
+  margin-left: 20px; 
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
  
