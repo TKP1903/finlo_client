@@ -284,6 +284,8 @@ const performSearch = async (text) => {
 const SearchArea = () => {
   const [searchText, setSearch] = useState("");
   const [clients, setClients] = useState([]);
+  const [filteredClients, setFilteredClients] = useState([]);
+
 
   const makeClientsFromResults = (results) => {
     return results.map((client) => {
@@ -307,16 +309,20 @@ const SearchArea = () => {
       setClients(() => makeClientsFromResults(results));
     };
     getSearchResults();
+
+    // set filtered clients to all clients
+    setFilteredClients(() => clients);
+  
     // setClients(dummyClients);
   }, [searchText]);
 
   const resetFilters = () => {
+    setFilteredClients(() => clients);
+    // set select elements to default option (all)
 
   };
 
   const ResultsTable = ({ clients, className }) => {
-    const [filteredClients, setFilteredClients] = useState([...clients]);
-
     if (!Array.isArray(clients) || clients.length === 0) {
       return (
         <div className={className}>
@@ -407,7 +413,7 @@ const SearchArea = () => {
         </tr>
       );
     });
-    
+
     return (
       <table className={className}>
         <thead>
@@ -537,7 +543,12 @@ const SearchArea = () => {
       <div className="table-options">
         <SearchBox className="search-box" />
         <div className="table-options-buttons">
-          <button className="reset-filters"> Reset Filters </button>
+          <button 
+            className="reset-filters"
+            onClick={resetFilters}
+          > 
+            Reset Filters 
+          </button>
           <button className="table-options-button add-btn">
             <MdAdd /> Add
           </button>
