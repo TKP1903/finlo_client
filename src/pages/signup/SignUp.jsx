@@ -195,7 +195,7 @@ import { API_URL } from "../../key";
           </div>
           <div className="signin_info">
             <h2 className="welcome">Welcome!</h2>
-            <p>SignUp</p>
+            <p className="SignUptext">Sign Up</p>
           </div>
           <form action="">
             <div className="input_block">
@@ -204,7 +204,7 @@ import { API_URL } from "../../key";
                   {firstnameError.name}
                 </label>
               ) : (
-                <label>FirstName</label>
+                <label>First Name</label>
               )}
 
               <input
@@ -220,7 +220,7 @@ import { API_URL } from "../../key";
                   {lastnameError.name}
                 </label>
               ) : (
-                <label>LastName</label>
+                <label>Last Name</label>
               )}
 
               <input
@@ -289,9 +289,9 @@ import { API_URL } from "../../key";
                   {stateError.name}
                 </label>
               ) : (
-                <div>
-                  <label>State</label>
-                  <div className="input_block">
+                <div className="StateLabel">
+                  <label >State</label>
+                  <div className="input_block StateInput">
                     <form>
                       <label>
                         <select

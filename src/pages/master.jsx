@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 
 //pages
 import HomePage from "./home/homepage";
-import Documents from "./documnets/documents";
-import UserDocumentsPage from "./documnets/userdocuments";
-import DocumentsPage from "./documnets/userFolders";
+import Documents from "./documents/documents";
+import UserDocumentsPage from "./documents/userdocuments";
+import DocumentsPage from "./documents/userFolders";
+import Profile from "./profile/Profile";
 import AdminPage from "./admin/admin";
 
 const Master = () => {
@@ -17,6 +18,7 @@ const Master = () => {
       {/* {type === "documents" && <DocumentsPage />} */}
       {type === "documents" && <Documents />}
       {type === "admin" && <AdminPage />}
+      {type === "profile" && <Profile/>}
     </div>
   );
 };
