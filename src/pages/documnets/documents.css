@@ -175,8 +175,9 @@
   outline: none;
   opacity: 0;
   max-height: 0;
-  padding: 25px;
+  padding: 28px;
   padding-top: 15px;
+  padding-bottom: 15px;
   overflow: visible;
   border-radius: 5px;
 }
@@ -193,4 +194,5 @@ a{
   opacity: 1;
   z-index: 1000;
   max-height: 100vh; 
+  padding-top: 15px;
 }
