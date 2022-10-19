@@ -1,4 +1,7 @@
 /* admin page */
+:root {
+    --debug-mode: 1;
+}
 
 .admin-page {
     display: flex;
@@ -114,20 +117,24 @@
     background-color: white;
 }
 
-.admin-page-form .form-column .form-inputs input {
+.admin-page-form .form-column .form-inputs input,
+.admin-page-form .form-column select {
     width: 100%;
     border: 1px solid var(--first-color);
     border-radius: 5px;
     outline: none;
+
+    height: 2rem;
+    margin: 2px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .admin-page-form .form-column select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid var(--first-color);
 
-    border-radius: 5px;
-    outline: none;
+    background-color: transparent;
+
 }
 
 /* styling form buttons */
@@ -138,6 +145,7 @@
     align-items: flex-end;
     justify-content: center;
     gap: 10px;
+    margin: 10px;
     width: 100%;
     height: 100%;
 }
@@ -165,22 +173,28 @@
     height: 100%;
 }
 
-.admin-page .searchArea .searchBox {
+.searchBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
     border: 1px solid black;
     width: 60%;
+    max-width: fit-content;
 }
 
-.searchBox input {
-    display: grid-inline;
-    width: 90%;
+.searchBox input, .searchBox input:focus, .searchBox input:active {
+    display: inline-grid;
     height: 2rem;
-    
     border: none;
     text-indent: 10%;
     font-size: large;
 }
 
+
 .searchBox .searchIcon {
+    display: inline-grid;
     vertical-align: middle;
     font-size: 1.5rem;
     cursor: pointer;

@@ -46,7 +46,9 @@ const Sidebar = () => {
                 F
               </i>
               <span className="nav-logo-name">
-                 <img src={logo} alt="" style={{ width: "100px" }} />
+                 <span className="logo-img">
+                    <img src={logo} alt="" style={{ width: "100px" }} />
+                 </span>
               </span> 
             </Link>
 
