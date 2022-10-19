@@ -187,15 +187,15 @@ import { API_URL } from "../../key";
   };
   return (
     <div>
-      <div className="login_container align_column">
-        <div className="login_block align_column">
+      <div className="signup_container align_column">
+        <div className="signup_block align_column">
           {error.state ? <div className="errormsg">{error.name}</div> : <></>}
           <div className="logo">
             <img src={finloLogo} alt="" />
           </div>
-          <div className="signin_info">
+          <div className="signup_info">
             <h2 className="welcome">Welcome!</h2>
-            <p>SignUp</p>
+            <p className="SignUptext">Sign Up</p>
           </div>
           <form action="">
             <div className="input_block">
@@ -204,7 +204,7 @@ import { API_URL } from "../../key";
                   {firstnameError.name}
                 </label>
               ) : (
-                <label>FirstName</label>
+                <label>First Name</label>
               )}
 
               <input
@@ -220,7 +220,7 @@ import { API_URL } from "../../key";
                   {lastnameError.name}
                 </label>
               ) : (
-                <label>LastName</label>
+                <label>Last Name</label>
               )}
 
               <input
@@ -289,9 +289,9 @@ import { API_URL } from "../../key";
                   {stateError.name}
                 </label>
               ) : (
-                <div>
-                  <label>State</label>
-                  <div className="input_block">
+                <div className="StateLabel">
+                  <label >State</label>
+                  <div className="input_block StateInput">
                     <form>
                       <label>
                         <select
@@ -365,7 +365,7 @@ import { API_URL } from "../../key";
               <input type="text" name="ZipCode" onChange={handleChange} />
             </div>
 
-            <button className="signin_button" onClick={handleSubmit}>
+            <button className="signup_button" onClick={handleSubmit}>
               Sign Up
             </button>
           </form>

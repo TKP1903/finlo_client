@@ -55,7 +55,7 @@ const Sidebar = () => {
                 <IoHome className="nav-link-icon" />
                 <span className="nav-link-name ">Home</span>
               </NavLink>
-              <Link to="/" className="nav-link" >
+              <Link to="/profile" className="nav-link" >
                 <ImProfile className="nav-link-icon" />
                 <span className="nav-link-name">Profile</span>
               </Link>

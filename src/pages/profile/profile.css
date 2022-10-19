@@ -1,0 +1,139 @@
+.profileContainer {
+  
+  height: 100vh;
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+   gap:100px;
+  align-items: center;
+  
+  margin-left: 300px;
+  margin-right: 50px;
+   
+}
+.Title{
+  font-weight: bold;
+  font-size: 30px;
+  height: 50px;
+  display: flex;
+   margin-bottom: 70px;
+  justify-content: center;
+  
+}
+.personal_info,.Business_info{
+  height: 250px;
+  width: 500px;
+  box-shadow: 0 8px 45px 0 rgba(1, 2, 18, 0.567);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.titleName {
+  font-weight: bold;
+  font-size: 20px;
+}
+.header_box {
+  width: 100%;
+  background-color:#99e6ff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.edit_button {
+  width: 70px;
+  height: 30px;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  font-weight: 450;
+  background-color: rgb(37, 136, 228);
+  font-size: large;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.details_box {
+  width: 100%;
+  height: 330px; 
+  display: flex;
+}
+
+.labels {
+  margin-left: 20px;
+  margin-right: 40px;
+  font-weight: 400;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.values {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-weight: 600;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+ 
+.separator {
+  height: 100%;
+  width: 0.5px;
+  background-color: black;
+}
+input {
+  height: 20px;
+  font-size: 12px;
+  width: 100%;
+   
+}
+
+.flex_1{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  height: 200px;
+  align-items: center;
+  justify-content: space-around;
+  /* margin-left: 80px; */
+ 
+}
+.flex_2{
+  height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+   
+}
+.subtables{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+ 
+.Tainfo ,.support{
+  width: 300px;
+  height: 100px;
+  background-color: white;
+  box-shadow: 0 8px 30px 0 rgba(1, 2, 18, 0.567);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header2{
+  height: 30px;
+  background-color:  #d9ffcc;
+}
+.labels2{
+  margin-left: 20px;
+}
+
+ 

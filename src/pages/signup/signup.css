@@ -1,9 +1,10 @@
-.login_container{
+.signup_container{
     margin-top: 130px;
     width: 100vw;
     height: 100vh;
+    padding-top: 20px;
 }
-.login_block{
+.signup_block{
     background: rgba( 255, 255, 255, 0.05 );
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.103);
     backdrop-filter: blur( 1.5px );
@@ -22,7 +23,7 @@
     width: 100%;
     height: fit-content;
 }
-.signin_info {
+.signup_info {
     text-align: center;
 }
 .welcome{
@@ -49,15 +50,15 @@ input{
     border-radius: 5px;
     padding-left: 5px;
 }
-.signin_button{
+.signup_button{
     width: 100%;
     color: #fff;
-    background-color: #1029AD;
+    background-color: #0099ff;
     padding: 8px;
     margin: 20px 0 ;
     font-size: medium;
     font-weight: bold;
-    border: 2px solid #1029AD;
+    border: 2px solid #0099ff;
     border-radius: 10px;
 }
 .forgotpassword{
@@ -120,4 +121,12 @@ input{
     width: 100%;
     height: 40px;
     border-radius: 5px;
+    margin-top: 5px;
+}
+.StateLabel{
+    margin-top: 10px;
+}
+.SignUptext{
+    font-weight: bold;
+    font-size:1.5rem;
 }
