@@ -171,13 +171,15 @@
   position: absolute;
   right: 10px;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.096);
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.042);
   outline: none;
   opacity: 0;
-  z-index: -10!important;
   max-height: 0;
-  padding: 15px;
-  padding-top: 10px;
+  padding: 28px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: visible;
+  border-radius: 5px;
 }
 
 a{
@@ -190,6 +192,7 @@ a{
 
 .dropdown-container:focus .dropdown {
   opacity: 1;
-  z-index: -10;
-  max-height: 100vh;
+  z-index: 1000;
+  max-height: 100vh; 
+  padding-top: 15px;
 }

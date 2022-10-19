@@ -22,6 +22,8 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [folder_name, setFolder_name] = useState("");
   const [create, setCreatefolder] = useState("");
   const [editFolder, setEditFolder] = useState(false);
+  const [modal4, setModal4] = useState(false);
+
 
   const getUserFiles = async (user_id) => {
     try {
@@ -75,6 +77,7 @@ const UserFoldersPage = ({ documentshandler }) => {
     getUserFiles(0);
   }, []);
 
+  // Upload Modal 
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -84,6 +87,7 @@ const UserFoldersPage = ({ documentshandler }) => {
   } else {
     document.body.classList.remove("active-modal");
   }
+
   console.log(folder_name);
   const handleChange = (event) => {
     setFolder_name(event.target.value);
@@ -105,6 +109,17 @@ const UserFoldersPage = ({ documentshandler }) => {
     </a>
   ));
 
+   // Renane Modal 
+   const toggleModal4 = () => {
+    setModal4(!modal4);
+  };
+
+  if (modal4) {
+    document.body.classList.add("active-modal4");
+  } else {
+    document.body.classList.remove("active-modal4");
+  }
+
   return (
     <div className="document_container">
       <h3 className="page_heading">Documents</h3>
@@ -114,7 +129,7 @@ const UserFoldersPage = ({ documentshandler }) => {
             <BsFillFolderFill className="icon" />
             <div className="folder_creation">
               <button onClick={toggleModal} className="btn-modal">
-                New folder
+                Add folder
               </button>
               {modal && (
                 <div className="modal" style={{ zIndex: "1" }}>
@@ -157,15 +172,43 @@ const UserFoldersPage = ({ documentshandler }) => {
                     {data.folder_name}
                   </span>
                   <span className="editFolder">
+
                     {/* <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
                       onClick={() => setEditFolder(!editFolder)}
                     /> */}
-                    <div class="dropdown-container" tabindex="-1">
+
+                    {/* Rename Modal */}
+                    <div>
+                        {modal4 && (
+                          <div className="modal" style={{ zIndex: "1" }}>
+                            <div className="overlay"></div>
+                            <div className="modal-content">
+                              <div>
+                                Rename File Name  <br />
+                                <input type="text" name="" id="" />
+                                
+                              </div>
+                              <div className="btn-section">
+                                <button className="btn_overlay" >
+                                  Rename
+                                </button>
+                                <button className="btn_overlay" onClick={toggleModal4}>
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                   
+                  {/* Dropdown list 3 Dots */}
+                    <div class="dropdown-container" tabindex="1">
                       <div class="three-dots"></div>
                       <div class="dropdown">
-                        <a href="#"><div>Rename</div></a>
+                        <a href="#"><div onClick={toggleModal4}>Rename</div></a>
                         <a href="#"><div>Delete</div></a>
                       </div>
                     </div>

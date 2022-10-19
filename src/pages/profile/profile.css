@@ -1,79 +1,140 @@
-.profileContainer {
-  background-color: white;
-  height: 100vh;
-  width: 100%;
+ 
+.Title{
+  /* margin: 25px; */
+  margin-left: 200px;
+  font-weight: bold;
+  font-size: 25px;
+}
+.profileContainer{
+  display: flex;
+  max-width: 1024px;
+  height: 60%;
+  gap:10px; 
+  margin-left: 150px;
+}
+.col1{
+  height: 100%;
+  width: 600px;
+   gap:30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 50px;
-  overflow: hidden;
+  justify-content: space-between;
 }
 
-.personal_info {
-  height: 400px;
-  width: 800px;
-  box-shadow: 0 8px 45px 0 rgba(1, 2, 18, 0.567);
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-   
-}
 .titleName {
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
 }
 .header_box {
   width: 100%;
-  background-color: aquamarine;
+  background-color:#99e6ff;
   height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-position: relative;
+  position: relative;
 }
-
+.personal_info{
+  height: 250px;
+  width: 500px;
+  box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Business_info{
+  height: 250px;
+  width: 500px;
+  /* box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567); */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .edit_button {
   width: 70px;
   height: 30px;
   color: white;
   position: absolute;
-  top: 25px;
+  top: 10px;
   right: 30px;
-  font-weight: 600;
+  font-weight: 450;
   background-color: rgb(37, 136, 228);
   font-size: large;
   border-radius: 30px;
+  cursor: pointer;
 }
 
 .details_box {
   width: 100%;
-  height: 330px;
-   
+  height: 330px; 
   display: flex;
+}
+
+.labels {
+  margin-left: 20px;
+  margin-right: 40px;
+  font-weight: 400;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.values {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-weight: 600;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+ 
+.separator {
+  height: 100%;
+  width: 0.5px;
+  background-color: black;
+}
+input {
+  height: 20px;
+  font-size: 12px;
+  width: 100%;
    
 }
 
-.labels,.values{
-    margin-left: 50px;
-    margin-right: 100px;
-    font-weight: 600;
-    font-size: larger;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    
+.col2{
+  margin-top: 50px;
+  height: 100%;
+  width: 50%; 
+  display: flex;
+  flex-direction: column; 
+  gap: 50px;
 }
-
-.details{
-
+.header2 {
+  height: 30px;
+  background-color: #99e6ff;
+  display: flex;
+  align-items: center;
 }
-.separator{
-    height: 100%;
-    width: 1.5px;
-    background-color: black;
+.labels2 {
+  margin-left: 20px;
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+} 
+.Tainfo ,.support{
+  width: 300px;
+  height: 100px;
+  background-color: white;
+  box-shadow: 0 5px 20px 0 rgba(1, 2, 18, 0.567);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
 }
-input{
-  height: 35px;
-  font-size: 20px;
+.endTitle{
+  margin-left: 200px;
+  
 }
