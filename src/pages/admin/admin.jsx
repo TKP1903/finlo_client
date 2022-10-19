@@ -10,39 +10,121 @@ import "./admin.css";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 const countriesAPI = "https://restcountries.com/v2/all?fields=name";
-// const countriesAPI = "https://api.first.org/data/v1/countries";
+// const countriesAPI = "https://www.universal-tutorial.com/api/";
+// const countriesAPI = {
+//   url: "https://www.universal-tutorial.com/api/",
+//   token: " _ZC6EUQG-gVv6aNU3l7-Zp_gkcpsS38qY0WygNM9b6MPD20IDGkoRuJGNxJaM_z1WtA",
+//   userEmail: "aashishsingla567@gmail.com",
+//   authToken: "",
+//   // authToken: (async ()=> {
+//   //   const response = await axios.post(`${countriesAPI.url}getaccesstoken`, {
+//   //     "email": countriesAPI.userEmail,
+//   //     "api_token": countriesAPI.token
+//   //   });
+//   //   return response.data.auth_token;
+//   // })(),
+// };
+
+/*
+ * @param no params
+ * @return Promise<Array>
+ *  [
+ *    {
+ *      "country_name": "India",
+ *      "country_short_name": "IN",
+ *      "country_phone_code": "91",
+ *    },
+ *    ...
+ *  ]
+ */
+const fetchCountries = async () => {
+  try {
+    const response = await axios.get(`${countriesAPI.url}countries/`, {
+      headers: {
+        Authorization: `Bearer ${await countriesAPI.authToken}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+/*
+ * @params {String} country
+ *
+ */
+const fetchStates = async (country) => {
+  try {
+    const response = await axios.get(`${countriesAPI.url}states/${country}`, {
+      headers: {
+        Authorization: `Bearer ${await countriesAPI.authToken}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+
+const fetchCities = async (state) => {
+  try {
+    const response = await axios.get(`${countriesAPI.url}cities/${state}`, {
+      headers: {
+        Authorization: `Bearer ${await countriesAPI.authToken}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
 
 const RegisterForm = () => {
   // TODO :: make a ref to the form element
   const formRef = useRef();
-
+  const [selectedOptions, setSelectedOptions] = useState({
+    country: "",
+    state: "",
+    city: "",
+  });
   // TODO :: Implement the following methods
   const submitForm = () => {};
 
   const resetForm = () => {};
 
   const CountriesSelection = () => {
-    const [countries, setCountries] = useState ([]);
-    const countriesRef = useRef (null);
+    const [countries, setCountries] = useState([]);
+    const countriesRef = useRef(null);
 
-    useEffect (() => {
+    useEffect(() => {
       const getCountries = async () => {
         try {
-          if (!Array.isArray (countriesRef.current) || countriesRef.current.length === 0) {
-            const {data} = await axios.get (countriesAPI);              
-            console.log (data);
+          if (
+            !Array.isArray(countriesRef.current) ||
+            countriesRef.current.length === 0
+          ) {
+            const { data } = await fetchCountries();
+            console.log(data);
             countriesRef.current = data;
           }
-          setCountries (countriesRef.current);
+          setCountries(countriesRef.current);
         } catch (err) {
-          console.log ({err});
+          console.log({ err });
         }
       };
-      getCountries ();
+      getCountries();
     }, []);
 
-    const countriesList = countries.map ((country) => {
-      return <option value={country.name} key={country.name}>{country.name}</option>;
+    const countriesList = countries.map((country) => {
+      return (
+        <option value={country.name} key={country.name}>
+          {country.name}
+        </option>
+      );
     });
 
     return (
@@ -52,13 +134,9 @@ const RegisterForm = () => {
       </select>
     );
   };
-  const StatesSelection = () => {
+  const StatesSelection = () => {};
+  const CitySelection = () => {};
 
-  };
-  const CitySelection = () => {
-
-  }; 
-  
   return (
     <div className="RegisterForm">
       {/* form to register a client */}
@@ -75,8 +153,14 @@ const RegisterForm = () => {
            * Source : String
            */}
           <div className="form-labels">
-            <label htmlFor="first-name" required> First Name: </label>
-            <label htmlFor="email" required> Email: </label>
+            <label htmlFor="first-name" required>
+              {" "}
+              First Name:{" "}
+            </label>
+            <label htmlFor="email" required>
+              {" "}
+              Email:{" "}
+            </label>
             <label htmlFor="country"> Country: </label>
             <label htmlFor="city"> City: </label>
             <label htmlFor="branch-office"> Branch Office: </label>
@@ -85,8 +169,8 @@ const RegisterForm = () => {
           <div className="form-inputs">
             <input type="text" name="first-name" id="first-name" />
             <input type="email" name="email" id="email" />
-            {/* <input type="text" name="country" id="country" /> */}
-            <CountriesSelection />
+            <input type="text" name="country" id="country" />
+            {/* <CountriesSelection /> */}
             <input type="text" name="city" id="city" />
             <input type="text" name="branch-office" id="branch-office" />
             <input type="text" name="source" id="source" />
@@ -105,7 +189,7 @@ const RegisterForm = () => {
             <label htmlFor="last-name"> Last Name: </label>
             <label htmlFor="phone-number"> Phone Number: </label>
             <label htmlFor="state"> State: </label>
-            <label htmlFor="sales"> Sales: </label>
+            {/* <label htmlFor="sales"> Sales: </label> */}
             <label htmlFor="employee"> Employee: </label>
             <label htmlFor="status"> Status: </label>
           </div>
@@ -113,7 +197,7 @@ const RegisterForm = () => {
             <input type="text" name="last-name" id="last-name" />
             <input type="number" name="phone-number" id="phone-number" />
             <input type="text" name="state" id="state" />
-            <input type="text" name="sales" id="sales" />
+            {/* <input type="text" name="sales" id="sales" /> */}
             <input type="text" name="employee" id="employee" />
             {/* select status */}
             {/* default select active */}
@@ -140,7 +224,6 @@ const RegisterForm = () => {
   );
 };
 
-
 // 2 dummuy clients for debug
 const dummyClients = [
   {
@@ -149,9 +232,13 @@ const dummyClients = [
     lastName: "Doe",
     email: "jhonedoe@xyz.com",
     phone: "1234567890",
-    branchOffice: "office1",
-    sales: "sales",
-    employee: "raju",
+    city: "Abbeville",
+    state: "Alabama",
+    country: "United States",
+    status: "active",
+    // branchOffice: "office1",
+    // sales: "sales",
+    // employee: "raju",
   },
   {
     id: 2,
@@ -159,14 +246,32 @@ const dummyClients = [
     lastName: "Doe",
     email: "jhonedoe@xyz.com",
     phone: "1234567890",
-    branchOffice: "office1",
-    sales: "sales",
-    employee: "raju",
+    city: "Abbeville",
+    state: "Alabama",
+    country: "United States",
+    status: "inactive",
+    // branchOffice: "office1",
+    // sales: "sales",
+    // employee: "raju",
+  },
+  {
+    id: 3,
+    firstName: "John",
+    lastName: "Doe",
+    email: "jhonedoe@xyz.com",
+    phone: "1234567890",
+    city: "Abbeville",
+    state: "Alabama",
+    country: "United States",
+    status: "active",
+    // branchOffice: "office1",
+    // sales: "sales",
+    // employee: "raju",
   },
 ];
 
 const performSearch = async (text) => {
-  return dummyClients;  
+  return dummyClients;
 };
 
 const SearchArea = () => {
@@ -181,12 +286,16 @@ const SearchArea = () => {
         lastName: client.lastName,
         email: client.email,
         phone: client.phone,
-        branchOffice: client.branchOffice,
-        sales: client.sales,
-        employee: client.employee,
+        city: client.city,
+        state: client.state,
+        country: client.country,
+        status: client.status,
+        // branchOffice: client.branchOffice,
+        // sales: client.sales,
+        // employee: client.employee,
       };
-    }
-  )};
+    });
+  };
 
   const getId = (() => {
     let __id = 0;
@@ -196,7 +305,6 @@ const SearchArea = () => {
   })();
 
   useEffect(() => {
-    
     const getSearchResults = async () => {
       const results = await performSearch(searchText);
       setClients(() => getClientsFromResults(results));
@@ -206,6 +314,39 @@ const SearchArea = () => {
     // setClients(dummyClients);
   }, [searchText]);
 
+  const Filters = () => {
+    return (
+      <div className="filters">
+        <div className="filter">
+          <label htmlFor="filter-country"> Country: </label>
+          <select name="country" id="filter-country">
+            {/* { countries options list } */}
+            
+          </select>
+        </div>
+        <div className="filter">
+          <label htmlFor="filter-state"> State: </label>
+          <select name="state" id="filter-state">
+              {/* { states options list } */}
+          </select>
+        </div>
+        <div className="filter">
+          <label htmlFor="filter-city"> City: </label>
+          <select name="city" id="filter-city">
+            {/* { cities options list } */}
+          </select>
+        </div>
+        <div className="filter">
+          <label htmlFor="status"> Status: </label>
+          <select name="status" id="status">
+            <option value="active"> Active </option>
+            <option value="inactive"> Inactive </option>
+          </select>
+        </div>
+        <button type="submit"> Apply Filters </button>
+      </div>
+    );
+  };
   const ResultsTable = ({ clients, className }) => {
     if (!Array.isArray(clients) || clients.length === 0) {
       return (
@@ -214,52 +355,75 @@ const SearchArea = () => {
         </div>
       );
     }
+    /*
+    *   FirstName : String
+    *   LastName : String
+    *   Email : Email
+    *   Phone : String
+    *   City : String
+    *   State : String
+    *   Country : String
+    *   Status : Active/Inactive
+    * 
+  //  *   Sales : String
+  //  *   Employee : String
+    */
+    console.log(clients);
     const clientsList = clients.map((client) => {
       return (
-        <tr key={`client-${getId()}`}>
-          <td> {client.firstName} </td>
-          <td> {client.email} </td>
-          <td> {client.branchOffice} </td>
-          <td> {client.lastName} </td>
-          <td> {client.phone} </td>
-          <td> {client.sales} </td>
-          <td> {client.employee} </td>
+        <tr
+          key={`client-${client.id}`}
+          className={
+            client.status == "active" ? "client-active" : "client-inactive"
+          }
+        >
+          <td id="client-firstName"> {client.firstName} </td>
+          <td id="client-lastName"> {client.lastName} </td>
+          <td id="client-email"> {client.email} </td>
+          <td id="client-phone"> {client.phone} </td>
+          <td id="client-city"> {client.city} </td>
+          <td id="client-state"> {client.state} </td>
+          <td id="client-country"> {client.country} </td>
+          <td id="client-active-status">
+            {" "}
+            {client.status == "active" ? "Active" : "Inactive"}{" "}
+          </td>
+          {/* <td> {client.branchOffice} </td> */}
+          {/* <td> {client.sales} </td>
+          <td> {client.employee} </td> */}
         </tr>
       );
     });
     return (
       <table className={className}>
-        {/*
-         *   FirstName : String
-         *   Email : Email
-         *   Branch-Office: String
-         *   LastName : String
-         *   Phone : String
-         *   Sales : String
-         *   Employee : String
-         */}
         <thead>
-          <th> First Name </th>
-          <th> Email </th>
-          <th> Branch Office </th>
-          <th> Last Name </th>
-          <th> Phone </th>
-          <th> Sales </th>
-          <th> Employee </th>
+          <tr>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Email </th>
+            <th> Phone </th>
+            <th> City </th>
+            <th> State </th>
+            <th> Country </th>
+            <th> Status </th>
+            {/* <th> Sales </th>
+            <th> Branch Office </th>
+            <th> Employee </th> */}
+          </tr>
         </thead>
         <tbody>{clientsList}</tbody>
       </table>
     );
   };
 
-  const inputRef = useRef (null);
+  const inputRef = useRef(null);
   const searchIconRef = useRef(null);
 
   const clickSearchIcon = () => {
     console.log(searchIconRef);
-    console.log (inputRef);
+    console.log(inputRef);
     // click it
-    inputRef.current.click ();
+    inputRef.current.click();
   };
   return (
     <div className="searchArea">
@@ -267,26 +431,26 @@ const SearchArea = () => {
       <div className="searchBox">
         <input
           type="text"
-          ref = {inputRef}
+          ref={inputRef}
           placeholder="Search"
           onKeyDown={(e) => {
-            console.log ("searching");
-            return (e.key === "Enter" ? clickSearchIcon() : null)
-          }
-        }
+            console.log("searching");
+            return e.key === "Enter" ? clickSearchIcon() : null;
+          }}
         />
         {/* make wrapper for search icon */}
-        <div 
+        <div
           className="searchIcon"
           ref={searchIconRef}
-          onClick={()=>{
-            console.log (inputRef.current.value);
-            setSearch (inputRef.current.value);
+          onClick={() => {
+            console.log(inputRef.current.value);
+            setSearch(inputRef.current.value);
           }}
         >
-          <MdSearch/>
+          <MdSearch />
         </div>
       </div>
+      <Filters />
       <ResultsTable className="searchResults" clients={clients} />
     </div>
   );

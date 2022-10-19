@@ -65,7 +65,7 @@
 /* media query for width of form on big screens */
 @media screen and (min-width: 800px) {
     .admin-page-form {
-        width: 60%;
+        /* width: 60%; */
     }
 }
 /* media query for small screens */
@@ -201,7 +201,72 @@
     color:rgba(31, 38, 135, 0.518)
 }
 
-table {
+.searchArea .filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    width: 80%;
+    height: 100%;
+
+    margin: 1%;
+}
+
+.searchArea .filters .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.searchArea .filters .filter select {
+    display: inline-flex;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+.searchArea .filters .filter select:focus {
+    background-color: var(--white-color);
+    /* color: var(--white-color); */
+}
+
+.searchArea .filters .filter select option {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.searchArea .filters button[type="submit"] {
+    display: inline-flex;
+    width: 25rem;
+    height: fit-content;
+
+    align-self: end;
+    justify-self: center;
+
+    /* padding: 0.5rem; */
+    font-size: 1rem;
+    
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    outline: none;
+    
+    background-color: var(--first-color);
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.admin-page table {
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -228,7 +293,7 @@ table {
     border-bottom: none;
 }
 
-.searchResults thead {
+.searchResults thead > tr > th {
     background: var(--white-color);
     border: none;
 }
