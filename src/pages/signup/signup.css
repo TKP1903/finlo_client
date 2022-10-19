@@ -2,6 +2,7 @@
     margin-top: 130px;
     width: 100vw;
     height: 100vh;
+    padding-top: 20px;
 }
 .login_block{
     background: rgba( 255, 255, 255, 0.05 );
@@ -52,12 +53,12 @@ input{
 .signin_button{
     width: 100%;
     color: #fff;
-    background-color: #1029AD;
+    background-color: #0099ff;
     padding: 8px;
     margin: 20px 0 ;
     font-size: medium;
     font-weight: bold;
-    border: 2px solid #1029AD;
+    border: 2px solid #0099ff;
     border-radius: 10px;
 }
 .forgotpassword{
@@ -120,4 +121,12 @@ input{
     width: 100%;
     height: 40px;
     border-radius: 5px;
+    margin-top: 5px;
+}
+.StateLabel{
+    margin-top: 10px;
+}
+.SignUptext{
+    font-weight: bold;
+    font-size:1.5rem;
 }
