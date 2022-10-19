@@ -166,7 +166,7 @@ label {
     background-color: var(--first-color);
 }
 
-.searchArea {
+.search-area {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -176,15 +176,37 @@ label {
     height: 100%;
 }
 
-.searchArea>h1 {
+.search-area>h1 {
     align-self: flex-start;
     color: var(--first-color);
     padding: 0;
     margin: 0;
 }
 
+.search-area .table-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
-.searchBox {
+.search-area .table-options-buttons {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15px;
+}
+
+.search-area .table-options-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.search-box {
 
     align-self: flex-start;
 
@@ -201,9 +223,9 @@ label {
     background-color: var(--white-color);
 }
 
-.searchBox input,
-.searchBox input:focus,
-.searchBox input:active {
+.search-box input,
+.search-box input:focus,
+.search-box input:active {
     display: inline-grid;
     height: 2rem;
     border: none;
@@ -214,7 +236,7 @@ label {
 }
 
 
-.searchBox .searchIcon {
+.search-box .searchIcon {
     display: inline-grid;
     vertical-align: middle;
     font-size: 1.5rem;

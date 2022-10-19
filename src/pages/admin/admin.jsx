@@ -1,7 +1,7 @@
 // Component for the admin page
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { MdSearch } from "react-icons/md";
+import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 
 import { API_URL } from "../../key";
 import axios from "axios";
@@ -224,8 +224,6 @@ const RegisterForm = () => {
   );
 };
 
-
-
 // 2 dummuy clients for debug
 const dummyClients = [
   {
@@ -272,42 +270,22 @@ const dummyClients = [
   },
 ];
 
-
 for (let i = 0; i < 10; i++) {
   dummyClients.push({
     ...dummyClients[0],
     id: dummyClients.length + 1,
-  });     
+  });
 }
 
 const performSearch = async (text) => {
   return dummyClients;
 };
 
-
-const Filter = ({type, label, options, onChange}) => {
-  return (
-    <div className="filter">
-      <label className = "filter-label" htmlFor={type}>{label}</label>
-      <div className="filter-input">
-        <select name={type} id={type} onChange={onChange}>
-          <option value="">All</option>
-          {options.map((option) => (
-            <option value={option} key={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
-  );
-};
-
 const SearchArea = () => {
   const [searchText, setSearch] = useState("");
   const [clients, setClients] = useState([]);
 
-  const getClientsFromResults = (results) => {
+  const makeClientsFromResults = (results) => {
     return results.map((client) => {
       return {
         id: client.id,
@@ -319,71 +297,55 @@ const SearchArea = () => {
         state: client.state,
         country: client.country,
         status: client.status,
-        // branchOffice: client.branchOffice,
-        // sales: client.sales,
-        // employee: client.employee,
       };
     });
   };
 
-  const getId = (() => {
-    let __id = 0;
-    return () => {
-      return __id++;
-    };
-  })();
-
   useEffect(() => {
     const getSearchResults = async () => {
       const results = await performSearch(searchText);
-      setClients(() => getClientsFromResults(results));
+      setClients(() => makeClientsFromResults(results));
     };
     getSearchResults();
-
     // setClients(dummyClients);
   }, [searchText]);
 
-  // const Filters = () => {
-  //   return (
-  //     <div className="filters">
-  //       <div className="filter">
-  //         <label htmlFor="filter-country"> Country: </label>
-  //         <select name="country" id="filter-country">
-  //           {/* { countries options list } */}
+  const resetFilters = () => {
 
-  //         </select>
-  //       </div>
-  //       <div className="filter">
-  //         <label htmlFor="filter-state"> State: </label>
-  //         <select name="state" id="filter-state">
-  //             {/* { states options list } */}
-  //         </select>
-  //       </div>
-  //       <div className="filter">
-  //         <label htmlFor="filter-city"> City: </label>
-  //         <select name="city" id="filter-city">
-  //           {/* { cities options list } */}
-  //         </select>
-  //       </div>
-  //       <div className="filter">
-  //         <label htmlFor="status"> Status: </label>
-  //         <select name="status" id="status">
-  //           <option value="active"> Active </option>
-  //           <option value="inactive"> Inactive </option>
-  //         </select>
-  //       </div>
-  //       <button type="submit"> Apply Filters </button>
-  //     </div>
-  //   );
-  // };
+  };
+
   const ResultsTable = ({ clients, className }) => {
+    const [filteredClients, setFilteredClients] = useState([...clients]);
+
     if (!Array.isArray(clients) || clients.length === 0) {
       return (
         <div className={className}>
           <h2> &nbsp; No Results Found &nbsp; </h2>
         </div>
       );
-    }
+    };
+
+    const Filter = ({ type, label, options, onChange }) => {
+      const selectRef = useRef();
+      return (
+        <div className="filter">
+          <label className="filter-label" htmlFor={type}>
+            {label}
+          </label>
+          <div className="filter-input">
+            <select ref={selectRef} name={type} id={type} onChange={onChange}>
+              <option value="">All</option>
+              {options.map((option) => (
+                <option value={option} key={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      );
+    };
+  
     /*
     *   FirstName : String
     *   LastName : String
@@ -397,8 +359,30 @@ const SearchArea = () => {
   //  *   Sales : String
   //  *   Employee : String
     */
-    console.log(clients);
-    const clientsList = clients.map((client) => {
+
+    const makeFilterOptions = (clients, type) => {
+      const filters = new Set();
+      clients.forEach((client) => {
+        filters.add(client[type]);
+      });
+      return Array.from(filters);
+    };
+
+    const filterOnChange = (setFilteredClients, clients, type) => {
+      return (e) => {
+        const value = e.target.value;
+        if (value === "" || value === "All") {
+          setFilteredClients([...clients]);
+        } else {
+          const filteredClients = clients.filter((client) => {
+            return client[type] === value;
+          });
+          setFilteredClients(filteredClients);
+        }
+      };
+    };
+
+    const clientsList = filteredClients.map((client) => {
       return (
         <tr
           key={`client-${client.id}`}
@@ -423,79 +407,81 @@ const SearchArea = () => {
         </tr>
       );
     });
+    
     return (
       <table className={className}>
         <thead>
           <tr>
-            <th> 
+            <th>
               <Filter
-                type = "filter-firstName"
-                label = "First Name"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-firstName"
+                label="First Name"
+                options={makeFilterOptions(filteredClients, "firstName")}
+                onChange={(e) => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-lastName"
-                label = "Last Name"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-lastName"
+                label="Last Name"
+                options={makeFilterOptions(filteredClients, "lastName")}
+                onChange={filterOnChange(
+                  setFilteredClients,
+                  filteredClients,
+                  "lastName"
+                )}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-email"
-                label = "Email"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-email"
+                label="Email"
+                options={makeFilterOptions(filteredClients, "email")}
+                onChange={() => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-phone"
-                label = "Phone"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-phone"
+                label="Phone"
+                options={makeFilterOptions(filteredClients, "phone")}
+                onChange={() => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-city"
-                label = "City"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-city"
+                label="City"
+                options={makeFilterOptions(filteredClients, "city")}
+                onChange={() => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-state"
-                label = "State"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-state"
+                label="State"
+                options={makeFilterOptions(filteredClients, "state")}
+                onChange={() => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-country"
-                label = "Country"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-country"
+                label="Country"
+                options={makeFilterOptions(filteredClients, "country")}
+                onChange={() => {}}
               />
-              
             </th>
-            <th> 
+            <th>
               <Filter
-                type = "filter-status"
-                label = "Status"
-                options = {[]}
-                onChange = {()=>{}}
+                type="filter-status"
+                label="Status"
+                options={makeFilterOptions(filteredClients, "status")}
+                onChange={filterOnChange(
+                  setFilteredClients,
+                  filteredClients,
+                  "status"
+                )}
               />
             </th>
             {/* <th> Sales </th>
@@ -508,19 +494,20 @@ const SearchArea = () => {
     );
   };
 
-  const inputRef = useRef(null);
-  const searchIconRef = useRef(null);
+  const SearchBox = ({ className }) => {
 
-  const clickSearchIcon = () => {
-    console.log(searchIconRef);
-    console.log(inputRef);
-    // click it
-    inputRef.current.click();
-  };
-  return (
-    <div className="searchArea">
-      <h1> Clients </h1>
-      <div className="searchBox">
+    const inputRef = useRef(null);
+    const searchIconRef = useRef(null);
+
+    const clickSearchIcon = () => {
+      console.log(searchIconRef);
+      console.log(inputRef);
+      // click it
+      inputRef.current.click();
+    };
+
+    return (
+      <div className={className}>
         <input
           type="text"
           ref={inputRef}
@@ -542,7 +529,35 @@ const SearchArea = () => {
           <MdSearch />
         </div>
       </div>
-      {/* <Filters /> */}
+    );
+  };
+
+  const TableOptions = () => {
+    return (
+      <div className="table-options">
+        <SearchBox className="search-box" />
+        <div className="table-options-buttons">
+          <button className="reset-filters"> Reset Filters </button>
+          <button className="table-options-button add-btn">
+            <MdAdd /> Add
+          </button>
+          <button className="table-options-button delete-btn">
+            <MdDelete /> Delete
+          </button>
+          <button className="table-options-button edit-btn">
+            <MdEdit /> Edit
+          </button>
+        </div>
+      </div>
+
+    );
+  };
+  return (
+    <div className="search-area">
+      <h1> Clients </h1>
+      
+      <TableOptions />
+      
       <ResultsTable className="searchResults" clients={clients} />
     </div>
   );
