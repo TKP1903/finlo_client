@@ -13,7 +13,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [modal, setModal] = useState(false);
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
-
+  const [modal5, setModal5] = useState(false);
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
@@ -58,7 +58,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     document.body.classList.remove("active-modal");
   }
 
-  // modal 2
+  // Renane Modal 
   const toggleModal1 = () => {
     setModal1(!modal1);
   };
@@ -75,6 +75,18 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     };
   
     if (modal2) {
+      document.body.classList.add("active-modal");
+    } else {
+      document.body.classList.remove("active-modal");
+    }
+
+
+     // Info Modal
+     const toggleModal5 = () => {
+      setModal5(!modal5);
+    };
+  
+    if (modal5) {
       document.body.classList.add("active-modal");
     } else {
       document.body.classList.remove("active-modal");
@@ -118,7 +130,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           Back
         </label>
 
-        <div className="upload-btn">
+          {/* Upload Btn */}
+        {/* <div className="upload-btn">
           <button className="submit_button" onClick={toggleModal}>
             <BsFillCloudArrowUpFill className="icon" />
             Upload
@@ -146,7 +159,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Upload modal */}
         {/* <div>
@@ -187,7 +200,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       </div>
 
 {/* Rename dropdown modal */}
-      {/* <div>
+      <div>
           {modal1 && (
             <div className="modal" style={{ zIndex: "4" }}>
               <div onClick={toggleModal1} className="overlay"></div>
@@ -195,7 +208,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                 <div>
                   Rename File Name  <br />
                   <input type="text" name="" id="" />
-                  
                 </div>
                 <div className="btn-section">
                   <button className="btn_overlay" >
@@ -209,7 +221,32 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             </div>
           )}
         </div>
- */}
+
+        {/* Info Modal  */}
+        <div>
+          {modal5 && (
+            <div className="modal" style={{ zIndex: "4" }}>
+              <div onClick={toggleModal5} className="overlay"></div>
+              
+                <div className="modal-content">
+            {userFiles.map((data) => (
+              <div>
+                <div style={{padding:"15px"}}>File Name : {data.document_name} </div>
+                <div style={{padding:"15px"}}> File Type : {data.document_type} </div>
+                <div style={{padding:"15px"}}> Uploaded Date and Time : {data.date} {data.time}</div>
+                <div style={{padding:"15px"}}> File size : {data.document_size} </div>
+              </div>
+            ))}
+                <div className="btn-section">
+                 
+                  <button className="btn_overlay" onClick={toggleModal5}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
 
       {/* Table */}
      
@@ -226,10 +263,20 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   File Name
                 </span>
                 <span>
-                  <BsThreeDotsVertical
+                  {/* <BsThreeDotsVertical
                     className="icon"
                     style={{ color: "#000" }} onClick={toggleModal1}
-                  />
+                  /> */}
+                  <div class="dropdown-container" tabindex="1">
+                      <div class="three-dots"></div>
+                      <div class="dropdown">
+                        <a href="#"><div>Preview</div></a>
+                        <a href="#"><div onClick={toggleModal5}>Info</div></a>
+                        <a href="#"><div onClick={toggleModal1}>Rename</div></a>
+                        <a href="#"><div>Delete</div></a>
+                        
+                      </div>
+                    </div>
                 </span>
                 
               </div>

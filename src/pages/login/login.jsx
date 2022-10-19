@@ -104,6 +104,7 @@ const LoginPage = () => {
     // window.location.href = `${API_URL}auth/google`;
     console.log(googleAuth);
   };
+  
   return (
     <div>
       <div className="login_container align_column">
