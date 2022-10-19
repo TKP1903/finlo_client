@@ -1,36 +1,26 @@
-.profileContainer {
-  
-  height: 70vh;
-  width: 90%;
-  max-width: 1024px;
-  display: flex;
-  flex-direction: column;
-  gap:100px;
-  align-items: center; 
-  margin-left: 100px;
-  margin-right: 50px;
-   
-}
+ 
 .Title{
+  /* margin: 25px; */
+  margin-left: 200px;
   font-weight: bold;
-  font-size: 30px;
-  height: 50px;
-   align-items: center;
-   display: flex;
-   margin-bottom: 50px;
-  justify-content: center;
-  
+  font-size: 25px;
 }
-.personal_info,.Business_info{
-  height: 250px;
-  width: 500px;
-  box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567);
-  background-color: white;
+.profileContainer{
+  display: flex;
+  max-width: 1024px;
+  height: 60%;
+  gap:10px; 
+  margin-left: 150px;
+}
+.col1{
+  height: 100%;
+  width: 600px;
+   gap:30px;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  overflow: hidden;
+  justify-content: space-between;
 }
+
 .titleName {
   font-weight: bold;
   font-size: 20px;
@@ -44,7 +34,26 @@
   justify-content: center;
   position: relative;
 }
-
+.personal_info{
+  height: 250px;
+  width: 500px;
+  box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Business_info{
+  height: 250px;
+  width: 500px;
+  /* box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567); */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .edit_button {
   width: 70px;
   height: 30px;
@@ -96,31 +105,26 @@ input {
    
 }
 
-.flex_1{
+.col2{
+  margin-top: 50px;
+  height: 100%;
+  width: 50%; 
   display: flex;
-  flex-direction: row;
+  flex-direction: column; 
   gap: 50px;
-  height: 200px;
-  align-items: center;
-  justify-content:flex-start;
-
-  /* margin-left: 80px; */
- 
 }
-.flex_2{
-  height: 200px;
-  width: 100%;
+.header2 {
+  height: 30px;
+  background-color: #99e6ff;
   display: flex;
-  flex-direction: row; 
-   justify-content: flex-start;
-   margin-left: 170px;
+  align-items: center;
 }
-.subtables{
+.labels2 {
+  margin-left: 20px;
+  gap: 5px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-}
- 
+} 
 .Tainfo ,.support{
   width: 300px;
   height: 100px;
@@ -128,20 +132,9 @@ input {
   box-shadow: 0 5px 20px 0 rgba(1, 2, 18, 0.567);
   border-radius: 10px;
   overflow: hidden;
+  margin-bottom: 30px;
 }
-
-.header2{ 
-  height: 30px;
-  background-color:  #99e6ff;
-  display: flex;
-  align-items: center;
+.endTitle{
+  margin-left: 200px;
   
 }
-.labels2{
-  margin-left: 20px; 
-  gap: 5px;
-  display: flex;
-  flex-direction: column;
-}
-
- 
