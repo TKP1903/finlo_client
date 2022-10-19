@@ -135,22 +135,24 @@ function Profile() {
             <div className="Tainfo">
               <div className="header2">Tax Associate Info:</div>
               <div className="labels2">
-                <div>Name</div>
-                <div>Email</div>
-                <div>Phone</div>
+                <div>Name :</div>
+                <div>Email :</div>
+                <div>Phone :</div>
               </div>
             </div>
             <div className="support">
               <div className="header2">Support info:</div>
               <div className="labels2">
-                <div>Email:</div>
-                <div>Phone:</div>
+                <div>Email :</div>
+                <div>Phone :</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex_2"></div>
+        <div className="flex_2">
+          {/* <div className="Business_info"></div> */}
+        </div>
       </div>
     </div>
   );
