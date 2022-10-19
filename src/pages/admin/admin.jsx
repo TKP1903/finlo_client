@@ -6,7 +6,7 @@ import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 import { API_URL } from "../../key";
 import axios from "axios";
 
-import "./admin.css";
+// import "./admin.css";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 const countriesAPI = "https://restcountries.com/v2/all?fields=name";
@@ -307,12 +307,12 @@ const SearchArea = () => {
     const getSearchResults = async () => {
       const results = await performSearch(searchText);
       setClients(() => makeClientsFromResults(results));
+      // set filtered clients to all clients
+      setFilteredClients(() => clients);
     };
     getSearchResults();
+    
 
-    // set filtered clients to all clients
-    setFilteredClients(() => clients);
-  
     // setClients(dummyClients);
   }, [searchText]);
 
@@ -414,6 +414,8 @@ const SearchArea = () => {
       );
     });
 
+
+    resetFilters ();
     return (
       <table className={className}>
         <thead>
@@ -575,6 +577,7 @@ const SearchArea = () => {
 };
 
 const Admin = () => {
+  import ("./admin.css");
   return (
     <div className="admin-page">
       <div className="admin-page-header">

@@ -21,6 +21,7 @@ const Documents = () => {
       state: file,
     });
   }
+  
   return (
     <div>
       {folders.state && <UserFoldersPage documentshandler={documentshandler} />}
