@@ -3,8 +3,8 @@ import "./documents.css";
 import "./userDocuments.css";
 
 
-import { BsFillCloudArrowUpFill,BsFileEarmark,BsThreeDotsVertical } from "react-icons/bs";
-import {BiArrowBack} from "react-icons/bi";
+import { BsFileEarmark } from "react-icons/bs";
+import { BiArrowBack } from "react-icons/bi";
 import axios from "axios";
 import { API_URL } from "../../key";
 const UserDocumentsPage = ({ documentshandler, folders }) => {
@@ -238,7 +238,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             ))}
                 <div className="btn-section">
-                 
                   <button className="btn_overlay" onClick={toggleModal5}>
                     Cancel
                   </button>
@@ -274,13 +273,11 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                         <a href="#"><div onClick={toggleModal5}>Info</div></a>
                         <a href="#"><div onClick={toggleModal1}>Rename</div></a>
                         <a href="#"><div>Delete</div></a>
-                        
                       </div>
-                    </div>
-                </span>
-                
+                  </div>
+                </span>                
               </div>
-            ))}
+          ))}
         </div>
       </div>
     </div>
