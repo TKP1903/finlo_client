@@ -188,8 +188,8 @@
 .dropdown a{
   text-decoration: none;
   color: black;
-  
 }
+
 .dropdown-container:focus {
   outline: none;
 }
@@ -200,6 +200,7 @@
   max-height: 100vh; 
   padding-top: 15px;
 }
+
 .dropdown div:hover {
   background: rgba(135, 195, 255, 0.334);
   width: 85%;

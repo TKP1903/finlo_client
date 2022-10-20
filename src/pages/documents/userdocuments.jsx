@@ -140,7 +140,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           Back
         </label>
 
-          {/* Upload Btn */}
+      {/* Upload Btn */}
         {/* <div className="upload-btn">
           <button className="submit_button" onClick={toggleModal}>
             <BsFillCloudArrowUpFill className="icon" />
