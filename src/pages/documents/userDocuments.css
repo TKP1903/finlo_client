@@ -1,62 +1,63 @@
 .user_files_container {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
     justify-content: center; */
-    gap: 50px;
+  gap: 50px;
 }
 
-.file_upload_section{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.file_upload_section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.file-upload{
-    padding: 8px;
-    font-size: 15px;
-    color: #fff;
-    background-color: #1C76BD;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+
+.file-upload {
+  padding: 8px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #1C76BD;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
 
-  
-  .folder_block{
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
+
+.folder_block {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
     justify-content: center; */
-    gap: 20px;
-    width: 100%;
-    
-  }
-  .folder
-  {
-    background-color: #fff;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    cursor: pointer;
-    background: rgba( 255, 255, 255, 0.15 );
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.158);
-    backdrop-filter: blur( 4.5px );
-    -webkit-backdrop-filter: blur( 4.5px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-  }
+  gap: 20px;
+  width: 100%;
 
-  .folder_name{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
+}
+
+.folder {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.158);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.folder_name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}

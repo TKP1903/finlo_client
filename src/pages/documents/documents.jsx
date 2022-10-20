@@ -20,8 +20,8 @@ const Documents = () => {
       name: fileName,
       state: file,
     });
-  }
-  
+  };
+  console.log ({folders, files});
   return (
     <div>
       {folders.state && <UserFoldersPage documentshandler={documentshandler} />}

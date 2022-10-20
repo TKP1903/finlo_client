@@ -4,6 +4,8 @@ import "./documents.css";
 import Dropdown from "react-bootstrap/Dropdown";
 
 
+import { Folder, File } from "./components";
+
 import {
   BsFillFolderFill,
   BsFolderCheck,
@@ -109,7 +111,7 @@ const UserFoldersPage = ({ documentshandler }) => {
     </a>
   ));
 
-   // Renane Modal 
+   // Rename Modal 
    const toggleModal4 = () => {
     setModal4(!modal4);
   };
@@ -159,62 +161,76 @@ const UserFoldersPage = ({ documentshandler }) => {
         </div>
 
         <div className="folder_block">
+        
+          <Folder
+            folder = {{
+              name: "Aashish",
+              path: "/",
+            }}
+          />
           {userFolders.length > 0
             ? userFolders.map((data) => (
-                <div className="folder">
-                  <span
-                    className="folder_name"
-                    onClick={() => {
-                      documentshandler(true, false, "", `${data.folder_name}`);
-                    }}
-                  >
-                    <BsFolderCheck className="icon" style={{ color: "#000" }} />
-                    {data.folder_name}
-                  </span>
-                  <span className="editFolder">
+                <Folder 
+                  folder = {{
+                    name: data.folder_name,
+                    path: "/",
+                    info: {},
+                  }}
+                />
+                // <div className="folder">
+                //   <span
+                //     className="folder_name"
+                //     onClick={() => {
+                //       documentshandler(true, false, "", `${data.folder_name}`);
+                //     }}
+                //   >
+                //     <BsFolderCheck className="icon" style={{ color: "#000" }} />
+                //     {data.folder_name}
+                //   </span>
+                //   <span className="editFolder">
 
-                    {/* <BsThreeDotsVertical
-                      className="icon"
-                      style={{ color: "#000" }}
-                      onClick={() => setEditFolder(!editFolder)}
-                    /> */}
+                //     {/* <BsThreeDotsVertical
+                //       className="icon"
+                //       style={{ color: "#000" }}
+                //       onClick={() => setEditFolder(!editFolder)}
+                //     /> */}
 
-                    {/* Rename Modal */}
-                    <div>
-                        {modal4 && (
-                          <div className="modal" style={{ zIndex: "1" }}>
-                            <div className="overlay"></div>
-                            <div className="modal-content">
-                              <div>
-                                Rename File Name  <br />
-                                <input type="text" name="" id="" />
-                                
-                              </div>
-                              <div className="btn-section">
-                                <button className="btn_overlay" >
-                                  Rename
-                                </button>
-                                <button className="btn_overlay" onClick={toggleModal4}>
-                                  Cancel
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                //     {/* Rename Modal */}
+                //     <div>
+                //         {modal4 && (
+                //           <div className="modal" style={{ zIndex: "1" }}>
+                //             <div className="overlay"></div>
+                //             <div className="modal-content">
+                //               <div>
+                //                 Rename File Name  <br />
+                //                 <input type="text" name="" id="" />
+                //               </div>
+                //               <div className="btn-section">
+                //                 <button className="btn_overlay" >
+                //                   Rename
+                //                 </button>
+                //                 <button className="btn_overlay" onClick={toggleModal4}>
+                //                   Cancel
+                //                 </button>
+                //               </div>
+                //             </div>
+                //           </div>
+                //         )}
+                //       </div>
 
                    
-                  {/* Dropdown list 3 Dots */}
-                    <div class="dropdown-container" tabindex="1">
-                      <div class="three-dots"></div>
-                      <div class="dropdown">
-                        <a href="#"><div onClick={toggleModal4}>Rename</div></a>
-                        <a href="#"><div>Delete</div></a>
-                      </div>
-                    </div>
+                //   {/* Dropdown list 3 Dots */}
+                //     <div class="dropdown-container" tabindex="1">
+                //       <div class="three-dots"></div>
+                //       <div class="dropdown">
+                //         <a href="#"><div onClick={toggleModal4}>Rename</div></a>
+                //         <a href="#"><div>Delete</div></a>
+                //       </div>
+                //     </div>
                     
-                  </span>
-                </div>
+                //   </span>
+                // </div>
+                
                 // <div
                 //   onClick={() => {
                 //     documentshandler(true, false, "folder", "file");
