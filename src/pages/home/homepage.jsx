@@ -8,20 +8,22 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
-
-const AdminButton = () => {
-  return (
-    <Link to="/admin" className = "btn-admin" style={{color: "white"}}>
-      Admin
-    </Link>
-  );
-};
+// const AdminButton = () => {
+//   return (
+//     <Link to="/admin" className="btn-admin" style={{ color: "white" }}>
+//       Admin
+//     </Link>
+//   );
+// };
 
 const HomePage = () => {
   //  modal delete button
   const [isAdmin, setIsAdmin] = useState(true);
 
   const [modal, setModal] = useState(false);
+  const [deleteFileName, setDeleteFileName] = useState("");
+  const user_id = localStorage.getItem("finlo_user_id");
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -33,26 +35,26 @@ const HomePage = () => {
   }
 
   const [userFiles, setUserFiels] = useState([]);
-  const getUserFiles = async (user_id) => {
+  const getUserFiles = async () => {
     try {
       const response = await axios.get(
         `${API_URL}file/get-recent-user-docs/${user_id}`
       );
-      console.log(response?.data?.data);
       setUserFiels(response?.data?.data);
     } catch (error) {
       console.log(error);
     }
   };
-  const deleteFile = async (user_id, documentName) => {
+  const deleteFile = async () => {
     try {
       const response = await axios.delete(`${API_URL}file/delete-file`, {
         data: {
           user_id: user_id,
-          fileName: documentName,
+          fileName: deleteFileName,
         },
       });
-      getUserFiles(user_id);
+      toggleModal();
+      getUserFiles();
     } catch (error) {
       console.log(error);
     }
@@ -60,15 +62,15 @@ const HomePage = () => {
   console.log(userFiles);
 
   useEffect(() => {
-    getUserFiles(0);
-    setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
+    getUserFiles();
+    // setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
   }, []);
 
-  import ("./homepage.css");
+  import("./homepage.css");
   return (
     <>
       <div className="home-page-body">
-        { isAdmin ? <AdminButton /> : null}
+        {/* {isAdmin ? <AdminButton /> : null} */}
         <div className="dashboard_block">
           <Link to="" className="gradientCard gradientBlue">
             <MdOutlineMiscellaneousServices
@@ -102,13 +104,18 @@ const HomePage = () => {
             {userFiles.map((data) => (
               <tr>
                 <td>{data.document_name}</td>
-                <td>
-                  {data.date} {data.time}
-                </td>
+                <td>{data.created_date_time}</td>
                 <td>{data.document_type}</td>
-                <td>{data.document_size}</td>
+                <td>{Math.round(data.document_size / 1024)} kb</td>
                 <td>
-                  <button onClick={toggleModal}>Delete</button>
+                  <button
+                    onClick={() => {
+                      setDeleteFileName(data.document_name);
+                      toggleModal();
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -120,14 +127,20 @@ const HomePage = () => {
                 <div className="modal-content">
                   <div>Are You Sure Want To Delete The Folder ?</div>
                   <div className="btn-section">
-                    {userFiles.map((data) => (
+                    <button
+                      className="btn_overlay"
+                      onClick={() => deleteFile()}
+                    >
+                      Delete
+                    </button>
+                    {/* {userFiles.map((data) => (
                       <button
                         className="btn_overlay"
                         onClick={() => deleteFile(data.customer_id, data.document_name)
                         }>
                         Delete
                       </button>
-                    ))}
+                    ))} */}
                     <button className="btn_overlay" onClick={toggleModal}>
                       Cancel
                     </button>

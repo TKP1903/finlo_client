@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./documents.css";
 import Dropdown from "react-bootstrap/Dropdown";
 
-
 import {
   BsFillFolderFill,
   BsFolderCheck,
@@ -23,20 +22,17 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [create, setCreatefolder] = useState("");
   const [editFolder, setEditFolder] = useState(false);
   const [modal4, setModal4] = useState(false);
+  const user_id = localStorage.getItem("finlo_user_id");
 
-
-  const getUserFiles = async (user_id) => {
+  const getUserFolders = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}file/get-user-folders/${user_id}`
+        `${API_URL}folder/get-user-folders/${user_id}`
       );
-      console.log(response?.data?.data);
       setUserFolders(response?.data?.data);
     } catch (error) {}
   };
-  
-  const user_id = 0;
-  
+
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -55,7 +51,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       // });
       if (response.status === 200) {
         alert("File uploaded successfully");
-        getUserFiles(1);
+        getUserFolders();
       }
     } catch (error) {
       alert("Cant upload file");
@@ -65,19 +61,21 @@ const UserFoldersPage = ({ documentshandler }) => {
     event.preventDefault();
     setModal(!modal);
     try {
-      const response = await axios.post(
-        `${API_URL}file/uploadfolder/${user_id}/${folder_name}`
-      );
-      getUserFiles(1);
+      const response = await axios.post(`${API_URL}folder/create-folder`, {
+        user_id,
+        folderName: folder_name,
+        parentFolderName: "/",
+      });
+      getUserFolders();
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getUserFiles(0);
+    getUserFolders();
   }, []);
 
-  // Upload Modal 
+  // Upload Modal
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -94,12 +92,12 @@ const UserFoldersPage = ({ documentshandler }) => {
   };
   console.log(editFolder);
 
-// dropdown toggle 
+  // dropdown toggle
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
       ref={ref}
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}
@@ -109,8 +107,8 @@ const UserFoldersPage = ({ documentshandler }) => {
     </a>
   ));
 
-   // Renane Modal 
-   const toggleModal4 = () => {
+  // Renane Modal
+  const toggleModal4 = () => {
     setModal4(!modal4);
   };
 
@@ -172,7 +170,6 @@ const UserFoldersPage = ({ documentshandler }) => {
                     {data.folder_name}
                   </span>
                   <span className="editFolder">
-
                     {/* <BsThreeDotsVertical
                       className="icon"
                       style={{ color: "#000" }}
@@ -181,38 +178,40 @@ const UserFoldersPage = ({ documentshandler }) => {
 
                     {/* Rename Modal */}
                     <div>
-                        {modal4 && (
-                          <div className="modal" style={{ zIndex: "1" }}>
-                            <div className="overlay"></div>
-                            <div className="modal-content">
-                              <div>
-                                Rename File Name  <br />
-                                <input type="text" name="" id="" />
-                                
-                              </div>
-                              <div className="btn-section">
-                                <button className="btn_overlay" >
-                                  Rename
-                                </button>
-                                <button className="btn_overlay" onClick={toggleModal4}>
-                                  Cancel
-                                </button>
-                              </div>
+                      {modal4 && (
+                        <div className="modal" style={{ zIndex: "1" }}>
+                          <div className="overlay"></div>
+                          <div className="modal-content">
+                            <div>
+                              Rename File Name <br />
+                              <input type="text" name="" id="" />
+                            </div>
+                            <div className="btn-section">
+                              <button className="btn_overlay">Rename</button>
+                              <button
+                                className="btn_overlay"
+                                onClick={toggleModal4}
+                              >
+                                Cancel
+                              </button>
                             </div>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
+                    </div>
 
-                   
-                  {/* Dropdown list 3 Dots */}
+                    {/* Dropdown list 3 Dots */}
                     <div class="dropdown-container" tabindex="1">
                       <div class="three-dots"></div>
                       <div class="dropdown">
-                        <a href="#"><div onClick={toggleModal4}>Rename</div></a>
-                        <a href="#"><div>Delete</div></a>
+                        <a href="#">
+                          <div onClick={toggleModal4}>Rename</div>
+                        </a>
+                        <a href="#">
+                          <div>Delete</div>
+                        </a>
                       </div>
                     </div>
-                    
                   </span>
                 </div>
                 // <div

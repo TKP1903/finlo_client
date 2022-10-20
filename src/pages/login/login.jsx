@@ -67,6 +67,8 @@ const LoginPage = () => {
       }
       if (emailError.state === false && passwordError.state === false) {
         const result = await axios.post(`${API_URL}auth/login`, inputs);
+        localStorage.setItem("finlo_user_id", result?.data.user_id);
+        localStorage.setItem("finlo_user_name", result?.data.user_name);
         if (result.status === 200) {
           console.log (result);
           localStorage.setItem ('email', inputs.email);
@@ -132,6 +134,7 @@ const LoginPage = () => {
                 name="email"
                 placeholder="bob@gmail.com"
                 onChange={handleChange}
+                className="input_section"
               />
             </div>
             <div className="input_block">
@@ -143,7 +146,12 @@ const LoginPage = () => {
                 <label>Password</label>
               )}
 
-              <input type="password" name="password" onChange={handleChange} />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                className="input_section"
+              />
             </div>
             <div className="input_block">
               <a href="/" className="forgotpassword">
