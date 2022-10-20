@@ -19,55 +19,33 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [modal, setModal] = useState(false);
   const [folder_name, setFolder_name] = useState("");
   const [create, setCreatefolder] = useState("");
-  const getUserFiles = async (user_id) => {
+  const user_id = localStorage.getItem("finlo_user_id");
+
+  const getUserFolders = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}file/get-user-folders/${user_id}`
+        `${API_URL}folder/get-user-folders/${user_id}`
       );
-      console.log(response?.data?.data);
       setUserFolders(response?.data?.data);
     } catch (error) {}
   };
-  const user_id = 0;
-  const uploadFile = async () => {
-    let formData = new FormData();
 
-    formData.append("file", userDocs);
-    try {
-      const response = await axios.post(
-        `${API_URL}file/uploadfile/${user_id}`,
-        formData,
-        { data: "username" }
-        // { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      // const response = await axios({
-      //   method: "post",
-      //   url: "${API_URL}file/uploadfile",
-      //   data: formData,
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // });
-      if (response.status === 200) {
-        alert("File uploaded successfully");
-        getUserFiles(1);
-      }
-    } catch (error) {
-      alert("Cant upload file");
-    }
-  };
   const CreateFolder = async (event) => {
     event.preventDefault();
     setModal(!modal);
     try {
-      const response = await axios.post(
-        `${API_URL}file/uploadfolder/${user_id}/${folder_name}`
-      );
-      getUserFiles(1);
+      const response = await axios.post(`${API_URL}folder/create-folder`, {
+        user_id,
+        folderName: folder_name,
+        parentFolderName: "/",
+      });
+      getUserFolders();
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getUserFiles(0);
+    getUserFolders();
   }, []);
 
   const toggleModal = () => {

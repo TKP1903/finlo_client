@@ -1,8 +1,8 @@
 .login_container{
-    margin-top: 130px;
+    /* margin-top: 130px; */
+    /* padding-top: 20px; */
     width: 100vw;
     height: 100vh;
-    padding-top: 20px;
 }
 .login_block{
     background: rgba( 255, 255, 255, 0.05 );

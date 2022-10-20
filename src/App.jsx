@@ -11,15 +11,10 @@ import UserDocumentsPage from "./pages/documnets/userdocuments";
 function App() {
   return (
     <div>
-      {/* <LoginPage /> */}
-      {/* <Sidebar /> */}
       <Routes>
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<LoginPage />} />
-        <Route path="/userd" element={<UserDocumentsPage />} />
-        <Route path="/google/:token" element={<GoogleAuth />} />
         <Route path="/:type" element={<Sidebar />} />
+        <Route path="/google/:token" element={<GoogleAuth />} />
       </Routes>
     </div>
   );

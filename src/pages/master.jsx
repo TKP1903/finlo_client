@@ -7,15 +7,17 @@ import Docuents from "./documnets/documents";
 import UserDocumentsPage from "./documnets/userdocuments";
 import DocumentsPage from "./documnets/userFolders";
 import Profile from "./profile/Profile";
+
 const Master = () => {
   const { type } = useParams();
   console.log({ type });
   return (
     <div>
       {type === "home" && <HomePage />}
-      {/* {type === "documents" && <DocumentsPage />} */}
       {type === "documents" && <Docuents />}
-      {type === "profile" && <Profile/>}
+      {type === "profile" && <Profile />}
+      {type === "userd" && <UserDocumentsPage />}
+      {/* {type === "documents" && <DocumentsPage />} */}
     </div>
   );
 };

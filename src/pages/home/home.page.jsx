@@ -9,8 +9,10 @@ import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
 const HomePage = () => {
-  //  modal delete button
   const [modal, setModal] = useState(false);
+  const [deleteFileName, setDeleteFileName] = useState("");
+  const user_id = localStorage.getItem("finlo_user_id");
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -22,33 +24,32 @@ const HomePage = () => {
   }
 
   const [userFiles, setUserFiels] = useState([]);
-  const getUserFiles = async (user_id) => {
+  const getUserFiles = async () => {
     try {
       const response = await axios.get(
         `${API_URL}file/get-recent-user-docs/${user_id}`
       );
-      console.log(response?.data?.data);
       setUserFiels(response?.data?.data);
     } catch (error) {
       console.log(error);
     }
   };
-  const deleteFile = async (user_id, documentName) => {
+  const deleteFile = async () => {
     try {
       const response = await axios.delete(`${API_URL}file/delete-file`, {
         data: {
           user_id: user_id,
-          fileName: documentName,
+          fileName: deleteFileName,
         },
       });
-      getUserFiles(user_id);
+      toggleModal();
+      getUserFiles();
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(userFiles);
   useEffect(() => {
-    getUserFiles(0);
+    getUserFiles();
   }, []);
   return (
     <>
@@ -86,13 +87,18 @@ const HomePage = () => {
             {userFiles.map((data) => (
               <tr>
                 <td>{data.document_name}</td>
-                <td>
-                  {data.date} {data.time}
-                </td>
+                <td>{data.created_date_time}</td>
                 <td>{data.document_type}</td>
-                <td>{data.document_size}</td>
+                <td>{Math.round(data.document_size / 1024)} kb</td>
                 <td>
-                  <button onClick={toggleModal}>Delete</button>
+                  <button
+                    onClick={() => {
+                      setDeleteFileName(data.document_name);
+                      toggleModal();
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -104,7 +110,13 @@ const HomePage = () => {
                 <div className="modal-content">
                   <div>Are You Sure Want To Delete The Folder ?</div>
                   <div className="btn-section">
-                    {userFiles.map((data) => (
+                    <button
+                      className="btn_overlay"
+                      onClick={() => deleteFile()}
+                    >
+                      Delete
+                    </button>
+                    {/* {userFiles.map((data) => (
                       <button
                         className="btn_overlay"
                         onClick={() =>
@@ -113,7 +125,7 @@ const HomePage = () => {
                       >
                         Delete
                       </button>
-                    ))}
+                    ))} */}
                     <button className="btn_overlay" onClick={toggleModal}>
                       Cancel
                     </button>
