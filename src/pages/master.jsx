@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 //pages
 import HomePage from "./home/homepage";
-import Documents from "./documnets/documents";
+import Documents from "./documents/documents";
 // import UserDocumentsPage from "./documnets/userdocuments";
 // import DocumentsPage from "./documnets/userFolders";
 import AdminPage from "./admin/admin";
