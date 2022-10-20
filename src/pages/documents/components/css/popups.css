@@ -1,0 +1,39 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10px;
+    min-width: fit-content;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.info-item-key {
+    font-weight: 600;
+}
+
+.info-item-value {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    font-size: 1rem;
+    width: 50%;
+    min-width: fit-content;
+}
+
+.close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

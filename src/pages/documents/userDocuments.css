@@ -18,7 +18,7 @@
   padding: 8px;
   font-size: 15px;
   color: #fff;
-  background-color: #1C76BD;
+  background-color: #1c76bd;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -27,8 +27,6 @@
   gap: 5px;
 }
 
-
-
 .folder_block {
   display: flex;
   flex-direction: column;
@@ -36,16 +34,14 @@
     justify-content: center; */
   gap: 20px;
   width: 100%;
-
 }
 
 .folder {
-  background-color: #fff;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 12px 12px;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.158);
@@ -53,6 +49,12 @@
   -webkit-backdrop-filter: blur(4.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  box-sizing: border-box;
+}
+
+.folder:hover,
+.folder:focus {
+  filter: brightness(0.8);
 }
 
 .folder_name {

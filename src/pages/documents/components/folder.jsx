@@ -13,8 +13,11 @@ import {
   BsUpload,
 } from "react-icons/bs";
 
+import debounce from "../../../jsFunctions/debounce";
+import { RenameFolder, ShowInfo, DeleteFolder, Donwload } from "./popups";
+
 const Menu = ({
-  info,
+  folder,
   trigger,
   handleRename,
   handleDelete,
@@ -24,20 +27,20 @@ const Menu = ({
 
   return (
     <Popup trigger={trigger} nested position="bottom right">
-      {(close) => (
+      {(close1) => (
         <div className="folder-menu">
-          <Popup trigger={<div className="menu-item">Rename</div>} modal nested>
-            {(close) => (
+          {/* <Popup trigger={<div className="menu-item">Rename</div>} modal nested>
+            {(close2) => (
               <div className="prompt-input">
-                <div className="close-icon" onClick={close} />
+                <div className="close-icon" onClick={close1} />
                 <h2> Rename the Folder </h2>
                 <input
                   type="text"
                   placeholder="Enter new name"
-                  onChange={(e) => {
+                  onChange={debounce((e) => {
                     newName = e.target.value;
                     console.log(newName);
-                  }}
+                  })}
                 />
                 <Popup
                   trigger={<button className="btn-primary"> Rename </button>}
@@ -48,17 +51,36 @@ const Menu = ({
                     <h2> Are you sure you want to rename this folder? </h2>
                     <button
                       className="btn-primary"
-                      onClick={() => handleRename(newName)}
+                      onClick={async() => {
+                        await handleRename(newName)
+                        close1();
+                      }}
                     >
                       {" "}
                       Yes{" "}
                     </button>
-                    <button className="btn-primary"> No </button>
+                    <button className="btn-primary" onClick={close1}> No </button>
                   </div>
                 </Popup>
               </div>
             )}
-          </Popup>
+          </Popup> */}
+          <ShowInfo
+            info={folder}
+            trigger={<div className="menu-item">Info</div>}
+          />
+          <RenameFolder
+            trigger={<div className="menu-item">Rename</div>}
+            handleRename={handleRename}
+          />
+          <DeleteFolder
+            trigger={<div className="menu-item">Delete</div>}
+            handleDelete={handleDelete}
+          />
+          <Donwload
+            trigger={<div className="menu-item">Download</div>}
+            handleDownload={handleDownload}
+          />
         </div>
       )}
     </Popup>
@@ -69,10 +91,13 @@ const emptyfunc = () => {};
 
 /**
  * @param {object} folder
- * @param {string} folder.name
- * @param {string} folder.path
- * @param {object} folder.info
- * @param {string} folder.info.items
+ * 
+ * @param {function} handleOpen
+ * 
+ * @param {function} handleRename
+ * @param {function} handleDelete
+ * @param {function} handleDownload
+ * @param {function} handleSelect
  */
 export const Folder = ({
   folder,
@@ -87,13 +112,13 @@ export const Folder = ({
 }) => {
   import("./css/folder.css");
   return (
-    <div className="folder">
+    <div className="folder" onClick={()=>{handleOpen(folder.name);}}>
       <span className="folder_name">
         <BsFolderCheck className="icon" style={{ color: "#000" }} />
         {folder.name}
       </span>
       <Menu
-        info={folder.info}
+        folder={folder}
         trigger={<div class="three-dots"></div>}
         handleRename={handleRename}
         handleDelete={handleDelete}

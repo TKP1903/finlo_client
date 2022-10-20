@@ -99,7 +99,6 @@ const SearchArea = () => {
     const filterOnChange = (setFilteredClients, clients, type) => {
       return (e) => {
         const value = e.target.value;
-        // debugger;
         if (value === "" || value === "All") {
           setFilteredClients([...clients]);
         } else {
