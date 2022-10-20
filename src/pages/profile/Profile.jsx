@@ -1,30 +1,12 @@
 import React from "react";
-import "./profile.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import "./profile.css"; 
 import { useState } from "react";
 
 function Profile() {
-  const [edit, setEdit] = useState(false);
+  import ("./profile.css");
 
-  // const [name, setName] = useState({
-  //   Name: "",
-  // });
-  // const [spouse, setSpouse] = useState({
-  //   Spouse: "",
-  // });
-  // const [email, setEmail] = useState({
-  //   Email: "",
-  // });
-  // const [phone, setPhone] = useState({
-  //   Phone: "",
-  // });
-  // const [city, setCity] = useState({
-  //   City: "",
-  // });
-  // const [zipcode, setZipcode] = useState({
-  //   Zipcode: "",
-  // });
-
+  const [edit, setEdit] = useState(false); 
+  
   const [inputs, setInputs] = useState({
     name: "",
     spouse: "",
@@ -39,12 +21,12 @@ function Profile() {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   //console.log(inputs);
-
+  
   return (
     <div>
-      <div className="Title">Profile</div>
       <div className="profileContainer">
-        <div className="flex_1">
+        <div className="col1">
+          <div className="Title">Profile</div>
           <div className="personal_info">
             <div className="header_box">
               <span className="titleName"> Personal</span>
@@ -131,26 +113,32 @@ function Profile() {
               </div>
             </div>
           </div>
+          <div className="Business_info"></div>
+          <div className="endTitle">Finlo Inc, 2022</div>
+        </div>
+        <div className="col2">
           <div className="subtables">
             <div className="Tainfo">
               <div className="header2">Tax Associate Info:</div>
               <div className="labels2">
-                <div>Name</div>
-                <div>Email</div>
-                <div>Phone</div>
+                <div>Name :</div>
+                <div>Email :</div>
+                <div>Phone :</div>
               </div>
             </div>
             <div className="support">
               <div className="header2">Support info:</div>
               <div className="labels2">
-                <div>Email:</div>
-                <div>Phone:</div>
+                <div>Email :</div>
+                <div>Phone :</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex_2"></div>
+        <div className="flex_2">
+          {/* <div className="Business_info"></div> */}
+        </div>
       </div>
     </div>
   );

@@ -70,6 +70,8 @@ const LoginPage = () => {
         localStorage.setItem("finlo_user_id", result?.data.user_id);
         localStorage.setItem("finlo_user_name", result?.data.user_name);
         if (result.status === 200) {
+          console.log (result);
+          localStorage.setItem ('email', inputs.email);
           navigate("/home");
         }
       }
@@ -104,6 +106,7 @@ const LoginPage = () => {
     // window.location.href = `${API_URL}auth/google`;
     console.log(googleAuth);
   };
+  
   return (
     <div>
       <div className="login_container align_column">

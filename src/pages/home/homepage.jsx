@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./homepage.css";
+// import "./homepage.css";
 import axios from "axios";
 
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
@@ -8,7 +8,18 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
+// const AdminButton = () => {
+//   return (
+//     <Link to="/admin" className="btn-admin" style={{ color: "white" }}>
+//       Admin
+//     </Link>
+//   );
+// };
+
 const HomePage = () => {
+  //  modal delete button
+  const [isAdmin, setIsAdmin] = useState(true);
+
   const [modal, setModal] = useState(false);
   const [deleteFileName, setDeleteFileName] = useState("");
   const user_id = localStorage.getItem("finlo_user_id");
@@ -48,26 +59,32 @@ const HomePage = () => {
       console.log(error);
     }
   };
+  console.log(userFiles);
+
   useEffect(() => {
     getUserFiles();
+    // setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
   }, []);
+
+  import("./homepage.css");
   return (
     <>
-      <div>
+      <div className="home-page-body">
+        {/* {isAdmin ? <AdminButton /> : null} */}
         <div className="dashboard_block">
-          <Link to="" className="card1">
+          <Link to="" className="gradientCard gradientBlue">
             <MdOutlineMiscellaneousServices
               style={{ width: "80px", height: "100px", padding: "10px" }}
             />
             <span>Services We Offer</span>
           </Link>
-          <Link to="/documents" className="card2">
+          <Link to="/documents" className="gradientCard gradientRed">
             <MdOutlineUploadFile
               style={{ width: "90px", height: "100px", padding: "10px" }}
             />
             <span>Upload Documents</span>
           </Link>
-          <Link to="" className="card3">
+          <Link to="" className="gradientCard gradientGreen">
             <MdPayment
               style={{ width: "80px", height: "100px", padding: "10px" }}
             />
@@ -119,10 +136,8 @@ const HomePage = () => {
                     {/* {userFiles.map((data) => (
                       <button
                         className="btn_overlay"
-                        onClick={() =>
-                          deleteFile(data.customer_id, data.document_name)
-                        }
-                      >
+                        onClick={() => deleteFile(data.customer_id, data.document_name)
+                        }>
                         Delete
                       </button>
                     ))} */}

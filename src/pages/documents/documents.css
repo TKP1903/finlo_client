@@ -160,4 +160,48 @@
   padding: 10px;
 }  
 
- 
+.three-dots:after {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  content: '\2807';
+  font-size: 20px;
+  padding: 0 5px;
+}
+.dropdown {
+  position: absolute;
+  right: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.042);
+  outline: none;
+  opacity: 0;
+  max-height: 0;
+  padding: 20px;
+  padding-top: 5px;
+  overflow: visible;
+  border-radius: 5px;
+}
+
+.dropdown div{
+  padding: 10px;
+}
+
+.dropdown a{
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-container:focus {
+  outline: none;
+}
+
+.dropdown-container:focus .dropdown {
+  opacity: 1;
+  z-index: 1000;
+  max-height: 100vh; 
+  padding-top: 15px;
+}
+
+.dropdown div:hover {
+  background: rgba(135, 195, 255, 0.334);
+  width: 85%;
+}
