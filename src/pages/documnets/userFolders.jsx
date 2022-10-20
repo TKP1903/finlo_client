@@ -126,7 +126,6 @@ const UserFoldersPage = ({ documentshandler }) => {
 
         {/* New folder modal */}
         <div></div>
-
         <div className="folder_block">
           {userFolders.length > 0
             ? userFolders.map((data) => (
