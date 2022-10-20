@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   BsFillCloudArrowUpFill,
   BsFileEarmark,
   BsThreeDotsVertical,
+  BsFileEarmark,
+  BsUpload,
+  BsFillCloudArrowUpFill,
 } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import axios from "axios";
@@ -20,8 +25,10 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal5, setModal5] = useState(false);
+  
+  const user_id = localStorage.getItem("finlo_user_id");
 
-  const getUserFiles = async (user_id) => {
+  const getUserFiles = async () => {
     try {
       const response = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folders.name}`
@@ -36,7 +43,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     let formData = new FormData();
 
     formData.append("file", userDocs);
-    const user_id = 0;
     try {
       const response = await axios.post(
         `${API_URL}file/uploadfile/${user_id}/${folders.name}`,
@@ -52,7 +58,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     }
   };
   useEffect(() => {
-    getUserFiles(1);
+    getUserFiles();
   }, []);
 
   const toggleModal = () => {
@@ -119,6 +125,11 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     getUserFiles(0);
   }, []);
 
+  // toast.container
+  const notify = () => {
+    toast.success("File Name Changed Successfully!");
+  };
+
   return (
     <div className="user_files_container">
       <div className="file_upload_section">
@@ -163,10 +174,10 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </div>
           )}
-        </div> */}
+        </div>
 
         {/* Upload modal */}
-        {/* <div>
+        <div>
           <div className="upload_block">
             <span className="upload_button">
               <BsUpload className="icon" />
@@ -200,7 +211,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </span>
           </div>
-        </div> */}
+        </div>
       </div>
 
       {/* Rename dropdown modal */}
@@ -210,11 +221,13 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             <div onClick={toggleModal1} className="overlay"></div>
             <div className="modal-content">
               <div>
-                Rename File Name
+                Rename File Name <br />
                 <input type="text" name="" id="" />
               </div>
               <div className="btn-section">
-                <button className="btn_overlay">Rename</button>
+                <button className="btn_overlay" onClick={notify}>
+                  Rename
+                </button>
                 <button className="btn_overlay" onClick={toggleModal1}>
                   Cancel
                 </button>
@@ -233,18 +246,18 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             <div className="modal-content">
               {userFiles.map((data) => (
                 <div>
-                  <div style={{ padding: "15px" }}>
+                  <div style={{ padding: "10px" }}>
                     File Name : {data.document_name}{" "}
                   </div>
-                  <div style={{ padding: "15px" }}>
+                  <div style={{ padding: "10px" }}>
                     {" "}
                     File Type : {data.document_type}{" "}
                   </div>
-                  <div style={{ padding: "15px" }}>
+                  <div style={{ padding: "10px" }}>
                     {" "}
                     Uploaded Date and Time : {data.date} {data.time}
                   </div>
-                  <div style={{ padding: "15px" }}>
+                  <div style={{ padding: "10px" }}>
                     {" "}
                     File size : {data.document_size}{" "}
                   </div>
@@ -281,10 +294,18 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   <div class="dropdown-container" tabindex="1">
                     <div class="three-dots"></div>
                     <div class="dropdown">
-                      <div>Preview</div>
-                      <div onClick={toggleModal5}>Info</div>
-                      <div onClick={toggleModal1}>Rename</div>
-                      <div>Delete</div>
+                      <a href="#">
+                        <div onClick={notify}>Preview</div>
+                      </a>
+                      <a href="#">
+                        <div onClick={toggleModal5}>Info</div>
+                      </a>
+                      <a href="#">
+                        <div onClick={toggleModal1}>Rename</div>
+                      </a>
+                      <a href="#">
+                        <div>Delete</div>
+                      </a>
                     </div>
                   </div>
                 </span>
@@ -292,6 +313,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

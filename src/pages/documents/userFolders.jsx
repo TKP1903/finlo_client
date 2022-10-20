@@ -25,20 +25,17 @@ const UserFoldersPage = ({ documentshandler }) => {
   const [create, setCreatefolder] = useState("");
   const [editFolder, setEditFolder] = useState(false);
   const [modal4, setModal4] = useState(false);
+  const user_id = localStorage.getItem("finlo_user_id");
 
-
-  const getUserFiles = async (user_id) => {
+  const getUserFolders = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}file/get-user-folders/${user_id}`
+        `${API_URL}folder/get-user-folders/${user_id}`
       );
-      console.log(response?.data?.data);
       setUserFolders(response?.data?.data);
     } catch (error) {}
   };
-  
-  const user_id = 0;
-  
+
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -57,7 +54,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       // });
       if (response.status === 200) {
         alert("File uploaded successfully");
-        getUserFiles(1);
+        getUserFolders();
       }
     } catch (error) {
       alert("Cant upload file");
@@ -67,19 +64,21 @@ const UserFoldersPage = ({ documentshandler }) => {
     event.preventDefault();
     setModal(!modal);
     try {
-      const response = await axios.post(
-        `${API_URL}file/uploadfolder/${user_id}/${folder_name}`
-      );
-      getUserFiles(1);
+      const response = await axios.post(`${API_URL}folder/create-folder`, {
+        user_id,
+        folderName: folder_name,
+        parentFolderName: "/",
+      });
+      getUserFolders();
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getUserFiles(0);
+    getUserFolders();
   }, []);
 
-  // Upload Modal 
+  // Upload Modal
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -96,12 +95,12 @@ const UserFoldersPage = ({ documentshandler }) => {
   };
   console.log(editFolder);
 
-// dropdown toggle 
+  // dropdown toggle
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
       ref={ref}
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}
