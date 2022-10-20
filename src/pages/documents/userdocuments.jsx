@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-import { BsFileEarmark } from "react-icons/bs";
+import { BsFileEarmark,BsUpload,BsFillCloudArrowUpFill } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import axios from "axios";
 import { API_URL } from "../../key";
+
+
 const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
@@ -14,6 +17,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal5, setModal5] = useState(false);
+
+
   const getUserFiles = async (user_id) => {
     try {
       const response = await axios.get(
@@ -81,7 +86,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     }
 
 
-     // Info Modal
+  // Info Modal
      const toggleModal5 = () => {
       setModal5(!modal5);
     };
@@ -94,7 +99,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
 
 
   // deletefile 
-
   const deleteFile = async (user_id, documentName) => {
     try {
       const response = await axios.delete(`${API_URL}file/delete-file`, {
@@ -113,6 +117,12 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     getUserFiles(0);
   }, []);
 
+
+  // toast.container 
+  const notify = () => {
+        toast.success('File Name Changed Successfully!')
+      }
+    
 
   return (
     <div className="user_files_container">
@@ -162,7 +172,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         </div> */}
 
         {/* Upload modal */}
-        {/* <div>
+        <div>
           <div className="upload_block">
             <span className="upload_button">
               <BsUpload className="icon" />
@@ -196,7 +206,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </span>
           </div>
-        </div> */}
+        </div>
       </div>
 
 {/* Rename dropdown modal */}
@@ -210,7 +220,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   <input type="text" name="" id="" />
                 </div>
                 <div className="btn-section">
-                  <button className="btn_overlay" >
+                  <button className="btn_overlay" onClick={notify}>
                     Rename
                   </button>
                   <button className="btn_overlay" onClick={toggleModal1}>
@@ -269,7 +279,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   <div class="dropdown-container" tabindex="1">
                       <div class="three-dots"></div>
                       <div class="dropdown">
-                        <a href="#"><div>Preview</div></a>
+                        <a href="#"><div onClick={notify}>Preview</div></a>
                         <a href="#"><div onClick={toggleModal5}>Info</div></a>
                         <a href="#"><div onClick={toggleModal1}>Rename</div></a>
                         <a href="#"><div>Delete</div></a>
@@ -280,7 +290,9 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
+    
   );
 };
 
