@@ -241,10 +241,10 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                 <div className="modal-content">
             {userFiles.map((data) => (
               <div>
-                <div style={{padding:"15px"}}>File Name : {data.document_name} </div>
-                <div style={{padding:"15px"}}> File Type : {data.document_type} </div>
-                <div style={{padding:"15px"}}> Uploaded Date and Time : {data.date} {data.time}</div>
-                <div style={{padding:"15px"}}> File size : {data.document_size} </div>
+                <div style={{padding:"10px"}}>File Name : {data.document_name} </div>
+                <div style={{padding:"10px"}}> File Type : {data.document_type} </div>
+                <div style={{padding:"10px"}}> Uploaded Date and Time : {data.date} {data.time}</div>
+                <div style={{padding:"10px"}}> File size : {data.document_size} </div>
               </div>
             ))}
                 <div className="btn-section">
@@ -269,7 +269,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                 <span className="folder_name">
                   <BsFileEarmark className="icon" style={{ color: "#000" }} />
                   {data.document_name}
-                  File Name
                 </span>
                 <span>
                   {/* <BsThreeDotsVertical
