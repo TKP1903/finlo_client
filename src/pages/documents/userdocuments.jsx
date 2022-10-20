@@ -61,6 +61,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     getUserFiles();
   }, []);
 
+// Modal for popup 
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -127,8 +129,39 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
 
   // toast.container
   const notify = () => {
+        toast.success('File Name Changed Successfully!')
+      }
+
+
+  // File Size Validation  
+
+      const Filevalidation = () => {
+        const fi = document.getElementById('file');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+ 
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 4096) {
+                    alert(
+                      "File too Big, please select a file less than 4mb");
+                } else if (file < 2048) {
+                    alert(
+                      "File too small, please select a file greater than 2mb");
+                } else {
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB';
+                }
+            }
+        }
+    };
+    
+
     toast.success("File Name Changed Successfully!");
   };
+
 
   return (
     <div className="user_files_container">
@@ -145,8 +178,9 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           Back
         </label>
 
-        {/* Upload Btn */}
-        {/* <div className="upload-btn">
+
+      {/* Upload Btn */}
+        <div className="upload-btn">
           <button className="submit_button" onClick={toggleModal}>
             <BsFillCloudArrowUpFill className="icon" />
             Upload
@@ -159,8 +193,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   Upload Files <br />
                   <input
                     type="file"
-                    className="upload-input"
-                    onChange={(e) => setUserDocs(e.target.files[0])}
+                    className="upload-input" multiple
+                    onChange={(e) => setUserDocs(e.target.files[0])} 
                   />
                 </div>
                 <div className="btn-section">
@@ -177,7 +211,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         </div>
 
         {/* Upload modal */}
-        <div>
+        {/* <div>
           <div className="upload_block">
             <span className="upload_button">
               <BsUpload className="icon" />
@@ -192,7 +226,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                     <div className="modal-content">
                       <div>
                         Upload Files <br />
-                        <input type="file" className="upload-input" />
+                        <input type="file" className="upload-input" multiple />
                       </div>
                       <div className="btn-section">
                         <button
@@ -211,7 +245,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Rename dropdown modal */}
