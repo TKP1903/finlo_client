@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./homepage.css";
+// import "./homepage.css";
 import axios from "axios";
 
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
@@ -64,7 +64,7 @@ const HomePage = () => {
     setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
   }, []);
 
-
+  import ("./homepage.css");
   return (
     <>
       <div className="home-page-body">

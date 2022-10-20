@@ -5,6 +5,13 @@
   --first-color: #1C76BD;
   --first-color-alt: #fff;
   --white-color: #D6EBFC;
+  --friendly-red: #FFCCCC;
+  
+  --mui-red: #d32f2f;
+  --mui-red-light: #e57373;
+  --mui-red-dark: #9a0007;
+
+  
 }
 
 a {
@@ -54,7 +61,7 @@ main {
   background-color: #165d97;
   padding-top: 1rem;
   transition: 0.5s;
-
+  z-index: 10;
 }
 
 .nav {

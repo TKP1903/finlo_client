@@ -2,11 +2,10 @@ import "./App.css";
 
 import LoginPage from "./pages/login/login";
 import SignupPage from "./pages/signup/SignUp.jsx";
-import Profile from "./pages/profile/Profile";
 import Sidebar from "./components/sidebar/sidebar";
 import { Route, Routes } from "react-router-dom";
 import GoogleAuth from "./pages/googleAuth";
-import UserDocumentsPage from "./pages/documnets/userdocuments";
+import UserDocumentsPage from "./pages/documents/userdocuments";
 
 function App() {
   return (

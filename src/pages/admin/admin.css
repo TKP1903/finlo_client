@@ -1,4 +1,9 @@
 /* admin page */
+select,
+button,
+label {
+    cursor: pointer;
+}
 
 .admin-page {
     display: flex;
@@ -31,7 +36,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     width: 100%;
     height: 100%;
 }
@@ -57,24 +61,26 @@
     border: 1px solid var(--first-color);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
     background-color: var(--white-color);
+
+    width: 100%;
 }
 
 /* media query for width of form on big screens */
 @media screen and (min-width: 800px) {
     .admin-page-form {
-        width: 60%;
+        width: 70%;
     }
 }
+
 /* media query for small screens */
 @media screen and (max-width: 600px) {
-    .admin-page-form {
-        width: 109%;
-        margin-left: -4%;
-    }
+    .admin-page-form {}
+
     /* give more width to the from inputs and less to the labels */
     .admin-page-form .form-labels {
         width: 30%;
     }
+
     .admin-page-form .form-inputs {
         width: 70%;
     }
@@ -114,20 +120,24 @@
     background-color: white;
 }
 
-.admin-page-form .form-column .form-inputs input {
+.admin-page-form .form-column .form-inputs input,
+.admin-page-form .form-column select {
     width: 100%;
     border: 1px solid var(--first-color);
     border-radius: 5px;
     outline: none;
+
+    height: 2rem;
+    margin: 2px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .admin-page-form .form-column select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid var(--first-color);
 
-    border-radius: 5px;
-    outline: none;
+    background-color: transparent;
+
 }
 
 /* styling form buttons */
@@ -138,6 +148,7 @@
     align-items: flex-end;
     justify-content: center;
     gap: 10px;
+    margin: 10px;
     width: 100%;
     height: 100%;
 }
@@ -155,7 +166,7 @@
     background-color: var(--first-color);
 }
 
-.admin-page .searchArea {
+.search-area {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,29 +176,147 @@
     height: 100%;
 }
 
-.admin-page .searchArea .searchBox {
-    border: 1px solid black;
-    width: 60%;
+.search-area>h1 {
+    align-self: flex-start;
+    color: var(--first-color);
+    padding: 0;
+    margin: 0;
 }
 
-.searchBox input {
-    display: grid-inline;
-    width: 90%;
-    height: 2rem;
+.search-area .table-options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.search-area .table-options-buttons {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15px;
+}
+
+.search-area .table-options-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+
+    background-color: transparent;
     
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+    outline: none;
+    
+    cursor: pointer;
+
+    color: var(--first-color);
+}
+
+.search-area .table-options-button:hover,
+.search-area .table-options-button:active,
+.search-area .table-options-button:focus {
+    /* background-color: var(--first-color); */
+    background-color: rgba(0, 0, 0, 0.07);
+    /* color: var(--white-color); */
+    filter: brightness(0.8);
+    transition: all 0.15s ease-in-out;
+}
+
+.search-area .table-options-button svg {
+    font-size: 1.5rem;
+}
+
+.button-text {
+    border: none!important;
+    background-color: transparent!important;
+}
+.button-text:hover {
+    color: var(--first-color)!important;
+    border: none!important;
+    background-color: rgba(0, 0, 0, 0.07)!important;
+    filter: brightness(0.8);
+}
+
+.button-contained {
+    color: white!important;
+    border: 1px solid var(--first-color)!important;
+    background: var(--first-color)!important;
+}
+
+.button-contained:hover {
+    filter: brightness(0.8);
+}
+
+.button-outlined {
+    background-color: none!important;
+    background: transparent!important;
+}
+
+.table-options-buttons .delete-btn {
+    color: var(--mui-red)!important;
+    border-color: var(--mui-red)!important;
+}
+
+.table-options-buttons .delete-btn:hover {
+    
+}
+
+.search-box {
+
+    align-self: flex-start;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    border: 1px solid var(--first-color);
+
+    border-radius: 5px;
+    width: fit-content;
+
+    background-color: var(--white-color);
+}
+
+.search-box input,
+.search-box input:focus,
+.search-box input:active {
+    display: inline-grid;
+    height: 2rem;
     border: none;
     text-indent: 10%;
     font-size: large;
+
+    width: 20rem;
 }
 
-.searchBox .searchIcon {
+
+.search-box .searchIcon {
+    display: inline-grid;
     vertical-align: middle;
     font-size: 1.5rem;
     cursor: pointer;
-    color:rgba(31, 38, 135, 0.518)
+    color: rgba(31, 38, 135, 0.518);
+
+    width: 2rem;
 }
 
-table {
+.searchIcon svg {
+    font-size: 2rem;
+}
+
+.searchResults .filters .filter select option {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.admin-page table {
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -196,13 +325,102 @@ table {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
     border: 1px solid var(--first-color);
     text-align: left;
-
     margin-top: 10px;
+
+    width: 100%;
 }
 
-.searchResults th, td {
+/* make the table srollabble vertically */
+.admin-page .searchResults {
+    display: block;
+    /* overflow-x: auto; */
+    overflow-y: auto;
+    height: 400px;
+    width: fit-content;
+}
+
+/* fix the table header */
+.admin-page .searchResults thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    font-weight: bold;
+}
+
+/* shadow at the bottom of the header */
+
+.searchResults .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    align-content: flex-end;
+    gap: 1vw;
+}
+
+.searchResults .filter-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    width: 100%;
+    height: 100%;
+}
+
+.searchResults .filter-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+}
+
+.searchResults .filter-input select {
+
+    display: flex;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid var(--first-color);
+    border-radius: 5px;
+
+    color: rgba(31, 38, 135, 0.718);
+    background-color: var(--white-color);
+    border-color: rgba(31, 38, 135, 0.718);
+
+    cursor: pointer;
+}
+
+.searchResults .filter-input select option {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.searchResults .filter-input select:focus {
+    background-color: var(--white-color);
+    /* color: var(--white-color); */
+}
+
+.searchResults .filter-input options {
+    background-color: var(--white-color);
+    color: var(--first-color);
+
+    font-size: 1.1rem;
+}
+
+.searchResults th {
+    min-width: 5rem;
+}
+
+.searchResults th, 
+.searchResults td {
     border: none;
     padding: 15px;
+
+    width: 9rem;
 }
 
 .searchResults td {
@@ -210,20 +428,47 @@ table {
     color: rgba(31, 38, 135, 0.518);
 }
 
-.searchResults tr:last-child > td {
+.searchResults tr:last-child>td {
     border-bottom: none;
 }
 
-.searchResults thead {
+.searchResults thead>tr>th {
     background: var(--white-color);
     border: none;
 }
 
-.searchResults tbody, td {
+.searchResults tbody,
+td {
     background: white;
+}
+
+/* set the text color to --first-color */
+.searchResults .client-firstName,
+.searchResults .client-lastName,
+.searchResults .client-email {
+    color: var(--first-color);
+    border-color: inherit;
+}
+
+.searchResults tr > td{
+    background-color: var(--white-color);
+}
+
+.searchResults tr.client-inactive>td {
+    background-color: var(--friendly-red);
+}
+
+.searchResults tr.client-active>td.client-active-status {
+    color: green;
+    border-color: inherit;
+}
+
+td.client-active-status {
+    color: red;
+    border-color: inherit;
 }
 
 .admin-page-footer {
     font-size: 1rem;
-    color:rgba(31, 38, 135, 0.718);
+    color: rgba(31, 38, 135, 0.718);
 }

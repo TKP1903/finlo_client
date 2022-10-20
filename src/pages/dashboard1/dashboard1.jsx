@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./dashboard1.css";
+// import "./dashboard1.css";
 
 const DashBoard1 = () => {
+  import ("./dashboard1.css");
   return (
     <div>
       <div className="dashboard_block">
