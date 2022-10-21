@@ -16,12 +16,16 @@ import { API_URL } from "../../key";
 const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [userFiles, setUserFiels] = useState([]);
   const [userDocs, setUserDocs] = useState();
+  const [newFileName, setNewFileName] = useState();
+  const [clientDocId, setClientDocId] = useState();
   const [modal, setModal] = useState(false);
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal5, setModal5] = useState(false);
   const user_id = localStorage.getItem("finlo_user_id");
+  const user_name = localStorage.getItem("finlo_user_name");
 
+  //get all user files
   const getUserFiles = async () => {
     try {
       const response = await axios.get(
@@ -32,7 +36,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       console.log(error);
     }
   };
-
+  //upload user files
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -50,6 +54,31 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     } catch (error) {
       alert("Cant upload file");
     }
+  };
+  // delete specific file
+  const deleteFile = async (fileName) => {
+    try {
+      const response = await axios.delete(`${API_URL}file/delete-file`, {
+        data: {
+          user_id,
+          fileName,
+        },
+      });
+      getUserFiles(user_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //update specific file
+  const updateFileName = async () => {
+    try {
+      const response = await axios.put(`${API_URL}file/update-file-name`, {
+        client_documents_id: clientDocId,
+        user_id,
+        updatedFileName: newFileName,
+      });
+      getUserFiles();
+    } catch (error) {}
   };
   useEffect(() => {
     getUserFiles();
@@ -97,25 +126,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   } else {
     document.body.classList.remove("active-modal");
   }
-
-  // deletefile
-  const deleteFile = async (user_id, documentName) => {
-    try {
-      const response = await axios.delete(`${API_URL}file/delete-file`, {
-        data: {
-          user_id: user_id,
-          fileName: documentName,
-        },
-      });
-      getUserFiles(user_id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(userFiles);
-  useEffect(() => {
-    getUserFiles(0);
-  }, []);
 
   // toast.container
   const notify = () => {
@@ -168,7 +178,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         </div>
 
         {/* Upload modal */}
-        <div>
+        {/* <div>
           <div className="upload_block">
             <span className="upload_button">
               <BsUpload className="icon" />
@@ -202,7 +212,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               </div>
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Rename dropdown modal */}
@@ -213,10 +223,15 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             <div className="modal-content">
               <div>
                 Rename File Name <br />
-                <input type="text" name="" id="" />
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  onChange={(e) => setNewFileName(e.target.value)}
+                />
               </div>
               <div className="btn-section">
-                <button className="btn_overlay" onClick={notify}>
+                <button className="btn_overlay" onClick={updateFileName}>
                   Rename
                 </button>
                 <button className="btn_overlay" onClick={toggleModal1}>
@@ -289,14 +304,22 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                         <div onClick={notify}>Preview</div>
                       </a>
                       <a href="#">
-                        <div onClick={toggleModal5}>Info</div>
+                        <div
+                          onClick={() => {
+                            alert(data.client_documents_id);
+                            setClientDocId(data.client_documents_id);
+                            toggleModal5();
+                          }}
+                        >
+                          Info
+                        </div>
                       </a>
                       <a href="#">
                         <div onClick={toggleModal1}>Rename</div>
                       </a>
-                      <a href="#">
+                      <div onClick={() => deleteFile(data.document_name)}>
                         <div>Delete</div>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </span>
