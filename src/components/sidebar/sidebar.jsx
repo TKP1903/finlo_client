@@ -7,6 +7,11 @@ import UserAvatar from "react-user-avatar";
 import { GoThreeBars } from "react-icons/go";
 
 // icons
+import { IoMdSettings } from "react-icons/io";
+import { GoReport } from "react-icons/go";
+import {AiOutlineUsergroupDelete} from "react-icons/ai"
+import { FaFileContract } from "react-icons/fa";
+import { GiArchiveRegister } from "react-icons/gi";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
@@ -24,23 +29,23 @@ const navlistFactory = (mode) => {
         path: "/adminHome",
       },{
         name: "Register a client",
-        icon: <IoHome />,
+        icon: <GiArchiveRegister />,
         path: "/admin",
       },{
         name: "Invoices/Contracts",
-        icon: <IoHome />,
+        icon: <FaFileContract />,
         path: "/invoices",
       },{
         name: "Employees",
-        icon: <IoHome />,
+        icon: <AiOutlineUsergroupDelete/>,
         path: "/Employees",
       },{
         name: "Reports",
-        icon: <IoHome />,
+        icon: <GoReport />,
         path: "/reports",
       },{
         name: "Settings",
-        icon: <IoHome />,
+        icon: <IoMdSettings />,
         path: "/settings",
       },
     ];

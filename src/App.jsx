@@ -7,15 +7,14 @@ import { Route, Routes } from "react-router-dom";
 import GoogleAuth from "./pages/googleAuth";
 
 import { useState } from "react";
-import isAdmin from "./extraFunc/isAdmin";
 
 function App() {
-  const [mode, setMode] = useState(null);
+  const mode = localStorage.user_role;
   return (
     <div>
       <Routes>
         <Route path="/signup" element={<SignupPage />} />    
-        <Route path="/" element={<LoginPage setMode = {() => setMode(isAdmin() ? "admin" : "client")} />} />
+        <Route path="/" element={<LoginPage />} />
         <Route 
           path="/:type" 
           element={<Sidebar 

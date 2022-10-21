@@ -9,7 +9,7 @@ import SearchArea from "./components/searchArea";
 const Admin = ({mode}) => {
   const navigate = useNavigate ();
 
-  if (mode !== "admin") {
+  if (localStorage.user_role !== "admin") {
     return <div>Not authorized</div>;
   }
 

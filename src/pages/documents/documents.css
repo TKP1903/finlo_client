@@ -244,3 +244,16 @@
   gap: 10px;
   width: 100%;
 }
+
+.clients-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--first-color);
+  font-size: 1rem;
+}

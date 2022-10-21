@@ -117,7 +117,9 @@ const UserFoldersPage = ({ mode }) => {
 
   // const [userFolders, setUserFolders] = useState([]);
   // const [userFiles, setUserFiles] = useState([]);
-  const isAdmin = mode === "admin";
+  const isAdmin = localStorage.user_role === "admin";
+
+  const client = JSON.parse(localStorage.getItem("client"));
 
   const [fileStructure, setFileStructure] = useState({
     folders: [],
@@ -126,7 +128,7 @@ const UserFoldersPage = ({ mode }) => {
 
   const [currentPath, setCurrentPath] = useState([""]);
 
-  const user_id = localStorage.getItem("finlo_user_id");
+  const user_id = isAdmin ? 6 : localStorage.getItem("finlo_user_id");
 
   const getUserFolders = async (folder_name) => {
     if (folder_name === "") {
@@ -383,7 +385,10 @@ const UserFoldersPage = ({ mode }) => {
   import("./userDocuments.css");
   return (
     <div className="document_container">
-      <h3 className="page_heading"> Documents </h3>
+      <h3 className="page_heading">
+        {" "}
+        {isAdmin ? client.firstName + " " + client.lastName : "Documents"}{" "}
+      </h3>
       <div className="documents_block">
         <div className="folder-options">
           <div className="folder-options-item breadcrumbs">
@@ -462,11 +467,10 @@ const UserFoldersPage = ({ mode }) => {
             ))}
         </div>
       </div>
-      { 
-        isAdmin && 
+      {isAdmin && (
         <div className="clients-data">
         </div>
-      }
+      )}
     </div>
   );
 };
