@@ -103,7 +103,7 @@ const Header = ({ show, setShow, logouthandler }) => {
   );
 };
 
-const SideNav = ({ show, mode = "admin" }) => {
+const SideNav = ({ show, mode }) => {
   const navlist = navlistFactory(mode);
   return (
     <aside className={`sidebar ${show ? "show" : null}`}>
@@ -179,7 +179,7 @@ const Sidebar = ({mode}) => {
     <main className={show ? "space-toggle" : null}>
       <Header show={show} setShow={setShow} logouthandler={logouthandler} />
 
-      <SideNav show={show} />
+      <SideNav show={show} mode = {mode} />
 
       <div className="master-wrap">
         <Master mode = {mode} />
