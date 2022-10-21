@@ -24,10 +24,11 @@ const navlistFactory = (mode) => {
   if (mode === "admin") {
     return [
       {
-        name: "Home",
-        icon: <IoHome />,
-        path: "/adminHome",
-      },{
+        name: "Client Documents",
+        icon: <IoDocumentSharp />,
+        path: "/documents?user_id=1",
+      },
+      {
         name: "Register a client",
         icon: <GiArchiveRegister />,
         path: "/admin",

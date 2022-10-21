@@ -92,23 +92,23 @@ const SearchArea = () => {
   const [filteredClients, setFilteredClients] = useState([]);
 
   useEffect(() => {
-    // const getSearchResults = async () => {
-    //   const results = await performSearch(searchText);
-    //   const newClients = makeClientsFromResults(results);
-    //   setClients(newClients);
-    //   setFilteredClients(newClients);
-    // };
-    // getSearchResults();
+    const getSearchResults = async () => {
+      const results = await performSearch(searchText);
+      const newClients = makeClientsFromResults(results);
+      setClients(newClients);
+      setFilteredClients(newClients);
+    };
+    getSearchResults();
   }, [searchText]);
 
   useEffect (() => {
-    debugger;
+
     const getClients = async () => {
       try {
-        const {data} = await axios.get ("http://52.53.219.188:4000/admin/get-all-user");
+        const {data: {data}} = await axios.get ("http://52.53.219.188:4000/admin/get-all-user");
+        
         const newClients = makeClientsFromRes (data);
-        debugger;
-
+        debugger
         setClients (newClients);
         setFilteredClients (newClients);
 
@@ -117,8 +117,9 @@ const SearchArea = () => {
       }
     }
     
-    getClients ();
-  });
+    // getClients ();
+  }, []);
+
   const resetFilters = () => {
     setFilteredClients(() => clients);
     // set select elements to default option (all)
