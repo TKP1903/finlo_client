@@ -70,11 +70,12 @@ const LoginPage = ({setMode}) => {
         const result = await axios.post(`${API_URL}auth/login`, inputs);
         localStorage.setItem("finlo_user_id", result?.data.user_id);
         localStorage.setItem("finlo_user_name", result?.data.user_name);
+        localStorage.setItem("finlo_user_role", result?.data?.user_role);
         if (result.status === 200) {
-          console.log (result);
-          localStorage.setItem ('email', inputs.email);
-          setMode();
-          navigate("/home");
+          console.log(result);
+          localStorage.setItem("email", inputs.email);
+          if (result?.data?.user_role === "admin") navigate("/admin");
+          else navigate("/home");
         }
       }
     } catch (error) {

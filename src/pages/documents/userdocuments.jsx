@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
 
-
 import {
   BsFillCloudArrowUpFill,
   BsFileEarmark,
@@ -18,24 +17,29 @@ import File from "./components";
 const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [userFiles, setUserFiles] = useState([]);
   const [userDocs, setUserDocs] = useState();
+  const [newFileName, setNewFileName] = useState();
+  const [clientDocId, setClientDocId] = useState();
   const [modal, setModal] = useState(false);
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal5, setModal5] = useState(false);
 
   const user_id = localStorage.getItem("finlo_user_id");
+  const user_name = localStorage.getItem("finlo_user_name");
 
+  //get all user files
   const getUserFiles = async () => {
     try {
       const response = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folders.name}`
       );
+      alert("HI");
       setUserFiles(response?.data?.data);
     } catch (error) {
       console.log(error);
     }
   };
-
+  //upload user files
   const uploadFile = async () => {
     let formData = new FormData();
 
@@ -53,6 +57,31 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     } catch (error) {
       alert("Cant upload file");
     }
+  };
+  // delete specific file
+  const deleteFile = async (fileName) => {
+    try {
+      const response = await axios.delete(`${API_URL}file/delete-file`, {
+        data: {
+          user_id,
+          fileName,
+        },
+      });
+      getUserFiles(user_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //update specific file
+  const updateFileName = async () => {
+    try {
+      const response = await axios.put(`${API_URL}file/update-file-name`, {
+        client_documents_id: clientDocId,
+        user_id,
+        updatedFileName: newFileName,
+      });
+      getUserFiles();
+    } catch (error) {}
   };
   useEffect(() => {
     getUserFiles();
@@ -105,28 +134,28 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
 
   // deletefile
 
-  const deleteFile = async (user_id, documentName) => {
-    try {
-      const response = await axios.delete(`${API_URL}file/delete-file`, {
-        data: {
-          user_id: user_id,
-          fileName: documentName,
-        },
-      });
-      getUserFiles(user_id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteFile = async (user_id, documentName) => {
+  //   try {
+  //     const response = await axios.delete(`${API_URL}file/delete-file`, {
+  //       data: {
+  //         user_id: user_id,
+  //         fileName: documentName,
+  //       },
+  //     });
+  //     getUserFiles(user_id);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   console.log(userFiles);
   useEffect(() => {
-    getUserFiles(0);
+    getUserFiles();
   }, []);
 
   // toast.container
   const notify = () => {
-    toast.success("File Name Changed Successfully!");
+    // toast.success("File Name Changed Successfully!");
   };
 
   // File Size Validation
@@ -243,10 +272,15 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             <div className="modal-content">
               <div>
                 Rename File Name <br />
-                <input type="text" name="" id="" />
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  onChange={(e) => setNewFileName(e.target.value)}
+                />
               </div>
               <div className="btn-section">
-                <button className="btn_overlay" onClick={notify}>
+                <button className="btn_overlay" onClick={updateFileName}>
                   Rename
                 </button>
                 <button className="btn_overlay" onClick={toggleModal1}>
@@ -305,7 +339,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               <div className="folder">
                 <span className="folder_name">
                   <BsFileEarmark className="icon" style={{ color: "#000" }} />
-                  {data.document_name}
+                  {data.document_name}Files
                 </span>
                 <span>
                   {/* <BsThreeDotsVertical
@@ -319,14 +353,22 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                         <div onClick={notify}>Preview</div>
                       </a>
                       <a href="#">
-                        <div onClick={toggleModal5}>Info</div>
+                        <div
+                          onClick={() => {
+                            alert(data.client_documents_id);
+                            setClientDocId(data.client_documents_id);
+                            toggleModal5();
+                          }}
+                        >
+                          Info
+                        </div>
                       </a>
                       <a href="#">
                         <div onClick={toggleModal1}>Rename</div>
                       </a>
-                      <a href="#">
+                      <div onClick={() => deleteFile(data.document_name)}>
                         <div>Delete</div>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </span>
@@ -334,7 +376,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             ))}
         </div>
       </div>
-      
     </div>
   );
 };

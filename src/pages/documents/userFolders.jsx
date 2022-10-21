@@ -135,8 +135,12 @@ const UserFoldersPage = ({ mode }) => {
     try {
       const {
         data: { data },
-      } = await axios.get(`${API_URL}folder/get-user-folders/${user_id}/${folder_name}`);
-      debugger;
+      } = await axios.get(
+        `${API_URL}folder/get-user-folders/${user_id}/${
+          folder_name === "" ? "root" : folder_name
+        }`
+      );
+      // debugger;
       return makeFoldersFromRes(data);
       // if (doSet) {
       // } else
@@ -149,14 +153,16 @@ const UserFoldersPage = ({ mode }) => {
   const getUserFiles = async (folder_name) => {
     try {
       if (folder_name === "") {
-        folder_name = "finlo";
+        folder_name = "root";
       }
       const {
         data: { data },
       } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
-      const files = makeFilesFromRes(data);
+
+      console.log({ data });
+      const files = makeFilesFromRes(data.files);
       return files;
     } catch (error) {
       console.log(error);
@@ -172,6 +178,9 @@ const UserFoldersPage = ({ mode }) => {
   };
 
   const uploadFile = async (file, parent_folder_name) => {
+    if (parent_folder_name === "") {
+      parent_folder_name = "root";
+    }
     let formData = new FormData();
 
     formData.append("file", file);
@@ -350,7 +359,6 @@ const UserFoldersPage = ({ mode }) => {
       const filesNfolders = await getFilesAndFolders(
         currentPath[currentPath.length - 1]
       );
-      // debugger;
       setFileStructure(filesNfolders);
     })();
   }, [currentPath]);
