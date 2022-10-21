@@ -9,7 +9,7 @@ function Profile({mode}) {
   useEffect (
     () => {
       if (!mode && mode === "admin") {
-        navigate ("/");
+        navigate ("/admin");
       }
     }, []
   );

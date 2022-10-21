@@ -8,6 +8,7 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
+import isAdmin from "../../extraFunc/isAdmin";
 // const AdminButton = () => {
 //   return (
 //     <Link to="/admin" className="btn-admin" style={{ color: "white" }}>
@@ -16,7 +17,7 @@ import { API_URL } from "../../key";
 //   );
 // };
 
-const HomePage = (mode) => {
+const HomePage = ({mode}) => {
   //  modal delete button
   const [modal, setModal] = useState(false);
   const [deleteFileName, setDeleteFileName] = useState("");
@@ -59,15 +60,19 @@ const HomePage = (mode) => {
       console.log(error);
     }
   };
-  console.log(userFiles);
 
   useEffect(() => {
     if (mode === "admin") {
-      navigate ("/admin");
-    }
-    getUserFiles();
-  }, []);
+      navigate("/admin");
+    };
+  }, [mode]);
 
+  useEffect (
+    () => {
+      getUserFiles();
+    },
+    [user_id]
+  );
   import("./homepage.css");
   return (
     <>

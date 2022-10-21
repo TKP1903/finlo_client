@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
 
-const LoginPage = () => {
+const LoginPage = ({setMode}) => {
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -73,6 +73,7 @@ const LoginPage = () => {
         if (result.status === 200) {
           console.log (result);
           localStorage.setItem ('email', inputs.email);
+          setMode();
           navigate("/home");
         }
       }

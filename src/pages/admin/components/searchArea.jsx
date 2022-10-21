@@ -1,11 +1,24 @@
 // import react
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 
 import { performSearch } from "../api_callers";
 
+const makeClientDocsUrl = (client) => {
+  const search = new URLSearchParams ();
+
+  search.append ("user_id", client.id );
+  // store the current client data in local storage
+  localStorage.setItem ("finlo_client", JSON.stringify (client));
+  // navigate to the documents page
+  console.log ({docsUrl: search});
+  return "/documents?" + search;
+};
+
 const SearchArea = () => {
+  const navigate = useNavigate ();
+
   const [searchText, setSearch] = useState("");
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
@@ -118,7 +131,9 @@ const SearchArea = () => {
             client.status == "active" ? "client-active" : "client-inactive"
           }
         >
-          <td className="client-firstName"> {client.firstName} </td>
+          <Link to={makeClientDocsUrl(client)}>
+            <td className="client-firstName"> {client.firstName} </td>
+          </Link>
           <td className="client-lastName"> {client.lastName} </td>
           <td className="client-email"> {client.email} </td>
           <td className="client-phone"> {client.phone} </td>

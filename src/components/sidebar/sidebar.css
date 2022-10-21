@@ -2,16 +2,14 @@
   --header-height: 3rem;
   --nav-width: 68px;
 
-  --first-color: #1C76BD;
+  --first-color: #1c76bd;
   --first-color-alt: #fff;
-  --white-color: #D6EBFC;
-  --friendly-red: #FFCCCC;
-  
+  --white-color: #d6ebfc;
+  --friendly-red: #ffcccc;
+
   --mui-red: #d32f2f;
   --mui-red-light: #e57373;
   --mui-red-dark: #9a0007;
-
-  
 }
 
 a {
@@ -27,7 +25,7 @@ main {
   margin: var(--header-height) 0 0 0;
   padding: 1rem;
   font-size: 0.9rem;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   transition: 0.5s;
 }
 
@@ -50,7 +48,6 @@ main {
   cursor: pointer;
   color: var(--first-color);
 }
-
 
 .sidebar {
   position: fixed;
@@ -178,11 +175,10 @@ main {
   }
 
   .btn-logout {
-    color: #1C76BD;
+    color: #1c76bd;
     padding-left: 20px;
     cursor: pointer;
     padding-top: 2px;
-
   }
 
   .log-avator {
@@ -198,11 +194,15 @@ main {
   .useravatar {
     padding-left: 20px;
   }
-  .user_name{
+  .user_name {
     font-size: 15px;
     color: var(--first-color);
-    
   }
+}
+
+.folder-btn > * {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .btn-primary {
@@ -217,5 +217,5 @@ main {
 }
 
 .btn-primary:hover {
-  filter:  brightness(0.9);
+  filter: brightness(0.9);
 }

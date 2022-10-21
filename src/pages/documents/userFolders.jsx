@@ -129,14 +129,14 @@ const UserFoldersPage = ({ mode }) => {
   const user_id = localStorage.getItem("finlo_user_id");
 
   const getUserFolders = async (folder_name) => {
-    if (folder_name !== "") {
-      return [];
+    if (folder_name === "") {
+      folder_name = "root";
     }
     try {
       const {
         data: { data },
-      } = await axios.get(`${API_URL}folder/get-user-folders/${user_id}`);
-
+      } = await axios.get(`${API_URL}folder/get-user-folders/${user_id}/${folder_name}`);
+      debugger;
       return makeFoldersFromRes(data);
       // if (doSet) {
       // } else
@@ -350,6 +350,7 @@ const UserFoldersPage = ({ mode }) => {
       const filesNfolders = await getFilesAndFolders(
         currentPath[currentPath.length - 1]
       );
+      // debugger;
       setFileStructure(filesNfolders);
     })();
   }, [currentPath]);

@@ -1,7 +1,8 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-//pages
+
+// pages
 import HomePage from "./home/homepage";
 import Documents from "./documents/documents";
 import AdminPage from "./admin/admin";
@@ -11,7 +12,9 @@ import Profile from "./profile/Profile";
 
 const Master = ({ mode }) => {
   const { type } = useParams();
-  console.log({ type });
+  console.log({ mode });
+  const navigate = useNavigate();
+  
   return (
     <div>
       {type === "home" && <HomePage mode = {mode} />}

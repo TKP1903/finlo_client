@@ -5,10 +5,14 @@ import logo from "../../assets/finlo_logo.png";
 import UserAvatar from "react-user-avatar";
 
 import { GoThreeBars } from "react-icons/go";
+
+// icons
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { MdPayment } from "react-icons/md";
+import DocumentsIcon from "../../icons/documentsIcon";
+
 import Master from "../../pages/master";
 
 const navlistFactory = (mode) => {
@@ -41,7 +45,7 @@ const navlistFactory = (mode) => {
       },
     ];
   }
-  if (mode === "client") {
+  else {
     return [
       {
         name: "Home",
@@ -55,7 +59,7 @@ const navlistFactory = (mode) => {
       },
       {
         name: "Documents",
-        icon: <IoDocumentSharp />,
+        icon:  <IoDocumentSharp />,
         path: "/documents",
       },
       {
@@ -147,7 +151,7 @@ const SideNav = ({ show, mode }) => {
           </div> 
           */}
           <div className="nav-list">
-            {navlist.map((item, index) => (
+            {!!navlist && navlist.map((item, index) => (
               <NavLink
                 to={item.path}
                 className="nav-link"
@@ -166,6 +170,8 @@ const SideNav = ({ show, mode }) => {
 };
 
 const Sidebar = ({mode}) => {
+  console.log ({mode});
+
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const { type } = useParams();
