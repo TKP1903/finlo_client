@@ -190,14 +190,14 @@ const UserFoldersPage = ({ documentshandler }) => {
         // }
       );
       if (response.status === 200) {
-        alert("File uploaded successfully");
+      
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure((prev) => {
           return { ...prev, files };
         });
       }
     } catch (error) {
-      alert("Cant upload file");
+
       console.log (error);
     }
   };
@@ -211,7 +211,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       });
       // update the file structure
       if (response.status === 200) {
-        alert("Folder created successfully");
+       
         const newFolders = await getUserFolders(parent_folder_name);
         setFileStructure (
           (curr) => {
@@ -239,7 +239,7 @@ const UserFoldersPage = ({ documentshandler }) => {
         }
       );
       if (response.status === 200) {
-        alert("Folder DELETED successfully :-)");
+
         const newFolders = await getUserFolders(currentPath[currentPath.length - 1]);
         setFileStructure (
           (curr) => {
@@ -343,7 +343,6 @@ const UserFoldersPage = ({ documentshandler }) => {
         }
       );
       if (response.status === 200) {
-        alert("File DELETED successfully :-)");
         const newFiles = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure (
           (curr) => {

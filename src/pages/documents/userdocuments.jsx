@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 import {
   BsFillCloudArrowUpFill,
@@ -335,7 +334,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             ))}
         </div>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 };

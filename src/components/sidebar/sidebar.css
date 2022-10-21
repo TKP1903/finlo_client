@@ -206,7 +206,11 @@ main {
   }
 
   .useravatar {
-    padding-left: 70px;
+    padding-left: 20px;
+  }
+  .user_name{
+    font-size: 15px;
+    
   }
 }
 

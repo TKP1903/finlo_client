@@ -8,8 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 // import("reactjs-popup/dist/index.css");
 import "./css/popups.css";
 
+
 const TestModal = ({ trigger, content, position }) => {
   import("reactjs-popup/dist/index.css");
+  
   return (
     <Popup
       trigger={<button className="button"> Open Modal </button>}
@@ -158,6 +160,10 @@ const AddFile = ({ trigger, handleAddFile }) => {
 };
 
 const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
+  const Deletenotify = () => {
+    toast.success("Folder Name Changed Successfully!");
+  };
+
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
@@ -169,9 +175,8 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
           <button
             className="btn-primary"
             onClick={() => {
+              Deletenotify();
               handleDeleteFolder();
-              // TODO :: show a success/fail message
-              close();
             }}
           >
             {" "}
@@ -188,6 +193,15 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
 };
 
 const DeleteFile = ({ trigger, handleDeleteFile }) => {
+  const Deletenotify = () => {
+    toast.success("Folder Deleted Successfully!");
+  };
+  
+  const Deletefiles = async () => {
+    const isSuccess = await handleDeleteFile();
+    // TODO :: show a success/fail message
+  }
+
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
@@ -198,11 +212,11 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
           <h2> Are you sure you want to delete this file? </h2>
           <button
             className="btn-primary"
-            onClick={async () => {
-              const isSuccess = await handleDeleteFile();
-              // TODO :: show a success/fail message
-              close();
-            }}
+            onClick={ () =>{
+              Deletefiles();
+              Deletenotify();
+            }
+            }
           >
             {" "}
             Yes{" "}
@@ -211,6 +225,7 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
             {" "}
             No{" "}
           </button>
+          <ToastContainer />
         </div>
       )}
     </Popup>
@@ -218,6 +233,14 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
 };
 
 const RenameFolder = ({ trigger, handleRenameFolder }) => {
+  const Renamenotify = () => {
+    toast.success("Folder Name Changed Successfully!");
+  };
+  
+  const Renamefolders = async () => { 
+    const isSuccess = await handleRenameFolder(newName)  !== false;
+  };
+
   let newName;
   return (
     <Popup trigger={trigger} modal nested>
@@ -242,11 +265,12 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
           >
             <div className="prompt confirm-popup">
               <h2> Are you sure you want to rename this folder? </h2>
+              <ToastContainer />
               <button
                 className="btn-primary"
-                onClick={async () => {
-                  const isSuccess = await handleRenameFolder(newName) !== false;
-                  close();
+                onClick={ () => {
+                  Renamefolders();
+                  Renamenotify();
                 }}
               >
                 {" "}
@@ -260,7 +284,9 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
           </Popup>
         </div>
       )}
+      
     </Popup>
+    
   );
 };
 
