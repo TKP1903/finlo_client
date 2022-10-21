@@ -18,6 +18,7 @@ const Header = ({ show, setShow, logouthandler }) => {
         <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
       </div>
       <div className="log-avator">
+        <div className="user_name"><h4>Welcome Client</h4></div>
         <div className="useravatar">
           <UserAvatar
             size="42"

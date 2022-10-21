@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UserDocumentsPage from "./userdocuments";
+// import UserDocumentsPage from "./userdocuments";
 import UserFoldersPage from "./userFolders";
 
 const Documents = () => {
@@ -20,17 +20,18 @@ const Documents = () => {
       name: fileName,
       state: file,
     });
-  }
-  
+  };
+  console.log ({folders, files});
   return (
     <div>
-      {folders.state && <UserFoldersPage documentshandler={documentshandler} />}
+      <UserFoldersPage documentshandler={documentshandler} />
+      {/* {folders.state && }
       {files.state && (
-        <UserDocumentsPage
-          documentshandler={documentshandler}
-          folders={folders}
-        />
-      )}
+        // <UserDocumentsPage
+        //   documentshandler={documentshandler}
+        //   folders={folders}
+        // />
+      )} */}
     </div>
   );
 };

@@ -206,8 +206,27 @@ main {
   }
 
   .useravatar {
-    padding-left: 70px;
+    padding-left: 20px;
   }
+  .user_name{
+    font-size: 15px;
+    color: var(--first-color);
+    
+  }
+}
 
 
+.btn-primary {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--first-color);
+  color: var(--white-color);
+  min-width: 3rem;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  filter:  brightness(0.9);
 }

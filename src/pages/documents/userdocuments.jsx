@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./documents.css";
 import "./userDocuments.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
-  BsFileEarmark,
-  BsUpload,
   BsFillCloudArrowUpFill,
+  BsFileEarmark,
+  BsThreeDotsVertical,
+  BsUpload,
 } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import axios from "axios";
 import { API_URL } from "../../key";
 
+import File from "./components";
+
 const UserDocumentsPage = ({ documentshandler, folders }) => {
-  const [userFiles, setUserFiels] = useState([]);
+  const [userFiles, setUserFiles] = useState([]);
   const [userDocs, setUserDocs] = useState();
   const [newFileName, setNewFileName] = useState();
   const [clientDocId, setClientDocId] = useState();
@@ -22,6 +23,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal5, setModal5] = useState(false);
+
   const user_id = localStorage.getItem("finlo_user_id");
   const user_name = localStorage.getItem("finlo_user_name");
 
@@ -31,7 +33,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       const response = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folders.name}`
       );
-      setUserFiels(response?.data?.data);
+      alert("HI");
+      setUserFiles(response?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +87,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     getUserFiles();
   }, []);
 
+  // Modal for popup
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -127,14 +132,55 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
     document.body.classList.remove("active-modal");
   }
 
+  // deletefile
+
+  // const deleteFile = async (user_id, documentName) => {
+  //   try {
+  //     const response = await axios.delete(`${API_URL}file/delete-file`, {
+  //       data: {
+  //         user_id: user_id,
+  //         fileName: documentName,
+  //       },
+  //     });
+  //     getUserFiles(user_id);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  console.log(userFiles);
+  useEffect(() => {
+    getUserFiles();
+  }, []);
+
   // toast.container
   const notify = () => {
-    toast.success("File Name Changed Successfully!");
+    // toast.success("File Name Changed Successfully!");
+  };
+
+  // File Size Validation
+
+  const Filevalidation = () => {
+    const fi = document.getElementById("file");
+    // Check if any file is selected.
+    if (fi.files.length > 0) {
+      for (const i = 0; i <= fi.files.length - 1; i++) {
+        const fsize = fi.files.item(i).size;
+        const file = Math.round(fsize / 1024);
+        // The size of the file.
+        if (file >= 4096) {
+          alert("File too Big, please select a file less than 4mb");
+        } else if (file < 2048) {
+          alert("File too small, please select a file greater than 2mb");
+        } else {
+          document.getElementById("size").innerHTML = "<b>" + file + "</b> KB";
+        }
+      }
+    }
   };
 
   return (
     <div className="user_files_container">
-      <div></div>
       <div className="file_upload_section">
         <label
           for="inputTag"
@@ -147,6 +193,8 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
           <BiArrowBack className="icon" />
           Back
         </label>
+
+        {/* Upload Btn */}
         <div className="upload-btn">
           <button className="submit_button" onClick={toggleModal}>
             <BsFillCloudArrowUpFill className="icon" />
@@ -161,6 +209,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                   <input
                     type="file"
                     className="upload-input"
+                    multiple
                     onChange={(e) => setUserDocs(e.target.files[0])}
                   />
                 </div>
@@ -193,7 +242,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                     <div className="modal-content">
                       <div>
                         Upload Files <br />
-                        <input type="file" className="upload-input" />
+                        <input type="file" className="upload-input" multiple />
                       </div>
                       <div className="btn-section">
                         <button
@@ -290,7 +339,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
               <div className="folder">
                 <span className="folder_name">
                   <BsFileEarmark className="icon" style={{ color: "#000" }} />
-                  {data.document_name}
+                  {data.document_name}Files
                 </span>
                 <span>
                   {/* <BsThreeDotsVertical
@@ -327,7 +376,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
             ))}
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
