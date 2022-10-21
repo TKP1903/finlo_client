@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import "./homepage.css";
 import axios from "axios";
 
@@ -23,6 +23,8 @@ const HomePage = () => {
   const [modal, setModal] = useState(false);
   const [deleteFileName, setDeleteFileName] = useState("");
   const user_id = localStorage.getItem("finlo_user_id");
+
+  const navigate = useNavigate ();
 
   const toggleModal = () => {
     setModal(!modal);
@@ -63,6 +65,9 @@ const HomePage = () => {
 
   useEffect(() => {
     getUserFiles();
+    if (localStorage.getItem("email") === "admin@finlo.com") {
+      navigate ("/admin");
+    }
     // setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
   }, []);
 

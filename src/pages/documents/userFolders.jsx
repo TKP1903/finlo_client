@@ -301,7 +301,12 @@ const UserFoldersPage = ({ documentshandler }) => {
           <div className="folder-options-item breadcrumbs">
             {/* show the current path as breadcrumbs */}
             {currentPath.map((path, index) => (
-              <span key={index}>
+              <span key={index} onClick = {(e)=>{
+                // pop the path upto the index
+                setCurrentPath((curr) => {
+                  return curr.slice(0, index + 1);
+                });
+              }}>
                 {index === 0 && <span> HOME </span>}
                 <span>
                   {path}
