@@ -112,11 +112,12 @@ const makeFilesFromRes = (data) => {
   return files;
 };
 
-const UserFoldersPage = ({ documentshandler }) => {
+const UserFoldersPage = ({ mode }) => {
   // const [userDocs, setUserDocs] = useState();
 
   // const [userFolders, setUserFolders] = useState([]);
   // const [userFiles, setUserFiles] = useState([]);
+  const isAdmin = mode === "admin";
 
   const [fileStructure, setFileStructure] = useState({
     folders: [],
@@ -150,7 +151,9 @@ const UserFoldersPage = ({ documentshandler }) => {
       if (folder_name === "") {
         folder_name = "finlo";
       }
-      const { data: { data } } = await axios.get(
+      const {
+        data: { data },
+      } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
       const files = makeFilesFromRes(data);
@@ -178,7 +181,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       }
       const response = await axios.post(
         `${API_URL}file/uploadfile/${user_id}/${parent_folder_name}`,
-        formData,
+        formData
         // TODO :: Implement the progress bar
         // {
         //   onUploadProgress: (progressEvent) => {
@@ -190,15 +193,13 @@ const UserFoldersPage = ({ documentshandler }) => {
         // }
       );
       if (response.status === 200) {
-      
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure((prev) => {
           return { ...prev, files };
         });
       }
     } catch (error) {
-
-      console.log (error);
+      console.log(error);
     }
   };
 
@@ -211,16 +212,13 @@ const UserFoldersPage = ({ documentshandler }) => {
       });
       // update the file structure
       if (response.status === 200) {
-       
         const newFolders = await getUserFolders(parent_folder_name);
-        setFileStructure (
-          (curr) => {
-            return {
-              ...curr,
-              folders: newFolders
-            }
-          }
-        );
+        setFileStructure((curr) => {
+          return {
+            ...curr,
+            folders: newFolders,
+          };
+        });
       }
     } catch (error) {
       console.log(error);
@@ -229,28 +227,26 @@ const UserFoldersPage = ({ documentshandler }) => {
 
   const deleteFolder = async (folderName) => {
     try {
-      const response = await axios.delete(
-        `${API_URL}folder/delete-folder`,
-        {
-          data: {
-            folderName,
-            user_id,
-          },
-        }
-      );
+      const response = await axios.delete(`${API_URL}folder/delete-folder`, {
+        data: {
+          folderName,
+          user_id,
+        },
+      });
       if (response.status === 200) {
-
-        const newFolders = await getUserFolders(currentPath[currentPath.length - 1]);
-        setFileStructure (
-          (curr) => {
-            return {
-              ...curr,
-              folders: newFolders
-            }
-          }
+        const newFolders = await getUserFolders(
+          currentPath[currentPath.length - 1]
         );
+        setFileStructure((curr) => {
+          return {
+            ...curr,
+            folders: newFolders,
+          };
+        });
         return true;
-      } else {return false;}
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log(error);
       return false;
@@ -260,31 +256,28 @@ const UserFoldersPage = ({ documentshandler }) => {
   const renameFolder = async (folder, newName) => {
     const folderId = folder.id;
     try {
-      const response = await axios.put(
-        `${API_URL}folder/update-folder-name`,
-        {
-          folderNewName: newName,
-          folderName: folder.name,
-          user_id,
-        }
-      );
+      const response = await axios.put(`${API_URL}folder/update-folder-name`, {
+        folderNewName: newName,
+        folderName: folder.name,
+        user_id,
+      });
       if (response.status === 200) {
         // update the file structure
-        setFileStructure (
-          (curr) => {
-            // find the folder
-            const folderIndex = curr.folders.findIndex (folder => folder.id === folderId);
-            if (folderIndex === -1) {
-              return curr;
-            }
-            const newFolders = [...curr.folders];
-            newFolders[folderIndex].name = newName;
-            return {
-              ...curr,
-              folders: newFolders
-            }
+        setFileStructure((curr) => {
+          // find the folder
+          const folderIndex = curr.folders.findIndex(
+            (folder) => folder.id === folderId
+          );
+          if (folderIndex === -1) {
+            return curr;
           }
-        );
+          const newFolders = [...curr.folders];
+          newFolders[folderIndex].name = newName;
+          return {
+            ...curr,
+            folders: newFolders,
+          };
+        });
         return true;
       } else {
         return false;
@@ -297,31 +290,26 @@ const UserFoldersPage = ({ documentshandler }) => {
   const renameFile = async (file, newName) => {
     const fileId = file.id;
     try {
-      const response = await axios.put(
-        `${API_URL}file/update-file-name`,
-        {
-          client_documents_id: fileId,
-          user_id,
-          updatedFileName: newName,
-        }
-      );
+      const response = await axios.put(`${API_URL}file/update-file-name`, {
+        client_documents_id: fileId,
+        user_id,
+        updatedFileName: newName,
+      });
       if (response.status === 200) {
         // update the file structure
-        setFileStructure (
-          (curr) => {
-            // find the file
-            const fileIndex = curr.files.findIndex (file => file.id === fileId);
-            if (fileIndex === -1) {
-              return curr;
-            }
-            const newFiles = [...curr.files];
-            newFiles[fileIndex].name = newName;
-            return {
-              ...curr,
-              files: newFiles
-            }
+        setFileStructure((curr) => {
+          // find the file
+          const fileIndex = curr.files.findIndex((file) => file.id === fileId);
+          if (fileIndex === -1) {
+            return curr;
           }
-        );
+          const newFiles = [...curr.files];
+          newFiles[fileIndex].name = newName;
+          return {
+            ...curr,
+            files: newFiles,
+          };
+        });
         return true;
       } else {
         return false;
@@ -333,25 +321,22 @@ const UserFoldersPage = ({ documentshandler }) => {
 
   const deleteFile = async (file) => {
     try {
-      const response = await axios.delete(
-        `${API_URL}file/delete-file`,
-        {
-          data: {
-            fileName: file.name,
-            user_id,
-          },
-        }
-      );
+      const response = await axios.delete(`${API_URL}file/delete-file`, {
+        data: {
+          fileName: file.name,
+          user_id,
+        },
+      });
       if (response.status === 200) {
-        const newFiles = await getUserFiles(currentPath[currentPath.length - 1]);
-        setFileStructure (
-          (curr) => {
-            return {
-              ...curr,
-              files: newFiles
-            }
-          }
+        const newFiles = await getUserFiles(
+          currentPath[currentPath.length - 1]
         );
+        setFileStructure((curr) => {
+          return {
+            ...curr,
+            files: newFiles,
+          };
+        });
         return true;
       }
       return false;
@@ -384,10 +369,6 @@ const UserFoldersPage = ({ documentshandler }) => {
 
   const handleOpen = async (folder_name) => {
     addPath(folder_name);
-    // const files = (await getUserFiles(folder_name)) || [];
-    // const filesNfolders = await getFilesAndFolders(folder_name);
-    // setFileStructure(filesNfolders);
-    // getSubFolders(folder_name);
   };
 
   import("./userDocuments.css");
@@ -399,12 +380,15 @@ const UserFoldersPage = ({ documentshandler }) => {
           <div className="folder-options-item breadcrumbs">
             {/* show the current path as breadcrumbs */}
             {currentPath.map((path, index) => (
-              <span key={index} onClick = {(e)=>{
-                // pop the path upto the index
-                setCurrentPath((curr) => {
-                  return curr.slice(0, index + 1);
-                });
-              }}>
+              <span
+                key={index}
+                onClick={(e) => {
+                  // pop the path upto the index
+                  setCurrentPath((curr) => {
+                    return curr.slice(0, index + 1);
+                  });
+                }}
+              >
                 {index === 0 && <span> HOME </span>}
                 <span>
                   {path}
@@ -416,32 +400,31 @@ const UserFoldersPage = ({ documentshandler }) => {
         </div>
         <div className="folder-buttons">
           <div className="folder-btn">
-            <AddFolder
-              trigger={
-                <button className="btn-primary btn-addFolder">
-                  <BsFillFolderFill className="icon" /> Add folder
-                </button>
-              }
-              handleAddFolder={createFolder}
-              parentFolder = {currentPath[currentPath.length - 1]}
-            />
-            {/* <createFolder
-              handlecreateFolder={()=>{}}
-            /> */}
-            {/* Add folder button */}
+            {!isAdmin && (
+              <AddFolder
+                trigger={
+                  <button className="btn-primary btn-addFolder">
+                    <BsFillFolderFill className="icon" /> Add folder
+                  </button>
+                }
+                handleAddFolder={createFolder}
+                parentFolder={currentPath[currentPath.length - 1]}
+              />
+            )}
           </div>
           <div className="folder-btn">
             {/* Upload file button */}
-            <Upload
-              trigger={
-                <button className="btn-primary btn-upload">
-                  <BsFillCloudUploadFill className="icon" /> Upload
-                </button>
-              }
-              handleUpload={uploadFile}
-              parentFolder = {currentPath[currentPath.length - 1]}
-            />
-
+            {!isAdmin && (
+              <Upload
+                trigger={
+                  <button className="btn-primary btn-upload">
+                    <BsFillCloudUploadFill className="icon" /> Upload
+                  </button>
+                }
+                handleUpload={uploadFile}
+                parentFolder={currentPath[currentPath.length - 1]}
+              />
+            )}
           </div>
         </div>
         <div className="folder_block">
@@ -451,29 +434,30 @@ const UserFoldersPage = ({ documentshandler }) => {
               path: "/",
             }}
           /> */}
-          {
-            fileStructure.folders.length > 0
-            && fileStructure.folders.map((data) => (
-                <Folder 
-                  folder={data} 
-                  handleOpen={handleOpen}
-                  handleDelete={deleteFolder}
-                  handleRename={renameFolder}
-                />
-              ))
-          }
-          {
-            fileStructure.files.length > 0
-            && fileStructure.files.map((data) => 
-              <File 
+          {fileStructure.folders.length > 0 &&
+            fileStructure.folders.map((data) => (
+              <Folder
+                folder={data}
+                handleOpen={handleOpen}
+                handleDelete={deleteFolder}
+                handleRename={renameFolder}
+              />
+            ))}
+          {fileStructure.files.length > 0 &&
+            fileStructure.files.map((data) => (
+              <File
                 file={data}
                 handleDelete={deleteFile}
                 handleRename={renameFile}
               />
-            )
-          }
+            ))}
         </div>
       </div>
+      { 
+        isAdmin && 
+        <div className="clients-data">
+        </div>
+      }
     </div>
   );
 };

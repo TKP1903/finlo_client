@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
- const SignupPage = () => {
+const SignupPage = () => {
   const [inputs, setInputs] = useState({
     FirstName: "",
     LastName: "",
@@ -75,7 +75,7 @@ import { API_URL } from "../../key";
           status: true,
         });
       }
-      console.log(firstnameError.name)
+      console.log(firstnameError.name);
       if (inputs.LastName.length === 0) {
         console.log("lastname");
         setLastnameError({
@@ -137,12 +137,7 @@ import { API_URL } from "../../key";
           state: true,
         });
       }
-      if (inputs.ZipCode.length === 0) {
-        setZipCodeError({
-          name: "Please enter your ZipCode",
-          state: true,
-        });
-      } else if (inputs.ZipCode.length < 6) {
+      if (inputs.ZipCode.length === 0 || inputs.ZipCode.length < 6) {
         setZipCodeError({
           name: "Please enter valid ZipCode",
           state: true,
@@ -290,7 +285,7 @@ import { API_URL } from "../../key";
                 </label>
               ) : (
                 <div className="StateLabel">
-                  <label >State</label>
+                  <label>State</label>
                   <div className="input_block StateInput">
                     <form>
                       <label>
@@ -380,6 +375,4 @@ import { API_URL } from "../../key";
   );
 };
 
-export default SignupPage
-
-
+export default SignupPage;

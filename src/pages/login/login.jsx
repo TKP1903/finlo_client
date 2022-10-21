@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { API_URL } from "../../key";
 
 const LoginPage = () => {
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",

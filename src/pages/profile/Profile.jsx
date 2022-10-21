@@ -1,8 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 // import "./profile.css"; 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Profile() {
+function Profile({mode}) {
+  const navigate = useNavigate ();
+
+  useEffect (
+    () => {
+      if (!mode && mode === "admin") {
+        navigate ("/");
+      }
+    }, []
+  );
   import ("./profile.css");
 
   const [edit, setEdit] = useState(false); 

@@ -1,13 +1,21 @@
 // Component for the admin page
 import React, { useState, useEffect, useRef } from "react";
-// import "./admin.css";  // imported in Admin component
-
+import { Link, useNavigate } from "react-router-dom";
 // custom components
 // import {RegisterForm, SearchArea} from "./components";
 import RegisterForm  from "./components/registerForm";
 import SearchArea from "./components/searchArea";
 
-const Admin = () => {
+const Admin = ({mode}) => {
+  const navigate = useNavigate ();
+
+  useEffect(() => {
+    if (!mode || mode !== "admin") {
+      navigate("/");
+      return <div>Not authorized</div>;
+    }
+  }, []);
+  
   import ("./admin.css");
   return (
     <div className="admin-page">

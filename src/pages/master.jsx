@@ -9,17 +9,19 @@ import AdminPage from "./admin/admin";
 
 import Profile from "./profile/Profile";
 
-const Master = () => {
+const Master = ({ mode }) => {
   const { type } = useParams();
   console.log({ type });
   return (
     <div>
-      {type === "home" && <HomePage />}
+      {type === "home" && <HomePage mode = {mode} />}
       {/* {type === "documents" && <DocumentsPage />} */}
-      {type === "documents" && <Documents />}
-      {type === "admin" && <AdminPage />}
+      
+      {type === "documents" && <Documents mode = {mode} />}
+      
+      {type === "admin" && <AdminPage mode={mode} />}
       {/* {type === "documents" && <Docuents />} */}
-      {type === "profile" && <Profile/>}
+      {type === "profile" && <Profile mode={mode} />}
 
     </div>
   );

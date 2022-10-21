@@ -6,13 +6,20 @@ import Sidebar from "./components/sidebar/sidebar";
 import { Route, Routes } from "react-router-dom";
 import GoogleAuth from "./pages/googleAuth";
 
+import isAdmin from "./extraFunc/isAdmin";
+
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/signup" element={<SignupPage />} />    
         <Route path="/" element={<LoginPage />} />
-        <Route path="/:type" element={<Sidebar />} />
+        <Route 
+          path="/:type" 
+          element={<Sidebar 
+            mode = {isAdmin() ? "admin" : "client"}
+          />} 
+        />
       </Routes>
     </div>
   );

@@ -16,10 +16,8 @@ import { API_URL } from "../../key";
 //   );
 // };
 
-const HomePage = () => {
+const HomePage = (mode) => {
   //  modal delete button
-  const [isAdmin, setIsAdmin] = useState(true);
-
   const [modal, setModal] = useState(false);
   const [deleteFileName, setDeleteFileName] = useState("");
   const user_id = localStorage.getItem("finlo_user_id");
@@ -64,18 +62,16 @@ const HomePage = () => {
   console.log(userFiles);
 
   useEffect(() => {
-    getUserFiles();
-    if (localStorage.getItem("email") === "admin@finlo.com") {
+    if (mode === "admin") {
       navigate ("/admin");
     }
-    // setIsAdmin (localStorage.getItem("email") === "admin@finlo.com");
+    getUserFiles();
   }, []);
 
   import("./homepage.css");
   return (
     <>
       <div className="home-page-body">
-        {/* {isAdmin ? <AdminButton /> : null} */}
         <div className="dashboard_block">
           <Link to="" className="gradientCard gradientBlue">
             <MdOutlineMiscellaneousServices
