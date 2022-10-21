@@ -200,6 +200,7 @@ main {
   }
   .user_name{
     font-size: 15px;
+    color: var(--first-color);
     
   }
 }
