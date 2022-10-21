@@ -10,7 +10,13 @@ import {
   BsThreeDotsVertical,
   BsUpload,
 } from "react-icons/bs";
-import { RenameFile, ShowInfo, DeleteFile, Donwload } from "./popups";
+import {
+  RenameFile,
+  ShowInfo,
+  DeleteFile,
+  Donwload,
+  FilePreview,
+} from "./popups";
 
 const Menu = ({
   file,
@@ -25,57 +31,25 @@ const Menu = ({
     <Popup trigger={trigger} nested position="bottom right">
       {(close1) => (
         <div className="folder-menu">
-          {/* <Popup trigger={<div className="menu-item">Rename</div>} modal nested>
-            {(close2) => (
-              <div className="prompt-input">
-                <div className="close-icon" onClick={close1} />
-                <h2> Rename the Folder </h2>
-                <input
-                  type="text"
-                  placeholder="Enter new name"
-                  onChange={debounce((e) => {
-                    newName = e.target.value;
-                    console.log(newName);
-                  })}
-                />
-                <Popup
-                  trigger={<button className="btn-primary"> Rename </button>}
-                  modal
-                  position="bottom right"
-                >
-                  <div className="prompt confirm-popup">
-                    <h2> Are you sure you want to rename this folder? </h2>
-                    <button
-                      className="btn-primary"
-                      onClick={async() => {
-                        await handleRename(newName)
-                        close1();
-                      }}
-                    >
-                      {" "}
-                      Yes{" "}
-                    </button>
-                    <button className="btn-primary" onClick={close1}> No </button>
-                  </div>
-                </Popup>
-              </div>
-            )}
-          </Popup> */}
           <ShowInfo
             info={file}
             trigger={<div className="menu-item">Info</div>}
           />
+          <FilePreview
+            trigger={<div className="menu-item">Preview</div>}
+            file={file}
+          />
           <RenameFile
             trigger={<div className="menu-item">Rename</div>}
-            handleRename={handleRename}
+            handleRenameFile={(newName) => handleRename(file, newName)}
           />
           <DeleteFile
             trigger={<div className="menu-item">Delete</div>}
-            handleDelete={handleDelete}
+            handleDeleteFile={() => handleDelete(file)}
           />
           <Donwload
             trigger={<div className="menu-item">Download</div>}
-            handleDownload={handleDownload}
+            handleDownloadFile={() => handleDownload(file)}
           />
         </div>
       )}
@@ -87,9 +61,9 @@ const emptyfunc = () => {};
 
 /**
  * @param {object} file
- * 
+ *
  * @param {function} handleOpen
- * 
+ *
  * @param {function} handleRename
  * @param {function} handleDelete
  * @param {function} handleDownload

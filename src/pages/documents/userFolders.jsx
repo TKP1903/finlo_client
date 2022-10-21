@@ -4,7 +4,7 @@ import "./documents.css";
 import Dropdown from "react-bootstrap/Dropdown";
 
 import { Folder, File } from "./components";
-import { Upload, CreateFolder, AddFolder } from "./components/popups";
+import { Upload, createFolder, AddFolder } from "./components/popups";
 
 import {
   BsFillFolderFill,
@@ -179,6 +179,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       const response = await axios.post(
         `${API_URL}file/uploadfile/${user_id}/${parent_folder_name}`,
         formData,
+        // TODO :: Implement the progress bar
         // {
         //   onUploadProgress: (progressEvent) => {
         //     const percentCompleted = Math.round(
@@ -188,12 +189,6 @@ const UserFoldersPage = ({ documentshandler }) => {
         //   },
         // }
       );
-      // const response = await axios({
-      //   method: "post",
-      //   url: "${API_URL}file/uploadfile",
-      //   data: formData,
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // });
       if (response.status === 200) {
         alert("File uploaded successfully");
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
@@ -207,7 +202,7 @@ const UserFoldersPage = ({ documentshandler }) => {
     }
   };
 
-  const CreateFolder = async (folder_name, parent_folder_name) => {
+  const createFolder = async (folder_name, parent_folder_name) => {
     try {
       const response = await axios.post(`${API_URL}folder/create-folder`, {
         user_id,
@@ -258,6 +253,110 @@ const UserFoldersPage = ({ documentshandler }) => {
       } else {return false;}
     } catch (error) {
       console.log(error);
+      return false;
+    }
+  };
+
+  const renameFolder = async (folder, newName) => {
+    const folderId = folder.id;
+    try {
+      const response = await axios.put(
+        `${API_URL}folder/update-folder-name`,
+        {
+          folderNewName: newName,
+          folderName: folder.name,
+          user_id,
+        }
+      );
+      if (response.status === 200) {
+        // update the file structure
+        setFileStructure (
+          (curr) => {
+            // find the folder
+            const folderIndex = curr.folders.findIndex (folder => folder.id === folderId);
+            if (folderIndex === -1) {
+              return curr;
+            }
+            const newFolders = [...curr.folders];
+            newFolders[folderIndex].name = newName;
+            return {
+              ...curr,
+              folders: newFolders
+            }
+          }
+        );
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const renameFile = async (file, newName) => {
+    const fileId = file.id;
+    try {
+      const response = await axios.put(
+        `${API_URL}file/update-file-name`,
+        {
+          client_documents_id: fileId,
+          user_id,
+          updatedFileName: newName,
+        }
+      );
+      if (response.status === 200) {
+        // update the file structure
+        setFileStructure (
+          (curr) => {
+            // find the file
+            const fileIndex = curr.files.findIndex (file => file.id === fileId);
+            if (fileIndex === -1) {
+              return curr;
+            }
+            const newFiles = [...curr.files];
+            newFiles[fileIndex].name = newName;
+            return {
+              ...curr,
+              files: newFiles
+            }
+          }
+        );
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const deleteFile = async (file) => {
+    try {
+      const response = await axios.delete(
+        `${API_URL}file/delete-file`,
+        {
+          data: {
+            fileName: file.name,
+            user_id,
+          },
+        }
+      );
+      if (response.status === 200) {
+        alert("File DELETED successfully :-)");
+        const newFiles = await getUserFiles(currentPath[currentPath.length - 1]);
+        setFileStructure (
+          (curr) => {
+            return {
+              ...curr,
+              files: newFiles
+            }
+          }
+        );
+        return true;
+      }
+      return false;
+    } catch (err) {
       return false;
     }
   };
@@ -324,11 +423,11 @@ const UserFoldersPage = ({ documentshandler }) => {
                   <BsFillFolderFill className="icon" /> Add folder
                 </button>
               }
-              handleAddFolder={CreateFolder}
+              handleAddFolder={createFolder}
               parentFolder = {currentPath[currentPath.length - 1]}
             />
-            {/* <CreateFolder
-              handleCreateFolder={()=>{}}
+            {/* <createFolder
+              handlecreateFolder={()=>{}}
             /> */}
             {/* Add folder button */}
           </div>
@@ -360,6 +459,7 @@ const UserFoldersPage = ({ documentshandler }) => {
                   folder={data} 
                   handleOpen={handleOpen}
                   handleDelete={deleteFolder}
+                  handleRename={renameFolder}
                 />
               ))
           }
@@ -368,6 +468,8 @@ const UserFoldersPage = ({ documentshandler }) => {
             && fileStructure.files.map((data) => 
               <File 
                 file={data}
+                handleDelete={deleteFile}
+                handleRename={renameFile}
               />
             )
           }

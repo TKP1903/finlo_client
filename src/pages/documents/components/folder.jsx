@@ -71,7 +71,7 @@ const Menu = ({
           />
           <RenameFolder
             trigger={<div className="menu-item">Rename</div>}
-            handleRenameFolder={handleRename}
+            handleRenameFolder={(newName)=> handleRename(folder, newName)}
           />
           <DeleteFolder
             trigger={<div className="menu-item">Delete</div>}

@@ -245,7 +245,7 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
               <button
                 className="btn-primary"
                 onClick={async () => {
-                  await handleRenameFolder(newName);
+                  const isSuccess = await handleRenameFolder(newName) !== false;
                   close();
                 }}
               >
@@ -390,6 +390,24 @@ const Donwload = ({ trigger, handleDownload }) => {
   );
 };
 
+const FilePreview = ({ trigger, file }) => {
+  return (
+    <Popup trigger={trigger} modal nested>
+      {(close) => (
+        <div className="prompt">
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
+          <h2> Preview </h2>
+          <div className="preview">
+            <img src={file.url} alt="preview" />
+          </div>
+        </div>
+      )}
+    </Popup>
+  );
+};
+
 const Upload = ({ trigger, handleUpload, parentFolder }) => {
   let file;
   return (
@@ -496,4 +514,5 @@ export {
   Donwload,
   Upload,
   CreateFolder,
+  FilePreview,
 };
