@@ -5,10 +5,14 @@ import logo from "../../assets/finlo_logo.png";
 import UserAvatar from "react-user-avatar";
 
 import { GoThreeBars } from "react-icons/go";
+
+// icons
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { MdPayment } from "react-icons/md";
+import DocumentsIcon from "../../icons/documentsIcon";
+
 import Master from "../../pages/master";
 
 const navlistFactory = (mode) => {
@@ -18,30 +22,34 @@ const navlistFactory = (mode) => {
         name: "Home",
         icon: <IoHome />,
         path: "/adminHome",
-      },{
+      },
+      {
         name: "Register a client",
         icon: <IoHome />,
         path: "/admin",
-      },{
+      },
+      {
         name: "Invoices/Contracts",
         icon: <IoHome />,
         path: "/invoices",
-      },{
+      },
+      {
         name: "Employees",
         icon: <IoHome />,
         path: "/Employees",
-      },{
+      },
+      {
         name: "Reports",
         icon: <IoHome />,
         path: "/reports",
-      },{
+      },
+      {
         name: "Settings",
         icon: <IoHome />,
         path: "/settings",
       },
     ];
-  }
-  if (mode === "client") {
+  } else {
     return [
       {
         name: "Home",
@@ -78,6 +86,7 @@ const navlistFactory = (mode) => {
 };
 
 const Header = ({ show, setShow, logouthandler }) => {
+  const client_name = localStorage.getItem("finlo_user_name");
   return (
     <header className={`header ${show ? "space-toggle" : null}`}>
       <div className="header-toggle" onClick={() => setShow(!show)}>
@@ -85,7 +94,7 @@ const Header = ({ show, setShow, logouthandler }) => {
       </div>
       <div className="log-avator">
         <div className="user_name">
-          <h4>Welcome Client</h4>
+          <h4>Welcome {client_name}</h4>
         </div>
         <div className="useravatar">
           <UserAvatar
@@ -147,7 +156,7 @@ const SideNav = ({ show, mode }) => {
           </div> 
           */}
           <div className="nav-list">
-            {navlist.map((item, index) => (
+            {!!navlist && navlist.map((item, index) => (
               <NavLink
                 to={item.path}
                 className="nav-link"
@@ -166,6 +175,8 @@ const SideNav = ({ show, mode }) => {
 };
 
 const Sidebar = ({mode}) => {
+  console.log ({mode});
+
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const { type } = useParams();

@@ -434,6 +434,40 @@ const FilePreview = ({ trigger, file }) => {
   );
 };
 
+const fileValidation = (file) => {
+  /**
+   * File size limit:15MB
+   * File Types: .doc,docx,pdf,png,jpeg,jpg,webpg,.xl,.csv
+   */
+  const validTypes = [
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/pdf",
+    "image/png",
+    "image/jpeg",
+    "image/jpg",
+    "image/webp",
+    "application/vnd.ms-excel",
+    "text/csv",
+  ];
+  if (validTypes.indexOf(file.type) === -1) {
+    return {
+      isValid: false,
+      message: "File type not supported",
+    };
+  }
+  if (file.size > 15 * 1024 * 1024) {
+    return {
+      isValid: false,
+      message: "File size too large try a file less than 15 MB",
+    };
+  }
+  return {
+    isValid: true,
+    message: "File is valid",
+  };
+};
+
 const Upload = ({ trigger, handleUpload, parentFolder }) => {
   let file;
   return (
@@ -449,6 +483,11 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
             name="file"
             onChange={(e) => {
               file = e.target.files[0];
+              const {isValid, message} = fileValidation(file);
+              if (!isValid) {
+                alert(message);
+                return;
+              }
               console.log(file);
             }}
           />

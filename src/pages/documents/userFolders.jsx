@@ -129,8 +129,8 @@ const UserFoldersPage = ({ mode }) => {
   const user_id = localStorage.getItem("finlo_user_id");
 
   const getUserFolders = async (folder_name) => {
-    if (folder_name !== "") {
-      return [];
+    if (folder_name === "") {
+      folder_name = "root";
     }
     try {
       const {
@@ -140,7 +140,7 @@ const UserFoldersPage = ({ mode }) => {
           folder_name === "" ? "root" : folder_name
         }`
       );
-
+      // debugger;
       return makeFoldersFromRes(data);
       // if (doSet) {
       // } else
@@ -153,15 +153,16 @@ const UserFoldersPage = ({ mode }) => {
   const getUserFiles = async (folder_name) => {
     try {
       if (folder_name === "") {
-        folder_name = "finlo";
+        folder_name = "root";
       }
       const {
         data: { data },
       } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
+
       console.log({ data });
-      const files = makeFilesFromRes(data);
+      const files = makeFilesFromRes(data.files);
       return files;
     } catch (error) {
       console.log(error);
@@ -177,6 +178,9 @@ const UserFoldersPage = ({ mode }) => {
   };
 
   const uploadFile = async (file, parent_folder_name) => {
+    if (parent_folder_name === "") {
+      parent_folder_name = "root";
+    }
     let formData = new FormData();
 
     formData.append("file", file);

@@ -6,18 +6,20 @@ import Sidebar from "./components/sidebar/sidebar";
 import { Route, Routes } from "react-router-dom";
 import GoogleAuth from "./pages/googleAuth";
 
+import { useState } from "react";
 import isAdmin from "./extraFunc/isAdmin";
 
 function App() {
+  const [mode, setMode] = useState(null);
   return (
     <div>
       <Routes>
         <Route path="/signup" element={<SignupPage />} />    
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage setMode = {() => setMode(isAdmin() ? "admin" : "client")} />} />
         <Route 
           path="/:type" 
           element={<Sidebar 
-            mode = {isAdmin() ? "admin" : "client"}
+            mode = { mode }
           />} 
         />
       </Routes>

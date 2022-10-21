@@ -9,13 +9,10 @@ import SearchArea from "./components/searchArea";
 const Admin = ({mode}) => {
   const navigate = useNavigate ();
 
-  useEffect(() => {
-    if (!mode || mode !== "admin") {
-      navigate("/");
-      return <div>Not authorized</div>;
-    }
-  }, []);
-  
+  if (mode !== "admin") {
+    return <div>Not authorized</div>;
+  }
+
   import ("./admin.css");
   return (
     <div className="admin-page">

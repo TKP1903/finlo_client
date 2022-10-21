@@ -3,10 +3,14 @@ import React from "react";
 import {adminEmail} from "../key";
 
 const isAdmin = () => {
-    if (localStorage.getItem("email") === adminEmail) {
-        return true;
-    }
-    return false;
+    const email = localStorage.getItem("email");
+    if (!email) {
+        return undefined;
+    };
+    if (email !== adminEmail) {
+        return false;
+    };
+    return true;
 };
 
 export default isAdmin;
