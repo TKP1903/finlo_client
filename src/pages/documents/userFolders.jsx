@@ -159,6 +159,7 @@ const UserFoldersPage = ({ documentshandler }) => {
       } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
+      console.log({ data });
       const files = makeFilesFromRes(data);
       return files;
     } catch (error) {
