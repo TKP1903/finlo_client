@@ -71,16 +71,20 @@ const Menu = ({
           />
           <RenameFolder
             trigger={<div className="menu-item">Rename</div>}
-            handleRename={handleRename}
+            handleRenameFolder={handleRename}
           />
           <DeleteFolder
             trigger={<div className="menu-item">Delete</div>}
-            handleDelete={handleDelete}
+            handleDeleteFolder={async () => {
+              const isSuccess = await handleDelete(folder.name);
+              if (isSuccess) close1();
+              else alert("Error deleting folder");
+            }}
           />
-          <Donwload
+          {/* <Donwload
             trigger={<div className="menu-item">Download</div>}
             handleDownload={handleDownload}
-          />
+          /> */}
         </div>
       )}
     </Popup>
@@ -91,9 +95,9 @@ const emptyfunc = () => {};
 
 /**
  * @param {object} folder
- * 
+ *
  * @param {function} handleOpen
- * 
+ *
  * @param {function} handleRename
  * @param {function} handleDelete
  * @param {function} handleDownload
@@ -112,7 +116,12 @@ export const Folder = ({
 }) => {
   import("./css/folder.css");
   return (
-    <div className="folder" onClick={()=>{handleOpen(folder.name);}}>
+    <div
+      className="folder"
+      onClick={() => {
+        handleOpen(folder.name);
+      }}
+    >
       <span className="folder_name">
         <BsFolderCheck className="icon" style={{ color: "#000" }} />
         {folder.name}

@@ -1,6 +1,8 @@
 import React from "react";
 import Popup from "reactjs-popup";
 
+import { AiFillCloseCircle } from "react-icons/ai";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import("reactjs-popup/dist/index.css");
@@ -61,13 +63,15 @@ const TestModal = ({ trigger, content, position }) => {
   );
 };
 
-const AddFolder = ({ trigger, handleAddFolder }) => {
+const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
   let newName;
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Add a new Folder </h2>
           <input
             type="text"
@@ -87,7 +91,7 @@ const AddFolder = ({ trigger, handleAddFolder }) => {
               <button
                 className="btn-primary"
                 onClick={async () => {
-                  await handleAddFolder(newName);
+                  await handleAddFolder(newName, parentFolder);
                   close();
                 }}
               >
@@ -112,7 +116,9 @@ const AddFile = ({ trigger, handleAddFile }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Add a new File </h2>
           <input
             type="text"
@@ -156,12 +162,14 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt confirm-popup">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Are you sure you want to delete this folder? </h2>
           <button
             className="btn-primary"
-            onClick={async () => {
-              const isSuccess = await handleDeleteFolder();
+            onClick={() => {
+              handleDeleteFolder();
               // TODO :: show a success/fail message
               close();
             }}
@@ -184,7 +192,9 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt confirm-popup">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Are you sure you want to delete this file? </h2>
           <button
             className="btn-primary"
@@ -213,7 +223,9 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Rename Folder </h2>
           <input
             type="text"
@@ -258,7 +270,9 @@ const RenameFile = ({ trigger, handleRenameFile }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Rename File </h2>
           <input
             type="text"
@@ -303,7 +317,9 @@ const ShowInfo = ({ trigger, info }) => {
       {(close) => (
         <>
           <div className="prompt">
-            <div className="close-icon" onClick={close} />
+            <div className="close-icon" onClick={close}>
+              <AiFillCloseCircle />
+            </div>
             <h2> Info </h2>
             <div className="info">
               <div className="info-item">
@@ -350,7 +366,9 @@ const Donwload = ({ trigger, handleDownload }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt confirm-popup">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Are you sure you want to download this file? </h2>
           <button
             className="btn-primary"
@@ -372,16 +390,19 @@ const Donwload = ({ trigger, handleDownload }) => {
   );
 };
 
-const Upload = ({ trigger, handleUpload }) => {
+const Upload = ({ trigger, handleUpload, parentFolder }) => {
   let file;
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Upload a File </h2>
           <input
             type="file"
+            name="file"
             onChange={(e) => {
               file = e.target.files[0];
               console.log(file);
@@ -397,7 +418,7 @@ const Upload = ({ trigger, handleUpload }) => {
               <button
                 className="btn-primary"
                 onClick={async () => {
-                  await handleUpload(file);
+                  await handleUpload(file, parentFolder);
                   close();
                 }}
               >
@@ -422,7 +443,9 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
     <Popup trigger={trigger} modal nested>
       {(close) => (
         <div className="prompt-input">
-          <div className="close-icon" onClick={close} />
+          <div className="close-icon" onClick={close}>
+            <AiFillCloseCircle />
+          </div>
           <h2> Create a Folder </h2>
           <input
             type="text"

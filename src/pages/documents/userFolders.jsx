@@ -148,7 +148,7 @@ const UserFoldersPage = ({ documentshandler }) => {
   const getUserFiles = async (folder_name) => {
     try {
       if (folder_name === "") {
-        folder_name = "/";
+        folder_name = "finlo";
       }
       const { data: { data } } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
@@ -168,15 +168,25 @@ const UserFoldersPage = ({ documentshandler }) => {
     return filesNfolders;
   };
 
-  const uploadFile = async () => {
+  const uploadFile = async (file, parent_folder_name) => {
     let formData = new FormData();
 
-    formData.append("file", "");
+    formData.append("file", file);
     try {
+      if (parent_folder_name === "") {
+        parent_folder_name = "finlo";
+      }
       const response = await axios.post(
-        `${API_URL}file/uploadfile/${user_id}`,
+        `${API_URL}file/uploadfile/${user_id}/${parent_folder_name}`,
         formData,
-        { data: "username" }
+        // {
+        //   onUploadProgress: (progressEvent) => {
+        //     const percentCompleted = Math.round(
+        //       (progressEvent.loaded * 100) / progressEvent.total
+        //     );
+        //     console.log(`upload process: ${percentCompleted}%`);
+        //   },
+        // }
       );
       // const response = await axios({
       //   method: "post",
@@ -186,10 +196,14 @@ const UserFoldersPage = ({ documentshandler }) => {
       // });
       if (response.status === 200) {
         alert("File uploaded successfully");
-        getUserFolders();
+        const files = await getUserFiles(currentPath[currentPath.length - 1]);
+        setFileStructure((prev) => {
+          return { ...prev, files };
+        });
       }
     } catch (error) {
       alert("Cant upload file");
+      console.log (error);
     }
   };
 
@@ -200,9 +214,51 @@ const UserFoldersPage = ({ documentshandler }) => {
         folderName: folder_name,
         parentFolderName: parent_folder_name,
       });
-      getUserFolders();
+      // update the file structure
+      if (response.status === 200) {
+        alert("Folder created successfully");
+        const newFolders = await getUserFolders(parent_folder_name);
+        setFileStructure (
+          (curr) => {
+            return {
+              ...curr,
+              folders: newFolders
+            }
+          }
+        );
+      }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const deleteFolder = async (folderName) => {
+    try {
+      const response = await axios.delete(
+        `${API_URL}folder/delete-folder`,
+        {
+          data: {
+            folderName,
+            user_id,
+          },
+        }
+      );
+      if (response.status === 200) {
+        alert("Folder DELETED successfully :-)");
+        const newFolders = await getUserFolders(currentPath[currentPath.length - 1]);
+        setFileStructure (
+          (curr) => {
+            return {
+              ...curr,
+              folders: newFolders
+            }
+          }
+        );
+        return true;
+      } else {return false;}
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   };
 
@@ -264,6 +320,7 @@ const UserFoldersPage = ({ documentshandler }) => {
                 </button>
               }
               handleAddFolder={CreateFolder}
+              parentFolder = {currentPath[currentPath.length - 1]}
             />
             {/* <CreateFolder
               handleCreateFolder={()=>{}}
@@ -279,6 +336,7 @@ const UserFoldersPage = ({ documentshandler }) => {
                 </button>
               }
               handleUpload={uploadFile}
+              parentFolder = {currentPath[currentPath.length - 1]}
             />
 
           </div>
@@ -295,7 +353,8 @@ const UserFoldersPage = ({ documentshandler }) => {
             && fileStructure.folders.map((data) => (
                 <Folder 
                   folder={data} 
-                  handleOpen={handleOpen} 
+                  handleOpen={handleOpen}
+                  handleDelete={deleteFolder}
                 />
               ))
           }
