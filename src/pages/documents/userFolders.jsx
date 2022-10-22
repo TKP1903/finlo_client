@@ -483,7 +483,7 @@ const UserFoldersPage = ({ mode }) => {
               path: "/",
             }}
           /> */}
-          {fileStructure.folders.length > 0 &&
+          {!!fileStructure.folders.length &&
             fileStructure.folders.map((data) => (
               <Folder
                 folder={data}
@@ -492,7 +492,7 @@ const UserFoldersPage = ({ mode }) => {
                 handleRename={renameFolder}
               />
             ))}
-          {fileStructure.files.length > 0 &&
+          {!!fileStructure.files.length &&
             fileStructure.files.map((data) => (
               <File
                 file={data}
