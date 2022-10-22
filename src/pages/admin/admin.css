@@ -452,7 +452,7 @@ td {
 }
 
 .searchResults .client-firstName {
-    background-color: var(--white-color);
+    background: white;
     cursor: pointer;
 }
 
