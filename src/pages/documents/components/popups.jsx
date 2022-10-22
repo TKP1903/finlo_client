@@ -96,6 +96,33 @@ const notifFail = (
   return toast.error(message, config);
 };
 
+const ConfirmAction = ({
+  trigger,
+  close,
+  onYes,
+  onNo = null,
+  message = "Are you sure?",
+}) => {
+  if (onNo === null) {
+    onNo = close;
+  }
+  return (
+    <Popup trigger={trigger} modal nested position="bottom right">
+      <div className="prompt confirm-popup">
+        <h2> {message} </h2>
+        <button className="btn-primary" onClick={onYes}>
+          {" "}
+          Yes{" "}
+        </button>
+        <button className="btn-primary" onClick={onNo}>
+          {" "}
+          No{" "}
+        </button>
+      </div>
+    </Popup>
+  );
+};
+
 const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
   let newName;
 
@@ -119,6 +146,7 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
             modal
             position="bottom right"
           >
+
             <div className="prompt confirm-popup">
               <h2> Are you sure you want to add this folder? </h2>
               <button
@@ -151,6 +179,29 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
                 No{" "}
               </button>
             </div>
+            {/* <ConfirmAction
+              message="Are you sure you want to add this folder?"
+              onYes={async () => {
+                const { res, isSuccess } = await handleAddFolder(
+                  newName,
+                  parentFolder
+                );
+                if (isSuccess) {
+                  notifSuccess("Folder Created Sucessfully!");
+                } else {
+                  if (hasWord(res.data, "Duplicate")) {
+                    notifFail(
+                      "Folder name is already taken\n Please try a new name"
+                    );
+                  } else {
+                    notifFail("Cannot Create folder");
+                  }
+                  console.log(res);
+                }
+                close();
+              }}
+              onNo={close}
+            /> */}
           </Popup>
         </div>
       )}

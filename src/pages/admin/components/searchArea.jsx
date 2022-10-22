@@ -63,7 +63,7 @@ const makeClientsFromRes = (data) => {
       state: client.state,
       city: client.city,
       // country: client.country,
-      status: client.user_role === "client" ? "active" : "inactive"
+      status: client.user_role === "client" ? "active" : "inactive",
     };
   }
   );
