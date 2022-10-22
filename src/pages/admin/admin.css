@@ -270,19 +270,15 @@ label {
 }
 
 .search-box {
-
     align-self: flex-start;
-
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 0px;
     border: 1px solid var(--first-color);
-
     border-radius: 5px;
     width: fit-content;
-
     background-color: var(--white-color);
 }
 
@@ -475,4 +471,13 @@ td.client-active-status {
 .admin-page-footer {
     font-size: 1rem;
     color: rgba(31, 38, 135, 0.718);
+}
+.action-btn{
+    display: flex;
+    flex-direction: row;
+}
+.action-btn-in{
+    padding: 1%;
+    padding-left: 15px;
+
 }

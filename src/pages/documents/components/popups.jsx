@@ -160,8 +160,16 @@ const AddFile = ({ trigger, handleAddFile }) => {
 };
 
 const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
-  const Deletenotify = () => {
-    toast.success("Folder Name Changed Successfully!");
+  const Deletefoldernotify = () => {
+    toast.success("Folder Deleted Successfully!" , {
+      position: "top-right",
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "light",
+      });
   };
 
   return (
@@ -175,7 +183,7 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
           <button
             className="btn-primary"
             onClick={() => {
-              Deletenotify();
+              Deletefoldernotify();
               handleDeleteFolder();
             }}
           >
@@ -186,15 +194,25 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
             {" "}
             No{" "}
           </button>
+          <ToastContainer />
         </div>
       )}
+      
     </Popup>
   );
 };
 
 const DeleteFile = ({ trigger, handleDeleteFile }) => {
-  const Deletenotify = () => {
-    toast.success("Folder Deleted Successfully!");
+  const Deletefilenotify = () => {
+    toast.success("File Deleted Successfully!" , {
+      position: "top-right",
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "light",
+      });
   };
   
   const Deletefiles = async () => {
@@ -214,7 +232,7 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
             className="btn-primary"
             onClick={ () =>{
               Deletefiles();
-              Deletenotify();
+              Deletefilenotify();
             }
             }
           >
@@ -229,6 +247,7 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
         </div>
       )}
     </Popup>
+   
   );
 };
 
@@ -358,7 +377,7 @@ const ShowInfo = ({ trigger, info }) => {
               </div>
               <div className="info-item">
                 <span className="info-item-key"> Size: </span>
-                <span className="info-item-value"> {info.size} </span>
+                <span className="info-item-value"> {Math.round(info.size / 1021)} Kb </span>
               </div>
               <div className="info-item">
                 <span className="info-item-key"> Created at: </span>
@@ -485,10 +504,8 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
               file = e.target.files[0];
               const {isValid, message} = fileValidation(file);
               if (!isValid) {
-                alert(message);
                 return;
               }
-              console.log(file);
             }}
           />
           <Popup
@@ -535,7 +552,6 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
             placeholder="Enter folder name"
             onChange={(e) => {
               name = e.target.value;
-              console.log(name);
             }}
           />
           <Popup

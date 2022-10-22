@@ -33,7 +33,6 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       const response = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folders.name}`
       );
-      alert("HI");
       setUserFiles(response?.data?.data);
     } catch (error) {
       console.log(error);
@@ -51,11 +50,9 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
       );
       if (response.status === 200) {
         toggleModal();
-        alert("File uploaded successfully");
         getUserFiles(1);
       }
     } catch (error) {
-      alert("Cant upload file");
     }
   };
   // delete specific file
@@ -169,9 +166,7 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
         const file = Math.round(fsize / 1024);
         // The size of the file.
         if (file >= 4096) {
-          alert("File too Big, please select a file less than 4mb");
         } else if (file < 2048) {
-          alert("File too small, please select a file greater than 2mb");
         } else {
           document.getElementById("size").innerHTML = "<b>" + file + "</b> KB";
         }

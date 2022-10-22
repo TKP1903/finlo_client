@@ -65,7 +65,7 @@ const RegisterForm = () => {
   return (
     <div className="RegisterForm">
       {/* form to register a client */}
-      <h2> Registeration From: </h2>
+      {/* <h2> Registeration From: </h2> */}
       <form className="admin-page-form">
         {/* seperate columns for labels and inputs */}
         <div className="form-column">

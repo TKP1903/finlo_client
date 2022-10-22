@@ -110,7 +110,7 @@ const Header = ({ show, setShow, logouthandler, mode }) => {
         </div>
         <div className="btn-logout" onClick={logouthandler}>
           <IoMdLogOut className="nav-link-icon1" />
-          <span className="nav-link-name">Logout</span>
+          <span className="hide">Logout</span>
         </div>
       </div>
     </header>

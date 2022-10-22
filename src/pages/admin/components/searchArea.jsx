@@ -60,7 +60,7 @@ const makeClientsFromRes = (data) => {
       email: client.email,
       phone: client.phone,
       state: client.state,
-      country: client.country,
+      // country: client.country,
       status: client.user_role === "client" ? "active" : "inactive"
     };
   }
@@ -78,7 +78,7 @@ const makeClientsFromResults = (results) => {
       phone: client.phone,
       city: client.city,
       state: client.state,
-      country: client.country,
+      // country: client.country,
       status: client.status,
     };
   });
@@ -142,7 +142,7 @@ const SearchArea = () => {
           <label className="filter-label" htmlFor={type}>
             {label}
           </label>
-          <div className="filter-input">
+          {/* <div className="filter-input">
             <select ref={selectRef} name={type} id={type} onChange={onChange}>
               <option value="">All</option>
               {options.map((option) => (
@@ -151,7 +151,7 @@ const SearchArea = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
         </div>
       );
     };
@@ -208,10 +208,20 @@ const SearchArea = () => {
           <td className="client-phone"> {client.phone} </td>
           <td className="client-city"> {client.city} </td>
           <td className="client-state"> {client.state} </td>
-          <td className="client-country"> {client.country} </td>
+          {/* <td className="client-country"> {client.country} </td> */}
           <td className="client-active-status">
             {" "}
             {client.status == "active" ? "Active" : "Inactive"}{" "}
+          </td>
+          <td className="action-btn">
+          <button className="table-options-button button-contained ">
+            <MdEdit style={{width:"20px"}}/>
+          </button>
+          <div className="action-btn-in">
+          <button className="table-options-button delete-btn">
+            <MdDelete style={{width:"25px"}}/>
+          </button>
+          </div>
           </td>
           {/* <td> {client.branchOffice} </td> */}
           {/* <td> {client.sales} </td>
@@ -276,14 +286,14 @@ const SearchArea = () => {
                 onChange={() => {}}
               />
             </th>
-            <th>
+            {/* <th>
               <Filter
                 type="filter-country"
                 label="Country"
                 options={makeFilterOptions(filteredClients, "country")}
                 onChange={() => {}}
               />
-            </th>
+            </th> */}
             <th>
               <Filter
                 type="filter-status"
@@ -296,6 +306,10 @@ const SearchArea = () => {
                 )}
               />
             </th>
+            <th><Filter
+                type="filter-status"
+                label="Action"
+              /></th>
             {/* <th> Sales </th>
               <th> Branch Office </th>
               <th> Employee </th> */}
@@ -346,23 +360,18 @@ const SearchArea = () => {
   const TableOptions = () => {
     return (
       <div className="table-options">
-        <SearchBox className="search-box" />
+        {/* <SearchBox className="search-box" /> */}
         <div className="table-options-buttons">
-          <button
+          {/* <button
             className="table-options-button reset-filters button-text"
             onClick={resetFilters}
           >
             Reset Filters
-          </button>
-          <button className="table-options-button add-btn">
+          </button> */}
+          {/* <button className="table-options-button add-btn">
             <MdAdd /> Add
-          </button>
-          <button className="table-options-button delete-btn">
-            <MdDelete /> Delete
-          </button>
-          <button className="table-options-button edit-btn button-contained">
-            <MdEdit /> Edit
-          </button>
+          </button> */}
+          
         </div>
       </div>
     );

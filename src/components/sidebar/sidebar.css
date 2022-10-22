@@ -24,7 +24,7 @@ main {
   position: relative;
   margin: var(--header-height) 0 0 0;
   padding: 1rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-family: "Nunito Sans", sans-serif;
   transition: 0.5s;
 }
@@ -86,7 +86,7 @@ main {
 .nav-logo {
   margin-bottom: 1rem;
   background-color: var(--white-color);
-  height: 45px;
+  height: 48px;
 }
 
 .show-logo-icon {
@@ -103,14 +103,14 @@ main {
 }
 
 .nav-logo-icon1 {
-  font-size: 0.3rem;
-  padding-top: 10% !important;
+  font-size: 1rem;
+  padding-top: 1% !important;
   color: var(--first-color);
   cursor: pointer;
   transition: 0.4s ease-in-out;
   margin-bottom: 4px;
-  height: 1.2rem;
-  width: 1rem;
+  height: 1.8rem;
+  width: 1.5rem;
 }
 
 .nav-logo-name {
@@ -218,4 +218,14 @@ main {
 
 .btn-primary:hover {
   filter: brightness(0.9);
+}
+
+/* logout */
+.hide {
+  display: none;
+}
+.nav-link-icon1:hover + .hide{
+  display: block;
+  color: #165d97;
+  transition: 0.8s ease-in-out;
 }
