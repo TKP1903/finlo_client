@@ -112,11 +112,19 @@ const makeFilesFromRes = (data) => {
   return files;
 };
 
+const getUserIdFromUrl = () => {
+  const url = window.location.href;
+  const searchParams = new URLSearchParams(url);
+  const userId = searchParams.get("userId");
+  return userId;
+};
+
 const UserFoldersPage = ({ mode }) => {
   // const [userDocs, setUserDocs] = useState();
 
   // const [userFolders, setUserFolders] = useState([]);
   // const [userFiles, setUserFiles] = useState([]);
+
   const isAdmin = localStorage.user_role === "admin";
 
   const client = JSON.parse(localStorage.getItem("client"));
@@ -128,7 +136,10 @@ const UserFoldersPage = ({ mode }) => {
 
   const [currentPath, setCurrentPath] = useState([""]);
 
-  const user_id = isAdmin ? 6 : localStorage.getItem("finlo_user_id");
+  const user_id = isAdmin
+    ? client.id
+    : localStorage.getItem("finlo_user_id");
+  console.log({ user_id });
 
   const getUserFolders = async (folder_name) => {
     if (folder_name === "") {
@@ -143,12 +154,16 @@ const UserFoldersPage = ({ mode }) => {
         }`
       );
       // debugger;
-      return makeFoldersFromRes(data);
+      if (!data || !data.length) {
+        return new Array ();
+      }
+      return makeFoldersFromRes(data) || [];
       // if (doSet) {
       // } else
       //   return response?.data?.data;
     } catch (error) {
       console.log({ error });
+      return [];
     }
   };
 
@@ -162,10 +177,12 @@ const UserFoldersPage = ({ mode }) => {
       } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
-
+      if (!data || !data.length) {
+        return new Array ();
+      }
       console.log({ data });
-      const files = makeFilesFromRes(data.files);
-      return files;
+      const files = makeFilesFromRes(data.files) || [];
+      return files || [];
     } catch (error) {
       console.log(error);
       return [];
@@ -173,9 +190,15 @@ const UserFoldersPage = ({ mode }) => {
   };
 
   const getFilesAndFolders = async (folder_name) => {
+    
+    if (folder_name === "") {
+      folder_name = "root";
+    }
     const folders = await getUserFolders(folder_name);
     const files = await getUserFiles(folder_name);
     const filesNfolders = { folders, files };
+    
+
     return filesNfolders;
   };
 
@@ -236,13 +259,13 @@ const UserFoldersPage = ({ mode }) => {
       }
       return {
         isSuccess: true,
-        res: response
+        res: response,
       };
     } catch (err) {
       console.log(err);
       return {
         isSuccess: false,
-        res: err.response
+        res: err.response,
       };
     }
   };
@@ -278,15 +301,12 @@ const UserFoldersPage = ({ mode }) => {
   const renameFolder = async (folder, newName) => {
     const folderId = folder.id;
     try {
-      const response = await axios.put(
-        `${API_URL}folder/update-folder-name`,
-        {
-          folderNewName: newName,
-          folderName: folder.name,
-          user_id,
-          client_folders_id: folder.id,
-        }
-      );
+      const response = await axios.put(`${API_URL}folder/update-folder-name`, {
+        folderNewName: newName,
+        folderName: folder.name,
+        user_id,
+        client_folders_id: folder.id,
+      });
       if (response.status === 200) {
         // update the file structure
         setFileStructure((curr) => {
@@ -309,7 +329,7 @@ const UserFoldersPage = ({ mode }) => {
         return false;
       }
     } catch (err) {
-      console.log (err);
+      console.log(err);
       return false;
     }
   };
@@ -367,7 +387,7 @@ const UserFoldersPage = ({ mode }) => {
       }
       return response;
     } catch (err) {
-      console.log (err);
+      console.log(err);
       return err.response;
     }
   };

@@ -39,3 +39,12 @@
     transform: translate(50%, -50%);
     font-size: 2rem;
 }
+
+.popup-content {
+    display: grid;
+    place-items: center;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.092);
+    gap: 10px;
+}
