@@ -14,7 +14,7 @@ const Master = ({ mode }) => {
   const { type } = useParams();
   console.log({ mode });
   const navigate = useNavigate();
-  
+  mode = localStorage.user_role;
   return (
     <div>
       {type === "home" && <HomePage mode = {mode} />}

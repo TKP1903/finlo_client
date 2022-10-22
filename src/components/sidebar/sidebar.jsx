@@ -7,6 +7,11 @@ import UserAvatar from "react-user-avatar";
 import { GoThreeBars } from "react-icons/go";
 
 // icons
+import { IoMdSettings } from "react-icons/io";
+import { GoReport } from "react-icons/go";
+import {AiOutlineUsergroupDelete} from "react-icons/ai"
+import { FaFileContract } from "react-icons/fa";
+import { GiArchiveRegister } from "react-icons/gi";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
@@ -19,33 +24,33 @@ const navlistFactory = (mode) => {
   if (mode === "admin") {
     return [
       {
-        name: "Home",
-        icon: <IoHome />,
-        path: "/adminHome",
+        name: "Client Documents",
+        icon: <IoDocumentSharp />,
+        path: "/documents?user_id=1",
       },
       {
         name: "Register a client",
-        icon: <IoHome />,
+        icon: <GiArchiveRegister />,
         path: "/admin",
       },
       {
         name: "Invoices/Contracts",
-        icon: <IoHome />,
+        icon: <FaFileContract />,
         path: "/invoices",
       },
       {
         name: "Employees",
-        icon: <IoHome />,
+        icon: <AiOutlineUsergroupDelete/>,
         path: "/Employees",
       },
       {
         name: "Reports",
-        icon: <IoHome />,
+        icon: <GoReport />,
         path: "/reports",
       },
       {
         name: "Settings",
-        icon: <IoHome />,
+        icon: <IoMdSettings />,
         path: "/settings",
       },
     ];
@@ -85,7 +90,7 @@ const navlistFactory = (mode) => {
   }
 };
 
-const Header = ({ show, setShow, logouthandler }) => {
+const Header = ({ show, setShow, logouthandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
   return (
     <header className={`header ${show ? "space-toggle" : null}`}>
@@ -94,7 +99,7 @@ const Header = ({ show, setShow, logouthandler }) => {
       </div>
       <div className="log-avator">
         <div className="user_name">
-          <h4>Welcome {client_name}</h4>
+          <h4>Welcome {mode === "admin" ? "Admin" : client_name}</h4>
         </div>
         <div className="useravatar">
           <UserAvatar
@@ -156,17 +161,18 @@ const SideNav = ({ show, mode }) => {
           </div> 
           */}
           <div className="nav-list">
-            {!!navlist && navlist.map((item, index) => (
-              <NavLink
-                to={item.path}
-                className="nav-link"
-                activeClassName="active"
-                key={index}
-              >
-                {item.icon}
-                <span className="nav-link-name">{item.name}</span>
-              </NavLink>
-            ))}
+            {!!navlist &&
+              navlist.map((item, index) => (
+                <NavLink
+                  to={item.path}
+                  className="nav-link"
+                  activeClassName="active"
+                  key={index}
+                >
+                  {item.icon}
+                  <span className="nav-link-name">{item.name}</span>
+                </NavLink>
+              ))}
           </div>
         </div>
       </nav>
@@ -174,8 +180,8 @@ const SideNav = ({ show, mode }) => {
   );
 };
 
-const Sidebar = ({mode}) => {
-  console.log ({mode});
+const Sidebar = ({ mode }) => {
+  console.log({ mode });
 
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
@@ -188,12 +194,17 @@ const Sidebar = ({mode}) => {
 
   return (
     <main className={show ? "space-toggle" : null}>
-      <Header show={show} setShow={setShow} logouthandler={logouthandler} />
+      <Header
+        show={show}
+        setShow={setShow}
+        logouthandler={logouthandler}
+        mode={mode}
+      />
 
-      <SideNav show={show} mode = {mode} />
+      <SideNav show={show} mode={mode} />
 
       <div className="master-wrap">
-        <Master mode = {mode} />
+        <Master mode={mode} />
       </div>
     </main>
   );

@@ -3,53 +3,122 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 
+
 import { performSearch } from "../api_callers";
+
+import axios from "axios";
 
 const makeClientDocsUrl = (client) => {
   const search = new URLSearchParams ();
 
   search.append ("user_id", client.id );
   // store the current client data in local storage
-  localStorage.setItem ("finlo_client", JSON.stringify (client));
+  localStorage.setItem ("client", JSON.stringify (client));
   // navigate to the documents page
   console.log ({docsUrl: search});
   return "/documents?" + search;
 };
 
+const makeClientsFromRes = (data) => {
+  /**
+   * {
+   * "user_id": 6,
+   *  "user_name": "neel",
+   *  "email": "neel@gmail.com",
+   *  "password": "$2a$10$CBPGh2/P8.Uk/lvCbKGHj.ViVdRozMGZkOAWyZoDx92VssKzWf2jW",
+   *  "customer_profile_id": null,
+   *  "customer_documents_id": null,
+   *  "user_role_id": null,
+   *  "phone": null,
+   *  "city": null,
+   *  "state": null,
+   *  "pincode": null,
+   *  "country": null,
+   *  "profile_url": null,
+   *  "created_date_time": null,
+   *  "updated_date_time": null,
+   *  "user_role": "client"
+   * }
+   * {
+   *  "id": user_id,
+   *  "firstName": user_name,
+   *  "lastName": "",
+   *  "email": email,
+   *  "phone": phone,
+   *  "state": state,
+   *  "country": country,
+   *  staus: user_role === "client" ? "active" : "inactive" 
+   * }
+   * 
+   * }
+   */
+  const clients = data.map (client => {
+    return {
+      id: client.user_id,
+      firstName: client.user_name,
+      lastName: "",
+      email: client.email,
+      phone: client.phone,
+      state: client.state,
+      country: client.country,
+      status: client.user_role === "client" ? "active" : "inactive"
+    };
+  }
+  );
+  return clients;
+}
+
+const makeClientsFromResults = (results) => {
+  return results.map((client) => {
+    return {
+      id: client.id,
+      firstName: client.firstName,
+      lastName: client.lastName,
+      email: client.email,
+      phone: client.phone,
+      city: client.city,
+      state: client.state,
+      country: client.country,
+      status: client.status,
+    };
+  });
+};
+
 const SearchArea = () => {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   const [searchText, setSearch] = useState("");
   const [clients, setClients] = useState([]);
   const [filteredClients, setFilteredClients] = useState([]);
 
-  const makeClientsFromResults = (results) => {
-    return results.map((client) => {
-      return {
-        id: client.id,
-        firstName: client.firstName,
-        lastName: client.lastName,
-        email: client.email,
-        phone: client.phone,
-        city: client.city,
-        state: client.state,
-        country: client.country,
-        status: client.status,
-      };
-    });
-  };
+  // useEffect(() => {
+  // const getSearchResults = async () => {
+  //   const results = await performSearch(searchText);
+  //   const newClients = makeClientsFromResults(results);
+  //   setClients(newClients);
+  //   setFilteredClients(newClients);
+  // };
+  // getSearchResults();
+  // }, [searchText]);
 
   useEffect(() => {
-    const getSearchResults = async () => {
-      const results = await performSearch(searchText);
-      const newClients = makeClientsFromResults(results);
-      setClients(newClients);
-      setFilteredClients(newClients);
-    };
-    getSearchResults();
+    const getClients = async () => {
+      try {
+        const {
+          data: { data },
+        } = await axios.get("http://52.53.219.188:4000/admin/get-all-user");
 
-    // setClients(dummyClients);
-  }, [searchText]);
+        const newClients = makeClientsFromRes(data);
+        debugger;
+        setClients(newClients);
+        setFilteredClients(newClients);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getClients();
+  }, []);
 
   const resetFilters = () => {
     setFilteredClients(() => clients);

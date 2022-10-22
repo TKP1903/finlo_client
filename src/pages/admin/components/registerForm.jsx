@@ -34,7 +34,6 @@ const RegisterForm = () => {
             countriesRef.current.length === 0
           ) {
             const { data } = await fetchCountries();
-            console.log(data);
             countriesRef.current = data;
           }
           setCountries(countriesRef.current);

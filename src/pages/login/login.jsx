@@ -74,6 +74,7 @@ const LoginPage = ({setMode}) => {
         if (result.status === 200) {
           console.log(result);
           localStorage.setItem("email", inputs.email);
+          localStorage.setItem("user_role", result?.data?.user_role);
           if (result?.data?.user_role === "admin") navigate("/admin");
           else navigate("/home");
         }
