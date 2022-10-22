@@ -124,7 +124,7 @@ function Profile({mode}) {
             </div>
           </div>
           <div className="Business_info"></div>
-          <div className="endTitle">Finlo Inc, 2022</div>
+          <div className="endTitle">© Finlo Inc, 2022</div>
         </div>
         <div className="col2">
           <div className="subtables">

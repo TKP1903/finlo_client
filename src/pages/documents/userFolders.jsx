@@ -417,7 +417,7 @@ const UserFoldersPage = ({ mode }) => {
         </div>
         <div className="folder-buttons">
           <div className="folder-btn">
-            {!isAdmin && (
+            
               <AddFolder
                 trigger={
                   <button className="btn-primary btn-addFolder">
@@ -427,11 +427,11 @@ const UserFoldersPage = ({ mode }) => {
                 handleAddFolder={createFolder}
                 parentFolder={currentPath[currentPath.length - 1]}
               />
-            )}
+            
           </div>
           <div className="folder-btn">
             {/* Upload file button */}
-            {!isAdmin && (
+            
               <Upload
                 trigger={
                   <button className="btn-primary btn-upload">
@@ -441,7 +441,6 @@ const UserFoldersPage = ({ mode }) => {
                 handleUpload={uploadFile}
                 parentFolder={currentPath[currentPath.length - 1]}
               />
-            )}
           </div>
         </div>
         <div className="folder_block">

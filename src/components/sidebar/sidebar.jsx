@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
 import logo from "../../assets/finlo_logo.png";
@@ -9,7 +9,7 @@ import { GoThreeBars } from "react-icons/go";
 // icons
 import { IoMdSettings } from "react-icons/io";
 import { GoReport } from "react-icons/go";
-import {AiOutlineUsergroupDelete} from "react-icons/ai"
+import { AiOutlineUsergroupDelete } from "react-icons/ai";
 import { FaFileContract } from "react-icons/fa";
 import { GiArchiveRegister } from "react-icons/gi";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
@@ -40,7 +40,7 @@ const navlistFactory = (mode) => {
       },
       {
         name: "Employees",
-        icon: <AiOutlineUsergroupDelete/>,
+        icon: <AiOutlineUsergroupDelete />,
         path: "/Employees",
       },
       {
@@ -90,8 +90,29 @@ const navlistFactory = (mode) => {
   }
 };
 
+const NavList = ({ mode }) => {
+  let navlist = navlistFactory(mode);
+  return (
+    <div className="nav-list">
+      {!!navlist &&
+        navlist.map((item, index) => (
+          <NavLink
+            to={item.path}
+            className="nav-link"
+            activeClassName="active"
+            key={index}
+          >
+            {item.icon}
+            <span className="nav-link-name">{item.name}</span>
+          </NavLink>
+        ))}
+    </div>
+  );
+};
+
 const Header = ({ show, setShow, logouthandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
+  const user_role = localStorage.getItem("finlo_user_role");
   return (
     <header className={`header ${show ? "space-toggle" : null}`}>
       <div className="header-toggle" onClick={() => setShow(!show)}>
@@ -99,7 +120,7 @@ const Header = ({ show, setShow, logouthandler, mode }) => {
       </div>
       <div className="log-avator">
         <div className="user_name">
-          <h4>Welcome {mode === "admin" ? "Admin" : client_name}</h4>
+          <h4>Welcome {user_role === "client" ? client_name : "Admin"}</h4>
         </div>
         <div className="useravatar">
           <UserAvatar
@@ -117,8 +138,14 @@ const Header = ({ show, setShow, logouthandler, mode }) => {
   );
 };
 
-const SideNav = ({ show, mode }) => {
-  const navlist = navlistFactory(mode);
+const SideNav = ({ show }) => {
+  const [mode, setMode] = useState(localStorage.user_role);
+
+  useEffect(() => {
+    setMode(localStorage.getItem("user_role"));
+  }, []);
+  console.log(mode);
+
   return (
     <aside className={`sidebar ${show ? "show" : null}`}>
       <nav className="nav">
@@ -131,49 +158,7 @@ const SideNav = ({ show, mode }) => {
               </span>
             </span>
           </Link>
-
-          {/* 
-          <div className="nav-list">
-            <NavLink to="/home" className="nav-link " activeClassName="active">
-              <IoHome className="nav-link-icon" />
-              <span className="nav-link-name ">Home</span>
-            </NavLink>
-            <Link to="/profile" className="nav-link">
-              <ImProfile className="nav-link-icon" />
-              <span className="nav-link-name">Profile</span>
-            </Link>
-            <NavLink to="/documents" className="nav-link">
-              <IoDocumentSharp className="nav-link-icon" />
-              <span className="nav-link-name">Documents</span>
-            </NavLink>
-            <Link to="/" className="nav-link">
-              <ImProfile className="nav-link-icon" />
-              <span className="nav-link-name">Contract Proposal</span>
-            </Link>
-            <Link to="/" className="nav-link">
-              <MdPayment className="nav-link-icon" />
-              <span className="nav-link-name">Payments</span>
-            </Link>
-            <Link to="/" className="nav-link">
-              <ImProfile className="nav-link-icon" />
-              <span className="nav-link-name">Referral Program</span>
-            </Link>
-          </div> 
-          */}
-          <div className="nav-list">
-            {!!navlist &&
-              navlist.map((item, index) => (
-                <NavLink
-                  to={item.path}
-                  className="nav-link"
-                  activeClassName="active"
-                  key={index}
-                >
-                  {item.icon}
-                  <span className="nav-link-name">{item.name}</span>
-                </NavLink>
-              ))}
-          </div>
+          <NavList mode={mode} />
         </div>
       </nav>
     </aside>
