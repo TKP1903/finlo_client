@@ -9,7 +9,7 @@ import { GoThreeBars } from "react-icons/go";
 // icons
 import { IoMdSettings } from "react-icons/io";
 import { GoReport } from "react-icons/go";
-import {AiOutlineUsergroupDelete} from "react-icons/ai"
+import { AiOutlineUsergroupDelete } from "react-icons/ai";
 import { FaFileContract } from "react-icons/fa";
 import { GiArchiveRegister } from "react-icons/gi";
 import { IoHome, IoDocumentSharp } from "react-icons/io5";
@@ -32,26 +32,29 @@ const navlistFactory = (mode) => {
         name: "Register a client",
         icon: <GiArchiveRegister />,
         path: "/admin",
-      },{
+      },
+      {
         name: "Invoices/Contracts",
         icon: <FaFileContract />,
         path: "/invoices",
-      },{
+      },
+      {
         name: "Employees",
-        icon: <AiOutlineUsergroupDelete/>,
+        icon: <AiOutlineUsergroupDelete />,
         path: "/Employees",
-      },{
+      },
+      {
         name: "Reports",
         icon: <GoReport />,
         path: "/reports",
-      },{
+      },
+      {
         name: "Settings",
         icon: <IoMdSettings />,
         path: "/settings",
       },
     ];
-  }
-  else {
+  } else {
     return [
       {
         name: "Home",
@@ -65,7 +68,7 @@ const navlistFactory = (mode) => {
       },
       {
         name: "Documents",
-        icon:  <IoDocumentSharp />,
+        icon: <IoDocumentSharp />,
         path: "/documents",
       },
       {
@@ -88,25 +91,28 @@ const navlistFactory = (mode) => {
 };
 
 const NavList = ({ mode }) => {
-  let navlist = navlistFactory (mode);
+  let navlist = navlistFactory(mode);
   return (
     <div className="nav-list">
-      {!!navlist && navlist.map((item, index) => (
-        <NavLink
-          to={item.path}
-          className="nav-link"
-          activeClassName="active"
-          key={index}
-        >
-          {item.icon}
-          <span className="nav-link-name">{item.name}</span>
-        </NavLink>
-      ))}
+      {!!navlist &&
+        navlist.map((item, index) => (
+          <NavLink
+            to={item.path}
+            className="nav-link"
+            activeClassName="active"
+            key={index}
+          >
+            {item.icon}
+            <span className="nav-link-name">{item.name}</span>
+          </NavLink>
+        ))}
     </div>
   );
 };
 
-const Header = ({ show, setShow, logouthandler }) => {
+const Header = ({ show, setShow, logouthandler, mode }) => {
+  const client_name = localStorage.getItem("finlo_user_name");
+  const user_role = localStorage.getItem("finlo_user_role");
   return (
     <header className={`header ${show ? "space-toggle" : null}`}>
       <div className="header-toggle" onClick={() => setShow(!show)}>
@@ -114,7 +120,7 @@ const Header = ({ show, setShow, logouthandler }) => {
       </div>
       <div className="log-avator">
         <div className="user_name">
-          <h4>Welcome Client</h4>
+          <h4>Welcome {user_role === "client" ? client_name : "Admin"}</h4>
         </div>
         <div className="useravatar">
           <UserAvatar
@@ -133,14 +139,12 @@ const Header = ({ show, setShow, logouthandler }) => {
 };
 
 const SideNav = ({ show }) => {
-  const [ mode, setMode ]= useState (localStorage.user_role); 
-  
-  useEffect (
-    () => {
-      setMode(localStorage.getItem ("user_role"));
-    }, []
-  );
-  console.log (mode);
+  const [mode, setMode] = useState(localStorage.user_role);
+
+  useEffect(() => {
+    setMode(localStorage.getItem("user_role"));
+  }, []);
+  console.log(mode);
 
   return (
     <aside className={`sidebar ${show ? "show" : null}`}>
@@ -154,15 +158,15 @@ const SideNav = ({ show }) => {
               </span>
             </span>
           </Link>
-          <NavList mode = {mode} />
+          <NavList mode={mode} />
         </div>
       </nav>
     </aside>
   );
 };
 
-const Sidebar = ({mode}) => {
-  console.log ({mode});
+const Sidebar = ({ mode }) => {
+  console.log({ mode });
 
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
@@ -175,12 +179,17 @@ const Sidebar = ({mode}) => {
 
   return (
     <main className={show ? "space-toggle" : null}>
-      <Header show={show} setShow={setShow} logouthandler={logouthandler} />
+      <Header
+        show={show}
+        setShow={setShow}
+        logouthandler={logouthandler}
+        mode={mode}
+      />
 
-      <SideNav show={show} mode = {mode} />
+      <SideNav show={show} mode={mode} />
 
       <div className="master-wrap">
-        <Master mode = {mode} />
+        <Master mode={mode} />
       </div>
     </main>
   );

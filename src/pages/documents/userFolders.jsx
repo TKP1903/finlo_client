@@ -403,7 +403,9 @@ const UserFoldersPage = ({ mode }) => {
     <div className="document_container">
       <h3 className="page_heading">
         {" "}
-        {isAdmin ? client.firstName + " " + client.lastName : "Documents"}{" "}
+        {isAdmin
+          ? client.firstName + " " + client.lastName + "  Documents"
+          : "Documents"}{" "}
       </h3>
       <div className="documents_block">
         <div className="folder-options">
@@ -430,30 +432,28 @@ const UserFoldersPage = ({ mode }) => {
         </div>
         <div className="folder-buttons">
           <div className="folder-btn">
-            
-              <AddFolder
-                trigger={
-                  <button className="btn-primary btn-addFolder">
-                    <BsFillFolderFill className="icon" /> Add folder
-                  </button>
-                }
-                handleAddFolder={createFolder}
-                parentFolder={currentPath[currentPath.length - 1]}
-              />
-            
+            <AddFolder
+              trigger={
+                <button className="btn-primary btn-addFolder">
+                  <BsFillFolderFill className="icon" /> Add folder
+                </button>
+              }
+              handleAddFolder={createFolder}
+              parentFolder={currentPath[currentPath.length - 1]}
+            />
           </div>
           <div className="folder-btn">
             {/* Upload file button */}
-            
-              <Upload
-                trigger={
-                  <button className="btn-primary btn-upload">
-                    <BsFillCloudUploadFill className="icon" /> Upload
-                  </button>
-                }
-                handleUpload={uploadFile}
-                parentFolder={currentPath[currentPath.length - 1]}
-              />
+
+            <Upload
+              trigger={
+                <button className="btn-primary btn-upload">
+                  <BsFillCloudUploadFill className="icon" /> Upload
+                </button>
+              }
+              handleUpload={uploadFile}
+              parentFolder={currentPath[currentPath.length - 1]}
+            />
           </div>
         </div>
         <div className="folder_block">
@@ -482,10 +482,7 @@ const UserFoldersPage = ({ mode }) => {
             ))}
         </div>
       </div>
-      {isAdmin && (
-        <div className="clients-data">
-        </div>
-      )}
+      {isAdmin && <div className="clients-data"></div>}
     </div>
   );
 };
