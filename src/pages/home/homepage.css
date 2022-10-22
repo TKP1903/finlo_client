@@ -1,5 +1,5 @@
 .home-page-body {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .dashboard_block{
@@ -65,13 +65,13 @@
 }
 
 .gradientCard {
-    width: 100%;
+    width: 60%;
     height: 15vw;
     background: #fff;
     color: black;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    padding: 10px;
+    padding: 2px;
     border-radius: 25px;
     background: rgba( 255, 255, 255, 0.2 );
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.218);
@@ -80,9 +80,8 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     display: flex;
     align-items: center;
-
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
     flex-direction: column;
     position: relative;
 }

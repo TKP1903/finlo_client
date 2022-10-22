@@ -79,7 +79,7 @@ const HomePage = ({mode}) => {
         <div className="dashboard_block">
           <Link to="" className="gradientCard gradientBlue">
             <MdOutlineMiscellaneousServices
-              style={{ width: "80px", height: "100px", padding: "10px" }}
+              style={{ width: "90px", height: "100px", padding: "10px" }}
             />
             <span>Services We Offer</span>
           </Link>

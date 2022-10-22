@@ -11,7 +11,6 @@ import {
   BsUpload,
 } from "react-icons/bs";
 import {
-  RenameFile,
   ShowInfo,
   DeleteFile,
   Donwload,
@@ -21,7 +20,6 @@ import {
 const Menu = ({
   file,
   trigger,
-  handleRename,
   handleDelete,
   handleDownload,
 }) => {
@@ -38,10 +36,6 @@ const Menu = ({
           <FilePreview
             trigger={<div className="menu-item">Preview</div>}
             file={file}
-          />
-          <RenameFile
-            trigger={<div className="menu-item">Rename</div>}
-            handleRenameFile={(newName) => handleRename(file, newName)}
           />
           <DeleteFile
             trigger={<div className="menu-item">Delete</div>}
@@ -64,7 +58,6 @@ const emptyfunc = () => {};
  *
  * @param {function} handleOpen
  *
- * @param {function} handleRename
  * @param {function} handleDelete
  * @param {function} handleDownload
  * @param {function} handleSelect
@@ -73,7 +66,6 @@ export const File = ({
   file,
   // menu fucntions
   handlePreview = emptyfunc,
-  handleRename = emptyfunc,
   handleDelete = emptyfunc,
   handleDownload = emptyfunc,
 }) => {
@@ -87,7 +79,6 @@ export const File = ({
       <Menu
         file={file}
         trigger={<div class="three-dots"></div>}
-        handleRename={handleRename}
         handleDelete={handleDelete}
         handleDownload={handleDownload}
       />
