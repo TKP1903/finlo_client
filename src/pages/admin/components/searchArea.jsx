@@ -14,7 +14,8 @@ const makeClientDocsUrl = (client) => {
   // store the current client data in local storage
   localStorage.setItem("client", JSON.stringify(client));
   // navigate to the documents page
-  return "/documents?" + search;
+  const url = "/documents?" + search;
+  return url;
 };
 
 const makeClientsFromRes = (data) => {
@@ -216,9 +217,10 @@ const SearchArea = () => {
             client.status == "active" ? "client-active" : "client-inactive"
           }
         >
-          <Link to={makeClientDocsUrl(client)}>
-            <td className="client-firstName"> {client.firstName} </td>
-          </Link>
+          <td className="client-firstName" onClick = {()=> {
+            navigate(makeClientDocsUrl(client));
+          }}> {client.firstName} </td>
+        
           <td className="client-lastName"> {client.lastName} </td>
           <td className="client-email"> {client.email} </td>
           <td className="client-phone"> {client.phone} </td>

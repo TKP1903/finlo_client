@@ -451,6 +451,11 @@ td {
     text-align: center;
 }
 
+.searchResults .client-firstName {
+    background-color: var(--white-color);
+    cursor: pointer;
+}
+
 .client-phone , .client-city , .client-state , .client-active-status{
     text-align: center;
 }
