@@ -3,17 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 
-
 import { performSearch } from "../api_callers";
 
 import axios from "axios";
 
 const makeClientDocsUrl = (client) => {
-  const search = new URLSearchParams ();
+  const search = new URLSearchParams();
 
-  search.append ("user_id", client.id );
+  search.append("user_id", client.id);
   // store the current client data in local storage
-  localStorage.setItem ("client", JSON.stringify (client));
+  localStorage.setItem("client", JSON.stringify(client));
   // navigate to the documents page
   return "/documents?" + search;
 };
@@ -40,32 +39,34 @@ const makeClientsFromRes = (data) => {
    * }
    * {
    *  "id": user_id,
-   *  "firstName": user_name,
-   *  "lastName": "",
+   *  "firstName": First_name,
+   *  "lastName": Last_name,
    *  "email": email,
    *  "phone": phone,
    *  "state": state,
+   *  "city": city,
    *  "country": country,
-   *  staus: user_role === "client" ? "active" : "inactive" 
+   *  staus: user_role === "client" ? "active" : "inactive"
    * }
-   * 
+   *
    * }
    */
-  const clients = data.map (client => {
+
+  const clients = data.map((client) => {
     return {
       id: client.user_id,
-      firstName: client.user_name,
-      lastName: "",
+      firstName: client.first_name,
+      lastName: client.last_name,
       email: client.email,
       phone: client.phone,
       state: client.state,
+      city: client.city,
       // country: client.country,
-      status: client.user_role === "client" ? "active" : "inactive"
+      status: client.user_role === "client" ? "active" : "inactive",
     };
-  }
-  );
+  });
   return clients;
-}
+};
 
 const makeClientsFromResults = (results) => {
   return results.map((client) => {
@@ -101,14 +102,30 @@ const SearchArea = () => {
   // }, [searchText]);
 
   useEffect(() => {
+    const getSearchResults = async () => {
+      const results = await performSearch(searchText);
+      const newClients = makeClientsFromResults(results);
+      setClients(newClients);
+      setFilteredClients(newClients);
+    };
+    // getSearchResults();
+  }, [searchText]);
+
+  useEffect(() => {
     const getClients = async () => {
       try {
         const {
           data: { data },
         } = await axios.get("http://52.53.219.188:4000/admin/get-all-user");
 
+        // debugger;
+
+        // const newClients = data;
         const newClients = makeClientsFromRes(data);
-        debugger;
+        setClients(newClients);
+        setFilteredClients(newClients);
+
+        // const newClients = makeClientsFromRes(data);
         setClients(newClients);
         setFilteredClients(newClients);
       } catch (err) {
@@ -213,14 +230,16 @@ const SearchArea = () => {
             {client.status == "active" ? "Active" : "Inactive"}{" "}
           </td>
           <td className="action-btn">
-          <button className="table-options-button button-contained ">
-            <MdEdit style={{width:"20px"}}/>
-          </button>
-          <div className="action-btn-in">
-          <button className="table-options-button delete-btn">
-            <MdDelete style={{width:"25px"}}/>
-          </button>
-          </div>
+            <div className="action-btn-in">
+              <button className="table-options-button button-contained ">
+                <MdEdit style={{ width: "20px" }} />
+              </button>
+            </div>
+            <div className="action-btn-in">
+              <button className="table-options-button delete-btn">
+                <MdDelete style={{ width: "25px" }} />
+              </button>
+            </div>
           </td>
           {/* <td> {client.branchOffice} </td> */}
           {/* <td> {client.sales} </td>
@@ -305,10 +324,9 @@ const SearchArea = () => {
                 )}
               />
             </th>
-            <th><Filter
-                type="filter-status"
-                label="Action"
-              /></th>
+            <th>
+              <Filter type="filter-status" label="Action" />
+            </th>
             {/* <th> Sales </th>
               <th> Branch Office </th>
               <th> Employee </th> */}
@@ -370,7 +388,6 @@ const SearchArea = () => {
           {/* <button className="table-options-button add-btn">
             <MdAdd /> Add
           </button> */}
-          
         </div>
       </div>
     );
@@ -378,9 +395,7 @@ const SearchArea = () => {
   return (
     <div className="search-area">
       <h1> Clients </h1>
-
       <TableOptions />
-
       <ResultsTable className="searchResults" clients={clients} />
     </div>
   );

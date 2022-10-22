@@ -7,11 +7,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import("reactjs-popup/dist/index.css");
 import "./css/popups.css";
-
+import debounce from "../../../jsFunctions/debounce";
+import hasWord from "../../../jsFunctions/hasWord";
 
 const TestModal = ({ trigger, content, position }) => {
   import("reactjs-popup/dist/index.css");
-  
+
   return (
     <Popup
       trigger={<button className="button"> Open Modal </button>}
@@ -65,8 +66,39 @@ const TestModal = ({ trigger, content, position }) => {
   );
 };
 
+const notifSuccess = (
+  message,
+  config = {
+    position: "top-right",
+    autoClose: 6000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    progress: undefined,
+    theme: "light",
+  }
+) => {
+  return toast.success(message, config);
+};
+
+const notifFail = (
+  message,
+  config = {
+    position: "top-right",
+    autoClose: 6000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    progress: undefined,
+    theme: "light",
+  }
+) => {
+  return toast.error(message, config);
+};
+
 const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
   let newName;
+
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
@@ -78,10 +110,9 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
           <input
             type="text"
             placeholder="Enter new name"
-            onChange={(e) => {
+            onChange={debounce((e) => {
               newName = e.target.value;
-              console.log(newName);
-            }}
+            }, 100)}
           />
           <Popup
             trigger={<button className="btn-primary"> Add </button>}
@@ -93,7 +124,22 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
               <button
                 className="btn-primary"
                 onClick={async () => {
-                  await handleAddFolder(newName, parentFolder);
+                  const { res, isSuccess } = await handleAddFolder(
+                    newName,
+                    parentFolder
+                  );
+                  if (isSuccess) {
+                    notifSuccess("Folder Created Sucessfully!");
+                  } else {
+                    if (hasWord(res.data, "Duplicate")) {
+                      notifFail(
+                        "Folder name is already taken\n Please try a new name"
+                      );
+                    } else {
+                      notifFail("Cannot Create folder");
+                    }
+                    console.log(res);
+                  }
                   close();
                 }}
               >
@@ -161,7 +207,7 @@ const AddFile = ({ trigger, handleAddFile }) => {
 
 const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
   const Deletefoldernotify = () => {
-    toast.success("Folder Deleted Successfully!" , {
+    toast.success("Folder Deleted Successfully!", {
       position: "top-right",
       autoClose: 6000,
       hideProgressBar: false,
@@ -169,7 +215,7 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
       pauseOnHover: true,
       progress: undefined,
       theme: "light",
-      });
+    });
   };
 
   return (
@@ -197,14 +243,13 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
           <ToastContainer />
         </div>
       )}
-      
     </Popup>
   );
 };
 
 const DeleteFile = ({ trigger, handleDeleteFile }) => {
   const Deletefilenotify = () => {
-    toast.success("File Deleted Successfully!" , {
+    toast.success("File Deleted Successfully!", {
       position: "top-right",
       autoClose: 6000,
       hideProgressBar: false,
@@ -212,13 +257,13 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
       pauseOnHover: true,
       progress: undefined,
       theme: "light",
-      });
+    });
   };
-  
+
   const Deletefiles = async () => {
     const isSuccess = await handleDeleteFile();
     // TODO :: show a success/fail message
-  }
+  };
 
   return (
     <Popup trigger={trigger} modal nested>
@@ -230,11 +275,10 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
           <h2> Are you sure you want to delete this file? </h2>
           <button
             className="btn-primary"
-            onClick={ () =>{
+            onClick={() => {
               Deletefiles();
               Deletefilenotify();
-            }
-            }
+            }}
           >
             {" "}
             Yes{" "}
@@ -247,17 +291,12 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
         </div>
       )}
     </Popup>
-   
   );
 };
 
 const RenameFolder = ({ trigger, handleRenameFolder }) => {
   const Renamenotify = () => {
     toast.success("Folder Name Changed Successfully!");
-  };
-  
-  const Renamefolders = async () => { 
-    const isSuccess = await handleRenameFolder(newName)  !== false;
   };
 
   let newName;
@@ -272,10 +311,9 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
           <input
             type="text"
             placeholder="Enter new name"
-            onChange={(e) => {
+            onChange={debounce ((e) => {
               newName = e.target.value;
-              console.log(newName);
-            }}
+            })}
           />
           <Popup
             trigger={<button className="btn-primary"> Rename </button>}
@@ -283,13 +321,20 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
             position="bottom right"
           >
             <div className="prompt confirm-popup">
+              <div className="close-icon" onClick={close}>
+                <AiFillCloseCircle />
+              </div>
               <h2> Are you sure you want to rename this folder? </h2>
               <ToastContainer />
               <button
                 className="btn-primary"
-                onClick={ () => {
-                  Renamefolders();
-                  Renamenotify();
+                onClick={async () => {
+                  const isSuccess = !!(await handleRenameFolder(newName));
+                  if (isSuccess) {
+                    notifSuccess ("Folder created sucessfully");
+                  } else {
+                    notifFail ("Cannot use this name for the folder");
+                  }
                 }}
               >
                 {" "}
@@ -303,9 +348,7 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
           </Popup>
         </div>
       )}
-      
     </Popup>
-    
   );
 };
 
@@ -377,7 +420,10 @@ const ShowInfo = ({ trigger, info }) => {
               </div>
               <div className="info-item">
                 <span className="info-item-key"> Size: </span>
-                <span className="info-item-value"> {Math.round(info.size / 1021)} Kb </span>
+                <span className="info-item-value">
+                  {" "}
+                  {Math.round(info.size / 1021)} Kb{" "}
+                </span>
               </div>
               <div className="info-item">
                 <span className="info-item-key"> Created at: </span>
@@ -502,7 +548,7 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
             name="file"
             onChange={(e) => {
               file = e.target.files[0];
-              const {isValid, message} = fileValidation(file);
+              const { isValid, message } = fileValidation(file);
               if (!isValid) {
                 return;
               }
