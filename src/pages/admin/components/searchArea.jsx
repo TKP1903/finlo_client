@@ -15,7 +15,6 @@ const makeClientDocsUrl = (client) => {
   // store the current client data in local storage
   localStorage.setItem ("client", JSON.stringify (client));
   // navigate to the documents page
-  console.log ({docsUrl: search});
   return "/documents?" + search;
 };
 

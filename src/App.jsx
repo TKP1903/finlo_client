@@ -9,7 +9,6 @@ import GoogleAuth from "./pages/googleAuth";
 import { useState } from "react";
 
 function App() {
-  const mode = localStorage.user_role;
   return (
     <div>
       <Routes>
@@ -17,8 +16,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route 
           path="/:type" 
-          element={<Sidebar 
-            mode = { mode }
+          element={<Sidebar
           />} 
         />
       </Routes>

@@ -12,7 +12,7 @@ import Profile from "./profile/Profile";
 
 const Master = ({ mode }) => {
   const { type } = useParams();
-  console.log({ mode });
+  
   const navigate = useNavigate();
   mode = localStorage.user_role;
   return (
