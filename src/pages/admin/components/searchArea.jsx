@@ -40,11 +40,12 @@ const makeClientsFromRes = (data) => {
    * }
    * {
    *  "id": user_id,
-   *  "firstName": user_name,
-   *  "lastName": "",
+   *  "firstName": First_name,
+   *  "lastName": Last_name,
    *  "email": email,
    *  "phone": phone,
    *  "state": state,
+   *  "city": city,
    *  "country": country,
    *  staus: user_role === "client" ? "active" : "inactive" 
    * }
@@ -55,11 +56,12 @@ const makeClientsFromRes = (data) => {
   const clients = data.map (client => {
     return {
       id: client.user_id,
-      firstName: client.user_name,
-      lastName: "",
+      firstName: client.first_name,
+      lastName: client.last_name,
       email: client.email,
       phone: client.phone,
       state: client.state,
+      city: client.city,
       // country: client.country,
       status: client.user_role === "client" ? "active" : "inactive"
     };
@@ -98,7 +100,7 @@ const SearchArea = () => {
       setClients(newClients);
       setFilteredClients(newClients);
     };
-    getSearchResults();
+    // getSearchResults();
   }, [searchText]);
 
   useEffect (() => {
@@ -107,8 +109,10 @@ const SearchArea = () => {
       try {
         const {data: {data}} = await axios.get ("http://52.53.219.188:4000/admin/get-all-user");
         
+        // debugger;
+
+        // const newClients = data;
         const newClients = makeClientsFromRes (data);
-        debugger
         setClients (newClients);
         setFilteredClients (newClients);
 
@@ -117,7 +121,7 @@ const SearchArea = () => {
       }
     }
     
-    // getClients ();
+    getClients ();
   }, []);
 
   const resetFilters = () => {

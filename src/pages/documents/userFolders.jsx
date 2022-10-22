@@ -216,6 +216,9 @@ const UserFoldersPage = ({ mode }) => {
 
   const createFolder = async (folder_name, parent_folder_name) => {
     try {
+      if (parent_folder_name !== "") {
+        parent_folder_name = "root";
+      }
       const response = await axios.post(`${API_URL}folder/create-folder`, {
         user_id,
         folderName: folder_name,
@@ -231,8 +234,16 @@ const UserFoldersPage = ({ mode }) => {
           };
         });
       }
-    } catch (error) {
-      console.log(error);
+      return {
+        isSuccess: true,
+        res: response
+      };
+    } catch (err) {
+      console.log(err);
+      return {
+        isSuccess: false,
+        res: err.response
+      };
     }
   };
 
@@ -254,9 +265,9 @@ const UserFoldersPage = ({ mode }) => {
             folders: newFolders,
           };
         });
-        return true;
+        return response;
       } else {
-        return false;
+        return response;
       }
     } catch (error) {
       console.log(error);
@@ -267,11 +278,15 @@ const UserFoldersPage = ({ mode }) => {
   const renameFolder = async (folder, newName) => {
     const folderId = folder.id;
     try {
-      const response = await axios.put(`${API_URL}folder/update-folder-name`, {
-        folderNewName: newName,
-        folderName: folder.name,
-        user_id,
-      });
+      const response = await axios.put(
+        `${API_URL}folder/update-folder-name`,
+        {
+          folderNewName: newName,
+          folderName: folder.name,
+          user_id,
+          client_folders_id: folder.id,
+        }
+      );
       if (response.status === 200) {
         // update the file structure
         setFileStructure((curr) => {
@@ -294,6 +309,7 @@ const UserFoldersPage = ({ mode }) => {
         return false;
       }
     } catch (err) {
+      console.log (err);
       return false;
     }
   };
@@ -348,11 +364,11 @@ const UserFoldersPage = ({ mode }) => {
             files: newFiles,
           };
         });
-        return true;
       }
-      return false;
+      return response;
     } catch (err) {
-      return false;
+      console.log (err);
+      return err.response;
     }
   };
 

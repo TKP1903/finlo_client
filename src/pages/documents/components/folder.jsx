@@ -69,10 +69,10 @@ const Menu = ({
             info={folder}
             trigger={<div className="menu-item">Info</div>}
           />
-          <RenameFolder
+          {/* <RenameFolder
             trigger={<div className="menu-item">Rename</div>}
             handleRenameFolder={(newName)=> handleRename(folder, newName)}
-          />
+          /> */}
           <DeleteFolder
             trigger={<div className="menu-item">Delete</div>}
             handleDeleteFolder={async () => {
