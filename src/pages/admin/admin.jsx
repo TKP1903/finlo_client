@@ -9,11 +9,21 @@ import SearchArea from "./components/searchArea";
 const Admin = ({mode}) => {
   const navigate = useNavigate ();
 
-  if (localStorage.user_role !== "admin") {
+  const [ userRole , setUserRole ] = useState (localStorage.getItem ("user_role"));
+
+  
+  useEffect(
+    () => {
+      setUserRole (localStorage.getItem ("user_role"));
+    }, []
+  );
+  
+  import ("./admin.css");
+  
+  if (userRole !== "admin") {
     return <div>Not authorized</div>;
   }
-
-  import ("./admin.css");
+  
   return (
     <div className="admin-page">
       <div className="admin-page-header">
