@@ -448,6 +448,11 @@ td {
 .searchResults .client-email {
     color: var(--first-color);
     border-color: inherit;
+    text-align: center;
+}
+
+.client-phone , .client-city , .client-state , .client-active-status{
+    text-align: center;
 }
 
 .searchResults tr > td{
@@ -472,12 +477,11 @@ td.client-active-status {
     font-size: 1rem;
     color: rgba(31, 38, 135, 0.718);
 }
-.action-btn{
+.action-btn {
     display: flex;
     flex-direction: row;
 }
 .action-btn-in{
     padding: 1%;
     padding-left: 15px;
-
 }

@@ -52,6 +52,7 @@ const makeClientsFromRes = (data) => {
    * 
    * }
    */
+
   const clients = data.map (client => {
     return {
       id: client.user_id,
@@ -214,9 +215,11 @@ const SearchArea = () => {
             {client.status == "active" ? "Active" : "Inactive"}{" "}
           </td>
           <td className="action-btn">
+          <div className="action-btn-in">
           <button className="table-options-button button-contained ">
             <MdEdit style={{width:"20px"}}/>
           </button>
+          </div>
           <div className="action-btn-in">
           <button className="table-options-button delete-btn">
             <MdDelete style={{width:"25px"}}/>
@@ -379,9 +382,7 @@ const SearchArea = () => {
   return (
     <div className="search-area">
       <h1> Clients </h1>
-
       <TableOptions />
-
       <ResultsTable className="searchResults" clients={clients} />
     </div>
   );
