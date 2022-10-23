@@ -136,9 +136,7 @@ const UserFoldersPage = ({ mode }) => {
 
   const [currentPath, setCurrentPath] = useState([""]);
 
-  const user_id = isAdmin
-    ? client.id
-    : localStorage.getItem("finlo_user_id");
+  const user_id = isAdmin ? client.id : localStorage.getItem("finlo_user_id");
   console.log({ user_id });
 
   const getUserFolders = async (folder_name) => {
@@ -155,20 +153,18 @@ const UserFoldersPage = ({ mode }) => {
       );
       // debugger;
       if (!data || !data.length) {
-        return new Array ();
+        return new Array();
       }
       const folders = makeFoldersFromRes(data) || [];
-      folders.sort (
-        (a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
+      folders.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
         }
-      );
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
       return folders;
     } catch (error) {
       console.log({ error });
@@ -187,15 +183,13 @@ const UserFoldersPage = ({ mode }) => {
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
       if (!data) {
-        return new Array ();
+        return new Array();
       }
       console.log({ data });
       const files = makeFilesFromRes(data.files) || [];
-      files.sort (
-        (a, b) => {
-          return a.name > b.name ? 1 : -1;
-        }
-      );
+      files.sort((a, b) => {
+        return a.name > b.name ? 1 : -1;
+      });
       return files || [];
     } catch (error) {
       console.log(error);
@@ -204,14 +198,12 @@ const UserFoldersPage = ({ mode }) => {
   };
 
   const getFilesAndFolders = async (folder_name) => {
-    
     if (folder_name === "") {
       folder_name = "root";
     }
     const folders = await getUserFolders(folder_name);
     const files = await getUserFiles(folder_name);
     const filesNfolders = { folders, files };
-    
 
     return filesNfolders;
   };
@@ -449,21 +441,22 @@ const UserFoldersPage = ({ mode }) => {
           <div className="folder-options-item breadcrumbs">
             {/* show the current path as breadcrumbs */}
             {currentPath.map((path, index) => (
-              <span
-                key={index}
-                onClick={(e) => {
-                  // pop the path upto the index
-                  setCurrentPath((curr) => {
-                    return curr.slice(0, index + 1);
-                  });
-                }}
-              >
-                {index === 0 && <span> HOME </span>}
-                <span>
-                  {path}
-                  {" / "}
+              <>
+                <span
+                  key={index}
+                  className="breadcrumb-item"
+                  onClick={(e) => {
+                    // pop the path upto the index
+                    setCurrentPath((curr) => {
+                      return curr.slice(0, index + 1);
+                    });
+                  }}
+                >
+                  {index === 0 && <span> HOME </span>}
+                  <span>{path}</span>
                 </span>
-              </span>
+                <span>{" / "}</span>
+              </>
             ))}
           </div>
         </div>

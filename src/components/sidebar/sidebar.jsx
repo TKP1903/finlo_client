@@ -102,7 +102,9 @@ const NavList = ({ mode }) => {
             activeClassName="active"
             key={index}
           >
-            {item.icon}
+            <span className="nav-link-icon">
+              {item.icon}
+            </span>
             <span className="nav-link-name">{item.name}</span>
           </NavLink>
         ))}
@@ -154,7 +156,7 @@ const SideNav = ({ show }) => {
             <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F</i>
             <span className="nav-logo-name">
               <span className="logo-img">
-                <img src={logo} alt="" style={{ width: "100px" }} />
+                  <img src={logo} alt="" style={{ width: "100px", objectFit: "cover"}} />
               </span>
             </span>
           </Link>

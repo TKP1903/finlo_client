@@ -52,9 +52,15 @@
   box-sizing: border-box;
 }
 
-.folder:hover,
-.folder:focus {
-  filter: brightness(0.8);
+.folder:hover {
+  filter: brightness(0.5);
+}
+
+.folder:active,
+.folder:focus,
+.folder:visited {
+  background: black;
+  color: white;
 }
 
 .folder_name {
@@ -62,4 +68,5 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
+  font-size: 1.2rem;
 }

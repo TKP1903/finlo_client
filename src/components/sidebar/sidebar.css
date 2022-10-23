@@ -79,8 +79,7 @@ main {
 }
 
 .nav-link-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .nav-logo {
@@ -125,6 +124,9 @@ main {
   padding-block: 1rem;
   margin-block: 0.1rem;
   cursor: pointer;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: flex-start;
 }
 
 .nav-link:hover {

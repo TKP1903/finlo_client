@@ -32,12 +32,18 @@
 }
 
 .close-icon {
-    cursor: pointer;
+    cursor: pointer!important;
     position: absolute;
     right: 0px;
     top: 0px;
     transform: translate(50%, -50%);
     font-size: 2rem;
+    color: var(--first-color);
+    background-color: var(--white-color);
+    border-radius: 1000rem;
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 10;
 }
 
 .popup-content {
