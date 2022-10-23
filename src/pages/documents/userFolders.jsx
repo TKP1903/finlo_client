@@ -157,10 +157,19 @@ const UserFoldersPage = ({ mode }) => {
       if (!data || !data.length) {
         return new Array ();
       }
-      return makeFoldersFromRes(data) || [];
-      // if (doSet) {
-      // } else
-      //   return response?.data?.data;
+      const folders = makeFoldersFromRes(data) || [];
+      folders.sort (
+        (a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        }
+      );
+      return folders;
     } catch (error) {
       console.log({ error });
       return [];
@@ -182,6 +191,11 @@ const UserFoldersPage = ({ mode }) => {
       }
       console.log({ data });
       const files = makeFilesFromRes(data.files) || [];
+      files.sort (
+        (a, b) => {
+          return a.name > b.name ? 1 : -1;
+        }
+      );
       return files || [];
     } catch (error) {
       console.log(error);
@@ -226,7 +240,7 @@ const UserFoldersPage = ({ mode }) => {
         //   },
         // }
       );
-      
+
       if (response.status === 200) {
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure((prev) => {
