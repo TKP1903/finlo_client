@@ -226,7 +226,7 @@ const UserFoldersPage = ({ mode }) => {
         //   },
         // }
       );
-      debugger;
+      
       if (response.status === 200) {
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure((prev) => {

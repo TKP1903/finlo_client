@@ -78,7 +78,12 @@ const notifSuccess = (
     theme: "light",
   }
 ) => {
-  return toast.success(message, config);
+  setTimeout (
+    () => {
+      toast.success(message, config);
+      toast.configure();
+    }, 0
+  );
 };
 
 const notifFail = (
@@ -93,7 +98,12 @@ const notifFail = (
     theme: "light",
   }
 ) => {
-  return toast.error(message, config);
+  setTimeout (
+    () => {
+      toast.error(message, config);
+      toast.configure();
+    }, 0
+  );
 };
 
 const ConfirmAction = ({
@@ -146,7 +156,6 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
             modal
             position="bottom right"
           >
-
             <div className="prompt confirm-popup">
               <h2> Are you sure you want to add this folder? </h2>
               <button
@@ -362,7 +371,7 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
           <input
             type="text"
             placeholder="Enter new name"
-            onChange={debounce ((e) => {
+            onChange={debounce((e) => {
               newName = e.target.value;
             })}
           />
@@ -382,9 +391,9 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
                 onClick={async () => {
                   const isSuccess = !!(await handleRenameFolder(newName));
                   if (isSuccess) {
-                    notifSuccess ("Folder created sucessfully");
+                    notifSuccess("Folder created sucessfully");
                   } else {
-                    notifFail ("Cannot use this name for the folder");
+                    notifFail("Cannot use this name for the folder");
                   }
                 }}
               >
@@ -553,33 +562,93 @@ const FilePreview = ({ trigger, file }) => {
 const fileValidation = (file) => {
   /**
    * File size limit:15MB
-   * File Types: .doc,docx,pdf,png,jpeg,jpg,webpg,.xl,.csv
+   * Allowed file types :-
+   * Images
+   * .jpg
+   * .jpeg
+   * .png
+   * .gif – must be inserted as Full Size image for animated gif to play.
+   *
+   *  Documents
+   * .pdf
+   * .doc, .docx
+   * .ppt, .pptx
+   * .xls, .xlsx
+   * .txt
+   * .rtf
+   * .csv
+   * 
+   * Compressed
+   * .zip
+   * .rar
+   * .7z
+   * 
+   * Audio
+   * .mp3
+   * .m4a
+   * .wav
+   * 
+   * Video
+   * .mp4, .m4v
+   * .mpg
+   * .wmv
+   * .mov
+   * .avi
+   * .swf
+   * 
+   * Other
+   * .ins, .isf, .te, .xbk, .ist, .kmz, .kes, .flp, .wxr, .xml, .fjsw, .zip, .epub
    */
-  // const validTypes = [
-  //   "application/msword",
-  //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  //   "application/pdf",
-  //   "image/png",
-  //   "image/jpeg",
-  //   "image/jpg",
-  //   "image/webp",
-  //   "application/vnd.ms-excel",
-  //   "text/csv",
-  // ];
-  // set of valid file types
-  const validTypes = new Set([
-    "application/msword",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    "application/pdf",
-    "image/png",
+
+  // set of allowed types
+  const allowedTypes = new Set([
+    // images
     "image/jpeg",
     "image/jpg",
-    "image/webp",
+    "image/png",
+    "image/gif",
+    // documents
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.ms-powerpoint",
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "application/vnd.ms-excel",
-    "text/csv",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "text/plain",
+    // compressed
+    "application/zip",
+    "application/x-rar-compressed",
+    "application/x-7z-compressed",
+
+    // audio
+    "audio/mpeg",
+    "audio/mp4",
+    "audio/wav",
+    // video
+    "video/mp4",
+    "video/mpeg",
+    "video/x-ms-wmv",
+    "video/quicktime",
+    "video/x-msvideo",
+    // other
+    "application/x-shockwave-flash",
+    "application/ins",
+    "application/isf",
+    "application/te",
+    "application/xbk",
+    "application/ist",
+    "application/kmz",
+    "application/kes",
+    "application/flp",
+    "application/wxr",
+    "application/xml",
+    "application/fjsw",
+    "application/zip",
+    "application/epub",
   ]);
-  console.log (file.type);
-  if (!validTypes.has (file.type)) {
+
+  if (!allowedTypes.has(file.type)) {
     return {
       isValid: false,
       message: "File type not supported",
@@ -614,8 +683,14 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
               file = e.target.files[0];
               const { isValid, message } = fileValidation(file);
               if (!isValid) {
-                alert (message);
-                close ();
+                setTimeout (
+                () => {
+                  notifFail (
+                    message + ".\n" +
+                    `${file.type || "This"} is not a supported type` 
+                  );
+                }, 0);
+                close();
               }
             }}
           />
@@ -625,15 +700,20 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
             position="bottom right"
           >
             <div className="prompt confirm-popup">
+              <div className="close-icon" onClick={close}>
+                <AiFillCloseCircle />
+              </div>
               <h2> Are you sure you want to upload this file? </h2>
               <button
                 className="btn-primary"
                 onClick={async () => {
                   const isSuccess = await handleUpload(file, parentFolder);
                   if (!isSuccess) {
-                    alert ("File already exists");
+                    notifFail("File already exists");
                   }
-
+                  else {
+                    notifSuccess("File uploaded successfully");
+                  }
                   close();
                 }}
               >
