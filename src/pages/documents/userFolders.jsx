@@ -177,7 +177,7 @@ const UserFoldersPage = ({ mode }) => {
       } = await axios.get(
         `${API_URL}file/get-user-docs/${user_id}/${folder_name}`
       );
-      if (!data || !data.length) {
+      if (!data) {
         return new Array ();
       }
       console.log({ data });
@@ -226,14 +226,17 @@ const UserFoldersPage = ({ mode }) => {
         //   },
         // }
       );
+      debugger;
       if (response.status === 200) {
         const files = await getUserFiles(currentPath[currentPath.length - 1]);
         setFileStructure((prev) => {
           return { ...prev, files };
         });
       }
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   };
 

@@ -555,7 +555,19 @@ const fileValidation = (file) => {
    * File size limit:15MB
    * File Types: .doc,docx,pdf,png,jpeg,jpg,webpg,.xl,.csv
    */
-  const validTypes = [
+  // const validTypes = [
+  //   "application/msword",
+  //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  //   "application/pdf",
+  //   "image/png",
+  //   "image/jpeg",
+  //   "image/jpg",
+  //   "image/webp",
+  //   "application/vnd.ms-excel",
+  //   "text/csv",
+  // ];
+  // set of valid file types
+  const validTypes = new Set([
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "application/pdf",
@@ -565,8 +577,9 @@ const fileValidation = (file) => {
     "image/webp",
     "application/vnd.ms-excel",
     "text/csv",
-  ];
-  if (validTypes.indexOf(file.type) === -1) {
+  ]);
+  console.log (file.type);
+  if (!validTypes.has (file.type)) {
     return {
       isValid: false,
       message: "File type not supported",
@@ -601,7 +614,8 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
               file = e.target.files[0];
               const { isValid, message } = fileValidation(file);
               if (!isValid) {
-                return;
+                alert (message);
+                close ();
               }
             }}
           />
@@ -615,7 +629,11 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
               <button
                 className="btn-primary"
                 onClick={async () => {
-                  await handleUpload(file, parentFolder);
+                  const isSuccess = await handleUpload(file, parentFolder);
+                  if (!isSuccess) {
+                    alert ("File already exists");
+                  }
+
                   close();
                 }}
               >
