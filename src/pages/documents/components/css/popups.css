@@ -39,11 +39,23 @@
     transform: translate(50%, -50%);
     font-size: 2rem;
     color: var(--first-color);
-    background-color: var(--white-color);
+    text-shadow: 1px 1px 2px black;
     border-radius: 1000rem;
     display: flex;
     flex: 0 0 auto;
     z-index: 10;
+}
+.close-icon::before {
+    /* white background behind the icon */
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 50%;
+    height: 64%;
+    border-radius: 1000rem;
+    background-color: white;
+    z-index: -1;
 }
 
 .popup-content {
@@ -52,5 +64,13 @@
 
     background-color: rgb(255, 255, 255);
     box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.092);
+    gap: 10px;
+}
+
+.prompt > .btn-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
 }

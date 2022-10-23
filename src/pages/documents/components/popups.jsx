@@ -78,12 +78,10 @@ const notifSuccess = (
     theme: "light",
   }
 ) => {
-  setTimeout (
-    () => {
-      toast.success(message, config);
-      toast.configure();
-    }, 0
-  );
+  setTimeout(() => {
+    toast.success(message, config);
+    toast.configure();
+  }, 0);
 };
 
 const notifFail = (
@@ -98,37 +96,41 @@ const notifFail = (
     theme: "light",
   }
 ) => {
-  setTimeout (
-    () => {
-      toast.error(message, config);
-      toast.configure();
-    }, 0
-  );
+  setTimeout(() => {
+    toast.error(message, config);
+    toast.configure();
+  }, 0);
 };
 
 const ConfirmAction = ({
   trigger,
-  close,
+  close = null,
   onYes,
   onNo = null,
   message = "Are you sure?",
 }) => {
-  if (onNo === null) {
-    onNo = close;
-  }
   return (
     <Popup trigger={trigger} modal nested position="bottom right">
-      <div className="prompt confirm-popup">
-        <h2> {message} </h2>
-        <button className="btn-primary" onClick={onYes}>
-          {" "}
-          Yes{" "}
-        </button>
-        <button className="btn-primary" onClick={onNo}>
-          {" "}
-          No{" "}
-        </button>
-      </div>
+      {(close2) => {
+        return (
+          <div className="prompt confirm-popup">
+            <div className="close-icon" onClick={close2}>
+              <AiFillCloseCircle />
+            </div>
+            <h2> {message} </h2>
+            <div className="btn-group">
+              <button className="btn-primary" onClick={onYes}>
+                {" "}
+                Yes{" "}
+              </button>
+              <button className="btn-primary" onClick={onNo || close2}>
+                {" "}
+                No{" "}
+              </button>
+            </div>
+          </div>
+        );
+      }}
     </Popup>
   );
 };
@@ -151,114 +153,31 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
               newName = e.target.value;
             }, 100)}
           />
-          <Popup
+          <ConfirmAction
             trigger={<button className="btn-primary"> Add </button>}
-            modal
-            position="bottom right"
-          >
-            <div className="prompt confirm-popup">
-              <h2> Are you sure you want to add this folder? </h2>
-              <button
-                className="btn-primary"
-                onClick={async () => {
-                  const { res, isSuccess } = await handleAddFolder(
-                    newName,
-                    parentFolder
+            message="Are you sure?"
+            onYes={async () => {
+              const { res, isSuccess } = await handleAddFolder(
+                newName,
+                parentFolder
+              );
+              if (isSuccess) {
+                notifSuccess("Folder Created Sucessfully!");
+              } else {
+                if (hasWord(res.data, "Duplicate")) {
+                  notifFail(
+                    "Folder name is already taken\n Please try a new name"
                   );
-                  if (isSuccess) {
-                    notifSuccess("Folder Created Sucessfully!");
-                  } else {
-                    if (hasWord(res.data, "Duplicate")) {
-                      notifFail(
-                        "Folder name is already taken\n Please try a new name"
-                      );
-                    } else {
-                      notifFail("Cannot Create folder");
-                    }
-                    console.log(res);
-                  }
-                  close();
-                }}
-              >
-                {" "}
-                Yes{" "}
-              </button>
-              <button className="btn-primary" onClick={close}>
-                {" "}
-                No{" "}
-              </button>
-            </div>
-            {/* <ConfirmAction
-              message="Are you sure you want to add this folder?"
-              onYes={async () => {
-                const { res, isSuccess } = await handleAddFolder(
-                  newName,
-                  parentFolder
-                );
-                if (isSuccess) {
-                  notifSuccess("Folder Created Sucessfully!");
                 } else {
-                  if (hasWord(res.data, "Duplicate")) {
-                    notifFail(
-                      "Folder name is already taken\n Please try a new name"
-                    );
-                  } else {
-                    notifFail("Cannot Create folder");
-                  }
-                  console.log(res);
+                  notifFail("Cannot Create folder");
                 }
-                close();
-              }}
-              onNo={close}
-            /> */}
-          </Popup>
-        </div>
-      )}
-    </Popup>
-  );
-};
-
-const AddFile = ({ trigger, handleAddFile }) => {
-  let newName;
-  return (
-    <Popup trigger={trigger} modal nested>
-      {(close) => (
-        <div className="prompt-input">
-          <div className="close-icon" onClick={close}>
-            <AiFillCloseCircle />
-          </div>
-          <h2> Add a new File </h2>
-          <input
-            type="text"
-            placeholder="Enter new name"
-            onChange={(e) => {
-              newName = e.target.value;
-              console.log(newName);
+                console.log(res);
+              }
+              close();
             }}
+            onNo={close}
+            close={close}
           />
-          <Popup
-            trigger={<button className="btn-primary"> Add </button>}
-            modal
-            position="bottom right"
-          >
-            <div className="prompt confirm-popup">
-              <h2> Are you sure you want to add this file? </h2>
-              <button
-                className="btn-primary"
-                onClick={async () => {
-                  await handleAddFile(newName);
-                  close();
-                }}
-              >
-                {" "}
-                Yes{" "}
-              </button>
-              <button className="btn-primary" onClick={close}>
-                {" "}
-                No{" "}
-              </button>
-            </div>
-          </Popup>
         </div>
       )}
     </Popup>
@@ -266,92 +185,91 @@ const AddFile = ({ trigger, handleAddFile }) => {
 };
 
 const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
-  const Deletefoldernotify = () => {
-    toast.success("Folder Deleted Successfully!", {
-      position: "top-right",
-      autoClose: 6000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
-
   return (
-    <Popup trigger={trigger} modal nested>
-      {(close) => (
-        <div className="prompt confirm-popup">
-          <div className="close-icon" onClick={close}>
-            <AiFillCloseCircle />
-          </div>
-          <h2> Are you sure you want to delete this folder? </h2>
-          <button
-            className="btn-primary"
-            onClick={() => {
-              Deletefoldernotify();
-              handleDeleteFolder();
-            }}
-          >
-            {" "}
-            Yes{" "}
-          </button>
-          <button className="btn-primary" onClick={close}>
-            {" "}
-            No{" "}
-          </button>
-          <ToastContainer />
-        </div>
-      )}
-    </Popup>
+    <ConfirmAction
+      trigger={trigger}
+      onYes={async () => {
+        const isSuccess = !!await handleDeleteFolder();
+        notifSuccess("Folder Deleted Sucessfully!");
+        // if (isSuccess) {
+        //   notifSuccess("Folder Deleted Sucessfully!");
+        // } else {
+        //   notifFail("Cannot Delete folder, Check you internet!");
+        // }
+      }}
+    />
   );
+  // return (
+  //   <Popup trigger={trigger} modal nested>
+  //     {(close) => (
+  //       <div className="prompt confirm-popup">
+  //         <div className="close-icon" onClick={close}>
+  //           <AiFillCloseCircle />
+  //         </div>
+  //         <h2> Are you sure you want to delete this folder? </h2>
+  //         <button
+  //           className="btn-primary"
+  //           onClick={() => {
+  //             Deletefoldernotify();
+  //             handleDeleteFolder();
+  //           }}
+  //         >
+  //           {" "}
+  //           Yes{" "}
+  //         </button>
+  //         <button className="btn-primary" onClick={close}>
+  //           {" "}
+  //           No{" "}
+  //         </button>
+  //         <ToastContainer />
+  //       </div>
+  //     )}
+  //   </Popup>
+  // );
 };
 
 const DeleteFile = ({ trigger, handleDeleteFile }) => {
-  const Deletefilenotify = () => {
-    toast.success("File Deleted Successfully!", {
-      position: "top-right",
-      autoClose: 6000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
-
-  const Deletefiles = async () => {
-    const isSuccess = await handleDeleteFile();
-    // TODO :: show a success/fail message
-  };
-
   return (
-    <Popup trigger={trigger} modal nested>
-      {(close) => (
-        <div className="prompt confirm-popup">
-          <div className="close-icon" onClick={close}>
-            <AiFillCloseCircle />
-          </div>
-          <h2> Are you sure you want to delete this file? </h2>
-          <button
-            className="btn-primary"
-            onClick={() => {
-              Deletefiles();
-              Deletefilenotify();
-            }}
-          >
-            {" "}
-            Yes{" "}
-          </button>
-          <button className="btn-primary" onClick={close}>
-            {" "}
-            No{" "}
-          </button>
-          <ToastContainer />
-        </div>
-      )}
-    </Popup>
+    <ConfirmAction
+      trigger={trigger}
+      onYes={async () => {
+        const isSuccess = await handleDeleteFile();
+        if (isSuccess) {
+          notifSuccess("File Deleted Sucessfully!");
+        } else {
+          notifFail("Cannot Delete File, Check you internet!");
+        }
+      }}
+    />
   );
+
+  // return (
+  //   <Popup trigger={trigger} modal nested>
+  //     {(close) => (
+  //       <div className="prompt confirm-popup">
+  //         <div className="close-icon" onClick={close}>
+  //           <AiFillCloseCircle />
+  //         </div>
+  //         <h2> Are you sure you want to delete this file? </h2>
+  //         <button
+  //           className="btn-primary"
+  //           onClick={() => {
+  //             Deletefiles();
+  //             Deletefilenotify();
+  //           }}
+  //         >
+  //           {" "}
+  //           Yes{" "}
+  //         </button>
+  //         <button className="btn-primary" onClick={close}>
+  //           {" "}
+  //           No{" "}
+  //         </button>
+  //         <ToastContainer />
+  //       </div>
+  //     )}
+  //   </Popup>
+  // );
 };
 
 const RenameFolder = ({ trigger, handleRenameFolder }) => {
@@ -375,6 +293,28 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
               newName = e.target.value;
             })}
           />
+          <ConfirmAction
+            trigger={<button className="btn-primary"> Rename </button>}
+            message="Are you sure?"
+            onYes={async () => {
+              const { res, isSuccess } = await handleRenameFolder(newName);
+              if (isSuccess) {
+                notifSuccess("Folder Renamed Sucessfully!");
+              } else {
+                if (hasWord(res.data, "Duplicate")) {
+                  notifFail(
+                    "Folder name is already taken\n Please try a new name"
+                  );
+                } else {
+                  notifFail("Cannot Rename folder");
+                }
+                console.log(res);
+              }
+              close();
+            }}
+            onNo={close}
+          />
+          {/*           
           <Popup
             trigger={<button className="btn-primary"> Rename </button>}
             modal
@@ -405,7 +345,7 @@ const RenameFolder = ({ trigger, handleRenameFolder }) => {
                 No{" "}
               </button>
             </div>
-          </Popup>
+          </Popup> */}
         </div>
       )}
     </Popup>
@@ -577,17 +517,17 @@ const fileValidation = (file) => {
    * .txt
    * .rtf
    * .csv
-   * 
+   *
    * Compressed
    * .zip
    * .rar
    * .7z
-   * 
+   *
    * Audio
    * .mp3
    * .m4a
    * .wav
-   * 
+   *
    * Video
    * .mp4, .m4v
    * .mpg
@@ -595,7 +535,7 @@ const fileValidation = (file) => {
    * .mov
    * .avi
    * .swf
-   * 
+   *
    * Other
    * .ins, .isf, .te, .xbk, .ist, .kmz, .kes, .flp, .wxr, .xml, .fjsw, .zip, .epub
    */
@@ -683,49 +623,31 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
               file = e.target.files[0];
               const { isValid, message } = fileValidation(file);
               if (!isValid) {
-                setTimeout (
-                () => {
-                  notifFail (
-                    message + ".\n" +
-                    `${file.type || "This"} is not a supported type` 
+                setTimeout(() => {
+                  notifFail(
+                    message +
+                      ".\n" +
+                      `${file.type || "This"} is not a supported type`
                   );
                 }, 0);
                 close();
               }
             }}
           />
-          <Popup
+          <ConfirmAction
             trigger={<button className="btn-primary"> Upload </button>}
-            modal
-            position="bottom right"
-          >
-            <div className="prompt confirm-popup">
-              <div className="close-icon" onClick={close}>
-                <AiFillCloseCircle />
-              </div>
-              <h2> Are you sure you want to upload this file? </h2>
-              <button
-                className="btn-primary"
-                onClick={async () => {
-                  const isSuccess = await handleUpload(file, parentFolder);
-                  if (!isSuccess) {
-                    notifFail("File already exists");
-                  }
-                  else {
-                    notifSuccess("File uploaded successfully");
-                  }
-                  close();
-                }}
-              >
-                {" "}
-                Yes{" "}
-              </button>
-              <button className="btn-primary" onClick={close}>
-                {" "}
-                No{" "}
-              </button>
-            </div>
-          </Popup>
+            onYes={async () => {
+              const isSuccess = await handleUpload(file, parentFolder);
+              if (!isSuccess) {
+                notifFail("File already exists");
+              } else {
+                notifSuccess("File uploaded successfully");
+              }
+              close();
+            }}
+            onNo={close}
+            message="Are you sure you want to upload this file?"
+          />
         </div>
       )}
     </Popup>
@@ -749,7 +671,22 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
               name = e.target.value;
             }}
           />
-          <Popup
+          <ConfirmAction
+            trigger={<button className="btn-primary"> Create </button>}
+            onYes={async () => {
+              const isSuccess = await handleCreateFolder(name);
+              if (!isSuccess) {
+                notifFail("Folder already exists");
+              } else {
+                notifSuccess("Folder created successfully");
+              }
+              close();
+            }}
+            onNo={close}
+            message="Are you sure?"
+          />
+            
+          {/* <Popup
             trigger={<button className="btn-primary"> Create </button>}
             modal
             position="bottom right"
@@ -771,7 +708,7 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
                 No{" "}
               </button>
             </div>
-          </Popup>
+          </Popup> */}
         </div>
       )}
     </Popup>
@@ -781,7 +718,6 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
 export {
   TestModal,
   AddFolder,
-  AddFile,
   DeleteFolder,
   DeleteFile,
   RenameFolder,
