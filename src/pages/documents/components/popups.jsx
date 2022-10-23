@@ -233,7 +233,7 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
     <ConfirmAction
       trigger={trigger}
       onYes={async () => {
-        const isSuccess = await handleDeleteFile();
+        const isSuccess = !!await handleDeleteFile();
         if (isSuccess) {
           notifSuccess("File Deleted Sucessfully!");
         } else {

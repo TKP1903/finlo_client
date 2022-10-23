@@ -297,10 +297,8 @@ const UserFoldersPage = ({ mode }) => {
             folders: newFolders,
           };
         });
-        return response;
-      } else {
-        return response;
-      }
+      } 
+      return true;
     } catch (error) {
       console.log(error);
       return false;
@@ -394,10 +392,10 @@ const UserFoldersPage = ({ mode }) => {
           };
         });
       }
-      return response;
+      return true;
     } catch (err) {
       console.log(err);
-      return err.response;
+      return false;
     }
   };
 
