@@ -10,62 +10,6 @@ import "./css/popups.css";
 import debounce from "../../../jsFunctions/debounce";
 import hasWord from "../../../jsFunctions/hasWord";
 
-const TestModal = ({ trigger, content, position }) => {
-  import("reactjs-popup/dist/index.css");
-
-  return (
-    <Popup
-      trigger={<button className="button"> Open Modal </button>}
-      modal
-      nested
-    >
-      {(close) => (
-        <div className="modal">
-          <button className="close" onClick={close}>
-            &times;
-          </button>
-          <div className="header"> Modal Title </div>
-          <div className="content">
-            {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a
-            nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet
-            quibusdam voluptates delectus doloremque, explicabo tempore dicta
-            adipisci fugit amet dignissimos?
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Consequatur sit commodi beatae optio voluptatum sed eius cumque,
-            delectus saepe repudiandae explicabo nemo nam libero ad, doloribus,
-            voluptas rem alias. Vitae?
-          </div>
-          <div className="actions">
-            <Popup
-              trigger={<button className="button"> Trigger </button>}
-              position="top center"
-              nested
-            >
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-                magni omnis delectus nemo, maxime molestiae dolorem numquam
-                mollitia, voluptate ea, accusamus excepturi deleniti ratione
-                sapiente! Laudantium, aperiam doloribus. Odit, aut.
-              </span>
-            </Popup>
-            <button
-              className="button"
-              onClick={() => {
-                console.log("modal closed ");
-                close();
-              }}
-            >
-              close modal
-            </button>
-          </div>
-        </div>
-      )}
-    </Popup>
-  );
-};
-
 const notifSuccess = (
   message,
   config = {
@@ -189,7 +133,7 @@ const DeleteFolder = ({ trigger, handleDeleteFolder }) => {
     <ConfirmAction
       trigger={trigger}
       onYes={async () => {
-        const isSuccess = !!await handleDeleteFolder();
+        const isSuccess = !!(await handleDeleteFolder());
         notifSuccess("Folder Deleted Sucessfully!");
         // if (isSuccess) {
         //   notifSuccess("Folder Deleted Sucessfully!");
@@ -233,7 +177,7 @@ const DeleteFile = ({ trigger, handleDeleteFile }) => {
     <ConfirmAction
       trigger={trigger}
       onYes={async () => {
-        const isSuccess = !!await handleDeleteFile();
+        const isSuccess = !!(await handleDeleteFile());
         if (isSuccess) {
           notifSuccess("File Deleted Sucessfully!");
         } else {
@@ -370,7 +314,27 @@ const RenameFile = ({ trigger, handleRenameFile }) => {
               console.log(newName);
             }}
           />
-          <Popup
+          <ConfirmAction
+            trigger={<button className="btn-primary"> Rename </button>}
+            onYes={async () => {
+              const { res, isSuccess } = await handleRenameFile(newName);
+              if (isSuccess) {
+                notifSuccess("File Renamed Sucessfully!");
+              } else {
+                if (hasWord(res.data, "Duplicate")) {
+                  notifFail(
+                    "File name is already taken\n Please try a new name"
+                  );
+                } else {
+                  notifFail("Cannot Rename File");
+                }
+                console.log(res);
+              }
+              close();
+            }}
+            onNo={close}
+          />
+          {/* <Popup
             trigger={<button className="btn-primary"> Rename </button>}
             modal
             position="bottom right"
@@ -392,7 +356,7 @@ const RenameFile = ({ trigger, handleRenameFile }) => {
                 No{" "}
               </button>
             </div>
-          </Popup>
+          </Popup> */}
         </div>
       )}
     </Popup>
@@ -452,7 +416,7 @@ const ShowInfo = ({ trigger, info }) => {
   );
 };
 
-const Donwload = ({ trigger, handleDownload }) => {
+const Donwload = ({ trigger, handleDownload, file }) => {
   return (
     <Popup trigger={trigger} modal nested>
       {(close) => (
@@ -460,7 +424,7 @@ const Donwload = ({ trigger, handleDownload }) => {
           <div className="close-icon" onClick={close}>
             <AiFillCloseCircle />
           </div>
-          <h2> Are you sure you want to download this file? </h2>
+          <h2> Are you sure you want to download {file.name || "this file"}? </h2>
           <button
             className="btn-primary"
             onClick={async () => {
@@ -685,7 +649,7 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
             onNo={close}
             message="Are you sure?"
           />
-            
+
           {/* <Popup
             trigger={<button className="btn-primary"> Create </button>}
             modal
