@@ -680,7 +680,6 @@ const CreateFolder = ({ trigger, handleCreateFolder }) => {
 };
 
 export {
-  TestModal,
   AddFolder,
   DeleteFolder,
   DeleteFile,
