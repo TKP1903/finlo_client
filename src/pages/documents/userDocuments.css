@@ -54,7 +54,7 @@
 
 .folder:hover {
   filter: brightness(0.6);
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 
 .folder:active,

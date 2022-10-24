@@ -591,7 +591,7 @@ const Upload = ({ trigger, handleUpload, parentFolder }) => {
                   notifFail(
                     message +
                       ".\n" +
-                      `${file.type || "This"} is not a supported type`
+                      `${file.name || "This"} is not a supported type`
                   );
                 }, 0);
                 close();
