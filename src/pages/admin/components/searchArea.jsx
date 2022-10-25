@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MdSearch, MdAdd, MdDelete, MdEdit } from "react-icons/md";
 
-import { searchWithTolerance } from "../../../jsFunctions/search";
+import { search } from "../../../jsFunctions/search";
 
 import debounce from "../../../jsFunctions/debounce";
 
@@ -71,7 +71,7 @@ const makeClientsFromRes = (data) => {
   return clients;
 };
 
-const performSearch = searchWithTolerance (0.9);
+const performSearch = search;
 
 const SearchBox = ({ className, handleSearch }) => {
   const inputRef = useRef(null);
