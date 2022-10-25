@@ -14,6 +14,7 @@ import {
 } from "react-icons/bs";
 
 import debounce from "../../../jsFunctions/debounce";
+
 import { RenameFolder, ShowInfo, DeleteFolder, Donwload } from "./popups";
 
 const Menu = ({
@@ -128,7 +129,7 @@ export const Folder = ({
       </span>
       <Menu
         folder={folder}
-        trigger={<div class="three-dots"></div>}
+        trigger={<div className="three-dots"></div>}
         handleRename={handleRename}
         handleDelete={handleDelete}
         handleDownload={handleDownload}

@@ -231,3 +231,7 @@ main {
   color: #165d97;
   transition: 0.8s ease-in-out;
 }
+
+.hide {
+  display: none!important;
+}

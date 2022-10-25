@@ -297,7 +297,7 @@ const UserFoldersPage = ({ mode }) => {
             folders: newFolders,
           };
         });
-      } 
+      }
       return true;
     } catch (error) {
       console.log(error);
@@ -492,8 +492,9 @@ const UserFoldersPage = ({ mode }) => {
             }}
           /> */}
           {!!fileStructure.folders.length &&
-            fileStructure.folders.map((data) => (
+            fileStructure.folders.map((data, index) => (
               <Folder
+                key={`folder-${index}`}
                 folder={data}
                 handleOpen={handleOpen}
                 handleDelete={deleteFolder}
@@ -501,8 +502,9 @@ const UserFoldersPage = ({ mode }) => {
               />
             ))}
           {!!fileStructure.files.length &&
-            fileStructure.files.map((data) => (
+            fileStructure.files.map((data, index) => (
               <File
+                key={`file-${index}`}
                 file={data}
                 handleDelete={deleteFile}
                 handleRename={renameFile}

@@ -424,7 +424,7 @@ const Donwload = ({ trigger, handleDownload, file }) => {
           <div className="close-icon" onClick={close}>
             <AiFillCloseCircle />
           </div>
-          <h2> Are you sure you want to download {file.name || "this file"}? </h2>
+          <h2> Are you sure you want to download this file? </h2>
           <button
             className="btn-primary"
             onClick={async () => {

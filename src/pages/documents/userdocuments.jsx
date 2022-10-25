@@ -341,9 +341,9 @@ const UserDocumentsPage = ({ documentshandler, folders }) => {
                     className="icon"
                     style={{ color: "#000" }} onClick={toggleModal1}
                   /> */}
-                  <div class="dropdown-container" tabindex="1">
-                    <div class="three-dots"></div>
-                    <div class="dropdown">
+                  <div   className="dropdown-container" tabindex="1">
+                    <div className="three-dots"></div>
+                    <div className="dropdown">
                       <a href="#">
                         <div onClick={notify}>Preview</div>
                       </a>

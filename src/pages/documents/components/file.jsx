@@ -10,43 +10,36 @@ import {
   BsThreeDotsVertical,
   BsUpload,
 } from "react-icons/bs";
-import {
-  ShowInfo,
-  DeleteFile,
-  Donwload,
-  FilePreview,
-} from "./popups";
 
-const Menu = ({
-  file,
-  trigger,
-  handleDelete,
-  handleDownload,
-}) => {
+import { ShowInfo, DeleteFile, Donwload, FilePreview } from "./popups";
+
+const Menu = ({ file, trigger, handleDelete, handleDownload }) => {
   let newName;
 
   return (
     <Popup trigger={trigger} nested position="bottom right">
-      {(close1) => (
-        <div className="folder-menu">
-          <ShowInfo
-            info={file}
-            trigger={<div className="menu-item">Info</div>}
-          />
-          <FilePreview
-            trigger={<div className="menu-item">Preview</div>}
-            file={file}
-          />
-          <DeleteFile
-            trigger={<div className="menu-item">Delete</div>}
-            handleDeleteFile={() => handleDelete(file)}
-          />
-          <Donwload
-            trigger={<div className="menu-item">Download</div>}
-            handleDownloadFile={() => handleDownload(file)}
-          />
-        </div>
-      )}
+      {(close1) => {
+        return (
+          <div className="folder-menu">
+            <ShowInfo
+              info={file}
+              trigger={<div className="menu-item">Info</div>}
+            />
+            {/* <FilePreview
+              trigger={<div className="menu-item">Preview</div>}
+              file={file}
+            /> */}
+            <DeleteFile
+              trigger={<div className="menu-item">Delete</div>}
+              handleDeleteFile={() => handleDelete(file)}
+            />
+            <Donwload
+              trigger={<div className="menu-item">Download</div>}
+              handleDownloadFile={() => handleDownload(file)}
+            />
+          </div>
+        );
+      }}
     </Popup>
   );
 };
@@ -71,7 +64,12 @@ export const File = ({
 }) => {
   import("./css/folder.css");
   return (
-    <div className="folder">
+    <div
+      className="folder"
+      onClick={(e) => {
+        e.preventDefault();
+      }}
+    >
       <span className="folder_name">
         <BsFileEarmark className="icon" style={{ color: "#000" }} />
         {file.name}
