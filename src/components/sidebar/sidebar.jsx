@@ -116,35 +116,67 @@ const NavList = ({ mode, show }) => {
   );
 };
 
-const Header = ({ show, setShow, logouthandler, mode }) => {
+const Header = ({ show, setShow, logoutHandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
   const user_role = localStorage.getItem("finlo_user_role");
+  const user_name = user_role === "client" ? client_name : "Admin";
+  
   return (
-    <header className={`header ${show ? "space-toggle" : null}`}>
-      <div className="header-toggle" onClick={() => setShow((curr) => !curr)}>
-        <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
-      </div>
+    <header className="header">
       <div id="finloTax-logo">
         <img src={logo} alt="" style={{ width: "100px", objectFit: "cover" }} />
       </div>
-      <div className="log-avator">
-        <div className="user_name">
-          <h4>Welcome {user_role === "client" ? client_name : "Admin"}</h4>
+      <div className="user-info">
+        <div className="welcome-message">
+          <h3 id="welcome-message">
+            Welcome,
+            <span id="user-name">
+              {" "}
+              {user_name.split(" ")[0]}
+            </span>
+          </h3>
         </div>
-        <div className="useravatar">
+        <div className="user-avatar">
           <UserAvatar
             size="42"
-            name="Will Binns-Smith"
-            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            name= {user_name}
+            // src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
           />
         </div>
-        <div className="btn-logout" onClick={logouthandler}>
+        <button className="btn-primary" onClick={logoutHandler}>
           <IoMdLogOut className="nav-link-icon1" />
-          <span className="hide">Logout</span>
-        </div>
+          <span> Logout </span>
+        </button>
       </div>
     </header>
   );
+
+  // return (
+  //   <header className={`header ${show ? "space-toggle" : null}`}>
+  //     <div className="header-toggle" onClick={() => setShow((curr) => !curr)}>
+  //       <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
+  //     </div>
+  //     <div id="finloTax-logo">
+  //       <img src={logo} alt="" style={{ width: "100px", objectFit: "cover" }} />
+  //     </div>
+  //     <div className="log-avator">
+  //       <div className="user_name">
+  //         <h4>Welcome {user_role === "client" ? client_name : "Admin"}</h4>
+  //       </div>
+  //       <div className="useravatar">
+  //         <UserAvatar
+  //           size="42"
+  //           name="Will Binns-Smith"
+  //           src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  //         />
+  //       </div>
+  //       <div className="btn-logout" onClick={logoutHandler}>
+  //         <IoMdLogOut className="nav-link-icon1" />
+  //         <span className="hide">Logout</span>
+  //       </div>
+  //     </div>
+  //   </header>
+  // );
 };
 
 const SideNav = ({ show, setShow }) => {
@@ -153,58 +185,36 @@ const SideNav = ({ show, setShow }) => {
   useEffect(() => {
     setMode(localStorage.getItem("user_role"));
   }, []);
-  console.log(mode);
 
   return (
     <nav className={`sidebar`}>
       <NavList mode={mode} show={show} />
-      <div className={`sidebar-menu-icon`} onClick={() => setShow((curr) => !curr)}>
+      <div
+        className={`sidebar-menu-icon`}
+        onClick={() => setShow((curr) => !curr)}
+      >
         <BiMenu />
       </div>
     </nav>
   );
-
-  // return (
-  //   <aside className={`sidebar ${show ? "show" : null}`}>
-  //     <nav className="nav">
-  //       <div>
-  //         <Link to="/" className="nav-logo">
-  //           <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F</i>
-  //           <span className="nav-logo-name">
-  //             <span className="logo-img">
-  //               <img
-  //                 src={logo}
-  //                 alt=""
-  //                 style={{ width: "100px", objectFit: "cover" }}
-  //               />
-  //             </span>
-  //           </span>
-  //         </Link>
-  //         <NavList mode={mode} />
-  //       </div>
-  //     </nav>
-  //   </aside>
-  // );
 };
 
 const Sidebar = ({ mode }) => {
-  console.log({ mode });
-
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const { type } = useParams();
 
-  const logouthandler = () => {
+  const logoutHandler = () => {
     localStorage.clear();
     navigate("/");
   };
 
   return (
-    <main className={show ? "space-toggle" : null}>
+    <main>
       <Header
         show={show}
         setShow={setShow}
-        logouthandler={logouthandler}
+        logoutHandler={logoutHandler}
         mode={mode}
       />
 
