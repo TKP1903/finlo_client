@@ -76,7 +76,7 @@ export const File = ({
       </span>
       <Menu
         file={file}
-        trigger={<div class="three-dots"></div>}
+        trigger={<div className="three-dots"></div>}
         handleDelete={handleDelete}
         handleDownload={handleDownload}
       />

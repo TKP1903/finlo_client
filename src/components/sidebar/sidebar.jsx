@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./sidebar.css";
 import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
 import logo from "../../assets/finlo_logo.png";
@@ -7,6 +7,7 @@ import UserAvatar from "react-user-avatar";
 import { GoThreeBars } from "react-icons/go";
 
 // icons
+import { BiMenu } from "react-icons/bi";
 import { IoMdSettings } from "react-icons/io";
 import { GoReport } from "react-icons/go";
 import { AiOutlineUsergroupDelete } from "react-icons/ai";
@@ -90,7 +91,7 @@ const navlistFactory = (mode) => {
   }
 };
 
-const NavList = ({ mode }) => {
+const NavList = ({ mode, show }) => {
   let navlist = navlistFactory(mode);
   return (
     <div className="nav-list">
@@ -100,12 +101,15 @@ const NavList = ({ mode }) => {
             to={item.path}
             className="nav-link"
             activeClassName="active"
-            key={index}
+            key={`menu-item-${index}`}
           >
-            <span className="nav-link-icon">
-              {item.icon}
+            <span className="nav-link-icon">{item.icon}</span>
+            <span
+              style={{ "--transition-delay": `${index * 0.05}s` }}
+              className={`nav-link-name ${!show ? "hide" : ""}`}
+            >
+              {item.name}
             </span>
-            <span className="nav-link-name">{item.name}</span>
           </NavLink>
         ))}
     </div>
@@ -117,8 +121,11 @@ const Header = ({ show, setShow, logouthandler, mode }) => {
   const user_role = localStorage.getItem("finlo_user_role");
   return (
     <header className={`header ${show ? "space-toggle" : null}`}>
-      <div className="header-toggle" onClick={() => setShow(!show)}>
+      <div className="header-toggle" onClick={() => setShow((curr) => !curr)}>
         <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
+      </div>
+      <div id="finloTax-logo">
+        <img src={logo} alt="" style={{ width: "100px", objectFit: "cover" }} />
       </div>
       <div className="log-avator">
         <div className="user_name">
@@ -140,7 +147,7 @@ const Header = ({ show, setShow, logouthandler, mode }) => {
   );
 };
 
-const SideNav = ({ show }) => {
+const SideNav = ({ show, setShow }) => {
   const [mode, setMode] = useState(localStorage.user_role);
 
   useEffect(() => {
@@ -149,22 +156,35 @@ const SideNav = ({ show }) => {
   console.log(mode);
 
   return (
-    <aside className={`sidebar ${show ? "show" : null}`}>
-      <nav className="nav">
-        <div>
-          <Link to="/" className="nav-logo">
-            <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F</i>
-            <span className="nav-logo-name">
-              <span className="logo-img">
-                  <img src={logo} alt="" style={{ width: "100px", objectFit: "cover"}} />
-              </span>
-            </span>
-          </Link>
-          <NavList mode={mode} />
-        </div>
-      </nav>
-    </aside>
+    <nav className={`sidebar`}>
+      <NavList mode={mode} show={show} />
+      <div className={`sidebar-menu-icon`} onClick={() => setShow((curr) => !curr)}>
+        <BiMenu />
+      </div>
+    </nav>
   );
+
+  // return (
+  //   <aside className={`sidebar ${show ? "show" : null}`}>
+  //     <nav className="nav">
+  //       <div>
+  //         <Link to="/" className="nav-logo">
+  //           <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F</i>
+  //           <span className="nav-logo-name">
+  //             <span className="logo-img">
+  //               <img
+  //                 src={logo}
+  //                 alt=""
+  //                 style={{ width: "100px", objectFit: "cover" }}
+  //               />
+  //             </span>
+  //           </span>
+  //         </Link>
+  //         <NavList mode={mode} />
+  //       </div>
+  //     </nav>
+  //   </aside>
+  // );
 };
 
 const Sidebar = ({ mode }) => {
@@ -175,7 +195,7 @@ const Sidebar = ({ mode }) => {
   const { type } = useParams();
 
   const logouthandler = () => {
-    localStorage.removeItem("FinloUser");
+    localStorage.clear();
     navigate("/");
   };
 
@@ -188,7 +208,7 @@ const Sidebar = ({ mode }) => {
         mode={mode}
       />
 
-      <SideNav show={show} mode={mode} />
+      <SideNav show={show} setShow={setShow} mode={mode} />
 
       <div className="master-wrap">
         <Master mode={mode} />
