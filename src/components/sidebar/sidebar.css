@@ -34,7 +34,7 @@ main {
 }
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   height: var(--header-height);
@@ -86,6 +86,7 @@ main {
   position: fixed;
 
   gap: 10px;
+  padding-top: 3rem;
 
   background-color: var(--first-color);
   min-height: 100vh;
