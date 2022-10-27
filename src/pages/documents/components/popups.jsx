@@ -1,4 +1,6 @@
 import React from "react";
+import {useEffect, useState} from 'react';
+
 import Popup from "reactjs-popup";
 
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -24,7 +26,6 @@ const notifSuccess = (
 ) => {
   setTimeout(() => {
     toast.success(message, config);
-    toast.configure();
   }, 0);
 };
 
@@ -42,7 +43,6 @@ const notifFail = (
 ) => {
   setTimeout(() => {
     toast.error(message, config);
-    toast.configure();
   }, 0);
 };
 
@@ -81,11 +81,14 @@ const ConfirmAction = ({
 
 const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
   let newName;
-
-  return (
-    <Popup trigger={trigger} modal nested>
-      {(close) => (
-        <div className="prompt-input">
+  useEffect (
+    () => {
+      console.log ({parentFolder});
+    }
+  , [parentFolder]);
+  const InputPrompt = ({close}) => {
+    return (
+      <div className="prompt-input">
           <div className="close-icon" onClick={close}>
             <AiFillCloseCircle />
           </div>
@@ -97,10 +100,9 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
               newName = e.target.value;
             }, 100)}
           />
-          <ConfirmAction
-            trigger={<button className="btn-primary"> Add </button>}
-            message="Are you sure?"
-            onYes={async () => {
+          <button
+            className="btn-primary"
+            onClick= {async () => {
               const { res, isSuccess } = await handleAddFolder(
                 newName,
                 parentFolder
@@ -119,10 +121,17 @@ const AddFolder = ({ trigger, handleAddFolder, parentFolder }) => {
               }
               close();
             }}
-            onNo={close}
-            close={close}
-          />
+          >
+            {" "}
+            Add{" "}
+          </button>
         </div>
+    );
+  };
+  return (
+    <Popup trigger={trigger} modal nested>
+      {(close) => (
+        <InputPrompt close={close} />
       )}
     </Popup>
   );

@@ -135,6 +135,7 @@ const UserFoldersPage = ({ mode }) => {
   });
 
   const [currentPath, setCurrentPath] = useState([""]);
+  const [currentFolder, setCurrentFolder] = useState("");
 
   const user_id = isAdmin ? client.id : localStorage.getItem("finlo_user_id");
   console.log({ user_id });
@@ -151,7 +152,6 @@ const UserFoldersPage = ({ mode }) => {
           folder_name === "" ? "root" : folder_name
         }`
       );
-      // debugger;
       if (!data || !data.length) {
         return new Array();
       }
@@ -246,9 +246,13 @@ const UserFoldersPage = ({ mode }) => {
     }
   };
 
-  const createFolder = async (folder_name, parent_folder_name) => {
+  const createFolder = async (
+    folder_name, 
+    parent_folder_name
+  ) => {
+    console.log ({folder_name, parent_folder_name});
     try {
-      if (parent_folder_name !== "") {
+      if(parent_folder_name === "") {
         parent_folder_name = "root";
       }
       const response = await axios.post(`${API_URL}folder/create-folder`, {
@@ -412,18 +416,19 @@ const UserFoldersPage = ({ mode }) => {
 
   const addPath = (path) => {
     // push the path to the currentPath array
-    setCurrentPath([...currentPath, path]);
+    setCurrentPath((curr) => [...curr, path]);
+    setCurrentFolder(path);
   };
 
   const popPath = () => {
-    // pop the last path from the currentPath array
     setCurrentPath((curr) => {
       curr.pop();
       return curr;
     });
+    setCurrentFolder(currentPath[currentPath.length - 1]);
   };
 
-  const handleOpen = async (folder_name) => {
+  const handleOpen = (folder_name) => {
     addPath(folder_name);
   };
 
@@ -444,12 +449,16 @@ const UserFoldersPage = ({ mode }) => {
               <>
                 <span
                   key={path + index}
+                  data-index = {index}
                   className="breadcrumb-item"
                   onClick={(e) => {
-                    // pop the path upto the index
-                    setCurrentPath((curr) => {
-                      return curr.slice(0, index + 1);
-                    });
+                    // pop the path upto the index using
+                    const newPath = currentPath.slice(0, index + 1);
+                    setCurrentPath(newPath);
+                    setCurrentFolder(newPath[newPath.length - 1]);
+                    // setCurrentPath((curr) => {
+                    //   return curr.slice(0, index + 1);
+                    // });
                   }}
                 >
                   {index === 0 && <span> HOME </span>}
@@ -463,13 +472,14 @@ const UserFoldersPage = ({ mode }) => {
         <div className="folder-buttons">
           <div className="folder-btn">
             <AddFolder
+              key={currentFolder}
               trigger={
                 <button className="btn-primary btn-addFolder">
                   <BsFillFolderFill className="icon" /> Add folder
                 </button>
               }
               handleAddFolder={createFolder}
-              parentFolder={currentPath[currentPath.length - 1]}
+              parentFolder={currentFolder}
             />
           </div>
           <div className="folder-btn">
@@ -482,7 +492,7 @@ const UserFoldersPage = ({ mode }) => {
                 </button>
               }
               handleUpload={uploadFile}
-              parentFolder={currentPath[currentPath.length - 1]}
+              parentFolder={currentFolder}
             />
           </div>
         </div>
