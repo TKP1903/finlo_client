@@ -7,6 +7,7 @@ import UserAvatar from "react-user-avatar";
 import { GoThreeBars } from "react-icons/go";
 
 // icons
+import { AiFillCloseCircle } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
 import { IoMdSettings } from "react-icons/io";
 import { GoReport } from "react-icons/go";
@@ -120,7 +121,7 @@ const Header = ({ show, setShow, logoutHandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
   const user_role = localStorage.getItem("finlo_user_role");
   const user_name = user_role === "client" ? client_name : "Admin";
-  
+
   return (
     <header className="header">
       <div id="finloTax-logo">
@@ -130,20 +131,17 @@ const Header = ({ show, setShow, logoutHandler, mode }) => {
         <div className="welcome-message">
           <h3 id="welcome-message">
             Welcome,
-            <span id="user-name">
-              {" "}
-              {user_name.split(" ")[0]}
-            </span>
+            <span id="user-name"> {user_name.split(" ")[0]}</span>
           </h3>
         </div>
         <div className="user-avatar">
           <UserAvatar
             size="42"
-            name= {user_name}
+            name={user_name}
             // src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
           />
         </div>
-        <button className="btn-primary" onClick={logoutHandler}>
+        <button className="btn-primary logout-btn" onClick={logoutHandler}>
           <IoMdLogOut className="nav-link-icon1" />
           <span> Logout </span>
         </button>
@@ -187,20 +185,32 @@ const SideNav = ({ show, setShow }) => {
   }, []);
 
   return (
-    <nav className={`sidebar`}>
-      <NavList mode={mode} show={show} />
-      <div
-        className={`sidebar-menu-icon`}
-        onClick={() => setShow((curr) => !curr)}
-      >
-        <BiMenu />
-      </div>
-    </nav>
+    <>
+      <nav className={`sidebar`}>
+        <NavList mode={mode} show={show} />
+        {!show && (
+          <div
+            className={`sidebar-menu-icon`}
+            onClick={() => setShow((curr) => !curr)}
+          >
+            <BiMenu />
+          </div>
+        )}
+        {show && (
+          <div
+            className="close-sidebar"
+            onClick={() => setShow((curr) => !curr)}
+          >
+            <AiFillCloseCircle />
+          </div>
+        )}
+      </nav>
+    </>
   );
 };
 
 const Sidebar = ({ mode }) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { type } = useParams();
 

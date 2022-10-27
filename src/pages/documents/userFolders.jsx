@@ -441,7 +441,7 @@ const UserFoldersPage = ({ mode }) => {
             {currentPath.map((path, index) => (
               <>
                 <span
-                  key={index}
+                  key={path + index}
                   className="breadcrumb-item"
                   onClick={(e) => {
                     // pop the path upto the index
@@ -494,7 +494,7 @@ const UserFoldersPage = ({ mode }) => {
           {!!fileStructure.folders.length &&
             fileStructure.folders.map((data, index) => (
               <Folder
-                key={`folder-${index}`}
+                key={`${data.name || "folder"}-${index}`}
                 folder={data}
                 handleOpen={handleOpen}
                 handleDelete={deleteFolder}
