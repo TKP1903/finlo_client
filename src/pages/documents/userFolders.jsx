@@ -258,7 +258,9 @@ const UserFoldersPage = ({ mode }) => {
       });
       // update the file structure
       if (response.status === 200) {
-        const newFolders = await getUserFolders(parent_folder_name);
+        const newFolders = await getUserFolders(
+          currentPath[currentPath.length - 1]
+        );
         setFileStructure((curr) => {
           return {
             ...curr,
