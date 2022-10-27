@@ -1,12 +1,12 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./sidebar.css";
-import { useNavigate, useParams, NavLink } from "react-router-dom";
+import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
 import logo from "../../assets/finlo_logo.png";
 import UserAvatar from "react-user-avatar";
 
+import { GoThreeBars } from "react-icons/go";
+
 // icons
-import { AiFillCloseCircle } from "react-icons/ai";
-import { BiMenu } from "react-icons/bi";
 import { IoMdSettings } from "react-icons/io";
 import { GoReport } from "react-icons/go";
 import { AiOutlineUsergroupDelete } from "react-icons/ai";
@@ -16,6 +16,7 @@ import { IoHome, IoDocumentSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { MdPayment } from "react-icons/md";
+import DocumentsIcon from "../../icons/documentsIcon";
 
 import Master from "../../pages/master";
 
@@ -89,7 +90,7 @@ const navlistFactory = (mode) => {
   }
 };
 
-const NavList = ({ mode, show }) => {
+const NavList = ({ mode }) => {
   let navlist = navlistFactory(mode);
   return (
     <div className="nav-list">
@@ -99,106 +100,95 @@ const NavList = ({ mode, show }) => {
             to={item.path}
             className="nav-link"
             activeClassName="active"
-            key={`menu-item-${index}`}
+            key={index}
           >
-            <span className="nav-link-icon">{item.icon}</span>
-            <span
-              style={{ "--transition-delay": `${index * 0.05}s` }}
-              className={`nav-link-name ${!show ? "hide" : ""}`}
-            >
-              {item.name}
+            <span className="nav-link-icon">
+              {item.icon}
             </span>
+            <span className="nav-link-name">{item.name}</span>
           </NavLink>
         ))}
     </div>
   );
 };
 
-const Header = ({ show, setShow, logoutHandler, mode }) => {
+const Header = ({ show, setShow, logouthandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
   const user_role = localStorage.getItem("finlo_user_role");
-  const user_name = user_role === "client" ? client_name : "Admin";
-
   return (
-    <header className="header">
-      <div id="finloTax-logo">
-        <img src={logo} alt="" style={{ width: "100px", objectFit: "cover" }} />
+    <header className={`header ${show ? "space-toggle" : null}`}>
+      <div className="header-toggle" onClick={() => setShow(!show)}>
+        <GoThreeBars className={` ${show ? "fa-solid fa-xmark" : null}`} />
       </div>
-      <div className="user-info">
-        <div className="welcome-message">
-          <h3 id="welcome-message">
-            Welcome,
-            <span id="user-name"> {user_name.split(" ")[0]}</span>
-          </h3>
+      <div className="log-avator">
+        <div className="user_name">
+          <h4>Welcome {user_role === "client" ? client_name : "Admin"}</h4>
         </div>
-        <div className="user-avatar">
+        <div className="useravatar">
           <UserAvatar
             size="42"
-            name={user_name}
-            // src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            name="Will Binns-Smith"
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
           />
         </div>
-        <button className="btn-primary logout-btn" onClick={logoutHandler}>
+        <div className="btn-logout" onClick={logouthandler}>
           <IoMdLogOut className="nav-link-icon1" />
-          <span> Logout </span>
-        </button>
+          <span className="hide">Logout</span>
+        </div>
       </div>
     </header>
   );
 };
 
-const SideNav = ({ show, setShow }) => {
+const SideNav = ({ show }) => {
   const [mode, setMode] = useState(localStorage.user_role);
 
   useEffect(() => {
     setMode(localStorage.getItem("user_role"));
   }, []);
+  console.log(mode);
 
   return (
-    <>
-      <nav className={`sidebar`}>
-        <NavList mode={mode} show={show} />
-        {!show && (
-          <div
-            className={`sidebar-menu-icon`}
-            onClick={() => setShow((curr) => !curr)}
-          >
-            <BiMenu />
-          </div>
-        )}
-        {show && (
-          <div
-            className="close-sidebar"
-            onClick={() => setShow((curr) => !curr)}
-          >
-            <AiFillCloseCircle />
-          </div>
-        )}
+    <aside className={`sidebar ${show ? "show" : null}`}>
+      <nav className="nav">
+        <div>
+          <Link to="/" className="nav-logo">
+            <i className={`${show ? "show-logo-icon" : "nav-logo-icon"}`}>F</i>
+            <span className="nav-logo-name">
+              <span className="logo-img">
+                  <img src={logo} alt="" style={{ width: "100px", objectFit: "cover"}} />
+              </span>
+            </span>
+          </Link>
+          <NavList mode={mode} />
+        </div>
       </nav>
-    </>
+    </aside>
   );
 };
 
 const Sidebar = ({ mode }) => {
-  const [show, setShow] = useState(false);
+  console.log({ mode });
+
+  const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const { type } = useParams();
 
-  const logoutHandler = () => {
-    localStorage.clear();
+  const logouthandler = () => {
+    localStorage.removeItem("FinloUser");
     navigate("/");
   };
 
   return (
-    <main>
+    <main className={show ? "space-toggle" : null}>
       <Header
         show={show}
         setShow={setShow}
-        logoutHandler={logoutHandler}
+        logouthandler={logouthandler}
         mode={mode}
       />
 
-      <SideNav show={show} setShow={setShow} mode={mode} />
+      <SideNav show={show} mode={mode} />
 
       <div className="master-wrap">
         <Master mode={mode} />
