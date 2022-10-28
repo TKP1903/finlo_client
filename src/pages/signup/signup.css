@@ -1,131 +1,130 @@
-.signup_container{
-    /* margin-top: 130px;
+.signup_container {
+  /* margin-top: 130px;
     width: 100vw;
     height: 100vh; */
 }
-.signup_block{
-    background: rgba( 255, 255, 255, 0.05 );
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.103);
-    backdrop-filter: blur( 1.5px );
-    -webkit-backdrop-filter: blur( 1.5px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    width: 400px;
-    padding: 50px 10px;
+.signup_block {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.103);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 400px;
+  padding: 50px 10px;
 }
-.logo{
-    width: 200px;
-    height: 50px;
-    text-align: center;
+.logo {
+  width: 200px;
+  height: 50px;
+  text-align: center;
 }
 .logo img {
-    width: 100%;
-    height: fit-content;
+  width: 100%;
+  height: fit-content;
 }
 .signup_info {
-    text-align: center;
+  text-align: center;
 }
-.welcome{
-    font-size: 2rem;
-    margin-bottom: -10px;
+.welcome {
+  font-size: 2rem;
+  margin-bottom: -10px;
 }
-.input_block{
-    display: flex;
-    flex-direction: column;
+.input_block {
+  display: flex;
+  flex-direction: column;
 }
-label{
-    padding: 10px 0;
-    font-size: medium;
-    font-weight: normal;
+label {
+  padding: 10px 0;
+  font-size: medium;
+  font-weight: normal;
 }
 .error_text {
-    color: red;
-    font-size: 1rem;
+  color: red;
+  font-size: 1rem;
 }
-input{
-    width: 300px;
-    height: 30px;
-    border: 1px solid rgba(11, 11, 11, 0.655);
-    border-radius: 5px;
-    padding-left: 5px;
+.inputblock {
+  width: 300px;
+  height: 30px;
+  border: 1px solid rgba(11, 11, 11, 0.655);
+  border-radius: 5px;
+  padding-left: 5px;
 }
-.signup_button{
-    width: 100%;
-    color: #fff;
-    background-color: #0099ff;
-    padding: 8px;
-    margin: 20px 0 ;
-    font-size: medium;
-    font-weight: bold;
-    border: 2px solid #0099ff;
-    border-radius: 10px;
+.signup_button {
+  width: 100%;
+  color: #fff;
+  background-color: #0099ff;
+  padding: 8px;
+  margin: 20px 0;
+  font-size: medium;
+  font-weight: bold;
+  border: 2px solid #0099ff;
+  border-radius: 10px;
 }
-.forgotpassword{
-    text-align: end;
-    text-decoration: none;
-    color: gray;
-    font-size: 0.9rem;
+.forgotpassword {
+  text-align: end;
+  text-decoration: none;
+  color: gray;
+  font-size: 0.9rem;
 }
-.alter_text{
-    margin-top: -6px;
-    font-size: 0.9rem;
-    color: gray;
+.alter_text {
+  margin-top: -6px;
+  font-size: 0.9rem;
+  color: gray;
 }
-.signup_link{
-    font-size: 1rem;
-    color: #1029AD;
-    text-decoration: none;
-    font-weight: bolder;
+.signup_link {
+  font-size: 1rem;
+  color: #1029ad;
+  text-decoration: none;
+  font-weight: bolder;
 }
-.google_login{
-    width: 250px;
-    margin-top: 20px;
-    padding: 7px 20px;
-    border: 2px solid rgba(241, 238, 238, 0.879);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: gray;
-    font-size: 15px;
-    cursor: pointer;
+.google_login {
+  width: 250px;
+  margin-top: 20px;
+  padding: 7px 20px;
+  border: 2px solid rgba(241, 238, 238, 0.879);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: gray;
+  font-size: 15px;
+  cursor: pointer;
 }
-.google_icon{
-    width: 30px;
-    height: 30px;
+.google_icon {
+  width: 30px;
+  height: 30px;
 }
 
-
-.align_row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.align_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.align_column{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.align_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .errormsg {
-    color: #fff;
-    background-color: red;
-    width: 100%;
-    text-align: center;
-    padding: 5px;
+  color: #fff;
+  background-color: red;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
 }
 
-.StateInput{
-    width: 102%;
-    height: 40px;
-    border-radius: 5px;
-    margin-top: 5px;
+.StateInput {
+  width: 102%;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 5px;
 }
-.StateLabel{
-    margin-top: 10px;
+.StateLabel {
+  margin-top: 10px;
 }
-.SignUptext{
-    font-weight: bold;
-    font-size:1.5rem;
+.SignUptext {
+  font-weight: bold;
+  font-size: 1.5rem;
 }

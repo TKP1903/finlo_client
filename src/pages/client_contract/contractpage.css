@@ -1,0 +1,163 @@
+.title {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .contractWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70vh;
+    align-items: center;
+    flex-wrap: wrap;
+     
+  }
+  .tables_flex {
+    display: flex;
+    width: max-content;
+    gap: 20x;
+    justify-content: space-around;
+    height: max-content;
+    flex-wrap: wrap;
+    gap: 70px;
+  }
+  
+  .maintable {
+    height: 200px;
+    width: 500px;
+    box-shadow: 0 8px 20px 0 rgba(1, 2, 18, 0.567);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .sidetables {
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    gap: 30px;
+  }
+  
+  .sidetable1 {
+    height: max-content;
+    width: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .submitButtondiv {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  .active {
+    height: max-content;
+    padding: 4px 12px;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .disabled {
+    height: max-content;
+    padding: 4px 12px;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    pointer-events: none;
+  }
+  .terms_conditions {
+    display: flex;
+    align-items: center;
+  }
+  .checkbox {
+    width: max-content;
+  }
+  .endTitle {
+    
+    margin-top: 50px;
+  }
+  
+  .main_table_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #1c76bd;
+    padding: 3px 5px;
+  }
+  .maintable {
+    display: inline-grid;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+     
+  }
+  
+  .side_table_header {
+    height: 22px;
+    background-color: #bde0fe;
+    padding-left: 5px;
+    padding-top: 0px;
+    margin-bottom: 5px;
+  }
+  .data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: max-content;
+    padding: 5px 10px;
+  }
+  
+  .entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1px;
+    background-color: gray;
+    padding: 1px;
+    border: none;
+    position: sticky;
+  }
+  
+  .grid-container > div {
+    background-color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 15px;
+  }
+  .h {
+    font-weight: bold;
+  }
+  
+  input {
+    width: auto; 
+  }
+  
