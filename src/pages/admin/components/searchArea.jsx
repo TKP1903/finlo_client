@@ -301,12 +301,12 @@ const ResultsTable = ({ clients, className, handleFilter }) => {
   );
 };
 
-const TableOptions = ({searchText, setSearchText}) => {
+const TableOptions = ({ searchText, setSearchText }) => {
   return (
     <div className="table-options">
-      <SearchBox 
+      <SearchBox
         key="search-box"
-        className="search-box" 
+        className="search-box"
         handleSearch={setSearchText}
       />
       {searchText.length > 0 && (
@@ -373,6 +373,15 @@ const SearchArea = () => {
     getClients();
   }, []);
 
+  useEffect(() => {
+    if (clients.length > 0) {
+      localStorage.setItem(
+        "client", 
+        JSON.stringify(clients[0])
+      );
+    }
+  }, [clients]);
+
   const handleFilter = (type) => {
     return (e) => {
       const value = e.target.value;
@@ -391,10 +400,7 @@ const SearchArea = () => {
   return (
     <div className="search-area">
       <h1> Clients </h1>
-      <TableOptions 
-        searchText = {searchText} 
-        setSearchText = {setSearchText}
-      />
+      <TableOptions searchText={searchText} setSearchText={setSearchText} />
       <ResultsTable
         className="searchResults"
         clients={filteredClients}
