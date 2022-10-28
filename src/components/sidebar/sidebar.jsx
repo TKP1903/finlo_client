@@ -35,7 +35,7 @@ const navlistFactory = (mode) => {
       {
         name: "Invoices/Contracts",
         icon: <FaFileContract />,
-        path: "/invoices",
+        path: "/contract-admin",
       },
       {
         name: "Employees",

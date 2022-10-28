@@ -8,8 +8,8 @@ import AdminPage from "./admin/admin";
 
 import Profile from "./profile/Profile";
 import { ToastContainer, toast } from "react-toastify";
-import ContractsPage from "./admin/contract/Contracts.page";
-import ContractPage from "./client_contract/ContractPage";
+import AdminContractsPage from "./admin/contract/ContractsPage";
+import ContractsPage from "./client_contract/ContractPage";
 
 const Master = ({ mode }) => {
   const { type } = useParams();
@@ -27,8 +27,8 @@ const Master = ({ mode }) => {
         {type === "admin" && <AdminPage mode={mode} />}
         {/* {type === "documents" && <Docuents />} */}
         {type === "profile" && <Profile mode={mode} />}
-        {type === "admincontract" && <ContractsPage />}
-        {type === "contract" && <ContractPage />}
+        {type === "contract-admin" && <AdminContractsPage />}
+        {type === "contract" && <ContractsPage />}
       </div>
       <ToastContainer />
     </>
