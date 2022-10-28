@@ -35,7 +35,7 @@ function ContractsPage() {
           <form action="" className="form1">
             <div className="fields">
               <div>
-                <label htmlFor="ContractNo">Contract No</label>
+                <label htmlFor="ContractNo">Contract ID</label>
               </div>
               <input
                 type="text"
