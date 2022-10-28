@@ -203,6 +203,7 @@ const SignupPage = () => {
               )}
 
               <input
+                className="inputblock"
                 type="text"
                 name="FirstName"
                 placeholder="bob"
@@ -219,6 +220,7 @@ const SignupPage = () => {
               )}
 
               <input
+                className="inputblock"
                 type="text"
                 name="LastName"
                 placeholder="bob"
@@ -235,6 +237,7 @@ const SignupPage = () => {
               )}
 
               <input
+                className="inputblock"
                 type="email"
                 name="email"
                 placeholder="bob@gmail.com"
@@ -250,7 +253,12 @@ const SignupPage = () => {
                 <label>Password</label>
               )}
 
-              <input type="password" name="password" onChange={handleChange} />
+              <input
+                className="inputblock"
+                type="password"
+                name="password"
+                onChange={handleChange}
+              />
             </div>
             <div className="input_block">
               {confirmPasswordError.state ? (
@@ -262,6 +270,7 @@ const SignupPage = () => {
               )}
 
               <input
+                className="inputblock"
                 type="password"
                 name="confirmPassword"
                 onChange={handleChange}
@@ -276,7 +285,12 @@ const SignupPage = () => {
                 <label>Mobile No</label>
               )}
 
-              <input type="text" name="mobileNo" onChange={handleChange} />
+              <input
+                className="inputblock"
+                type="text"
+                name="mobileNo"
+                onChange={handleChange}
+              />
             </div>
             <div className="input_block">
               {stateError.state ? (
@@ -357,7 +371,12 @@ const SignupPage = () => {
                 <label>ZipCode</label>
               )}
 
-              <input type="text" name="ZipCode" onChange={handleChange} />
+              <input
+                className="inputblock"
+                type="text"
+                name="ZipCode"
+                onChange={handleChange}
+              />
             </div>
 
             <button className="signup_button" onClick={handleSubmit}>

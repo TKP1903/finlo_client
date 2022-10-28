@@ -1,0 +1,216 @@
+.ContainerWrapper {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 50px;
+  padding-top: 20px;
+  padding-left: 30px;
+  margin-left: 200px;
+  margin-top: 50px;
+  
+}
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.table1 {
+  height: 200px;
+  width: 500px;
+  background-color: aqua;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  padding-top: 50px;
+}
+/* .form1{
+    padding: 20px 20px;
+  } */
+.billedby,
+.billedto {
+  height: 300px;
+  width: 350px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: #bde0fe;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  gap: 10px;
+}
+
+.admin_details,
+.client_details {
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: white;
+
+  /* padding-left: 10px;
+    padding-right: 10px; */
+}
+.client_details {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.edit_button_div {
+  display: flex;
+  justify-content: space-around;
+}
+.fields {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 50px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.image {
+  height: 50px;
+  width: 50px;
+}
+
+.row2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20%;
+}
+
+.addItem,
+.backbutton,
+.AddClient {
+  background-color: #1c76bd;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.items_table {
+  height: 100px;
+  width: 870px;
+  /* background-color: green; */
+}
+.items_table_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c76bd;
+  height: 40%;
+  color: white;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.items_table_body {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.bottom_table {
+  width: 250px;
+  height: max-content;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  /* margin-right: 100px; */
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+.btable_entry {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.hr {
+  height: 1px;
+  width: 100%;
+  background-color: gray;
+}
+.resultrow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 870px;
+}
+.contracts_list_table {
+  height: max-content;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 34px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.combined_row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 100px;
+}
+.row5 {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.row6 {
+  
+  max-width: 980px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 320px;
+}
+.contracts_header,
+.contracts_details {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+  background-color: #bde0fe;
+  padding: 3px 10px;
+}
+.contracts_details {
+  background-color: white;
+
+  padding: 10px 10px;
+}
+.br {
+  height: 100%;
+  width: 1px;
+  background-color: black;
+}
