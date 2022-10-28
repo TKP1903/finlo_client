@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import "./contractpage.css";
+// import "./contractpage.css"; // Conditionally imported inside the component
+
 function ContractPage() {
   const [checkbox, setCheckBox] = useState(false);
+  
+  import("./contractpage.css");
   return (
     <div>
       <div className="title">

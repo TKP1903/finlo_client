@@ -10,6 +10,15 @@
   margin-top: 50px;
   
 }
+
+.sign-plus {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
 .row {
   display: flex;
   flex-wrap: nowrap;

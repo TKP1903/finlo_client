@@ -141,9 +141,6 @@ const UserFoldersPage = ({ mode }) => {
   console.log({ user_id });
 
   const getUserFolders = async (folder_name) => {
-    if (folder_name === "") {
-      folder_name = "root";
-    }
     try {
       const {
         data: { data },
