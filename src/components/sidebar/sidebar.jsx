@@ -131,13 +131,13 @@ const Header = ({ show, setShow, logoutHandler, mode }) => {
             <span id="user-name"> {user_name.split(" ")[0]}</span>
           </h3>
         </div>
-        <div className="user-avatar">
+        {/* <div className="user-avatar">
           <UserAvatar
             size="42"
             name={user_name}
             // src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
           />
-        </div>
+        </div> */}
         <button className="btn-primary logout-btn" onClick={logoutHandler}>
           <IoMdLogOut className="nav-link-icon1" />
           <span> Logout </span>

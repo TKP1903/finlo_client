@@ -524,7 +524,7 @@ const UserFoldersPage = ({ mode }) => {
             ))}
         </div>
       </div>
-      {isAdmin && <div className="clients-data"></div>}
+      {/* {isAdmin && <div className="clients-data"></div>} */}
     </div>
   );
 };
