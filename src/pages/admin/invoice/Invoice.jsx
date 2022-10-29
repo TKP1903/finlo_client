@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import './invoice.css'
+// import './invoice.css';    // Conditionally imported inside the component
 // import "./contracts.css";  // Conditionally imported inside the component
 import { BiUserPlus } from "react-icons/bi";
 import { FaEdit , FaPlus} from "react-icons/fa";
+
 function Invoice() {
 
   const [duedate, setDueDate] = useState(false);
@@ -29,6 +30,7 @@ function Invoice() {
   };
 
 //   import("./contracts.css");
+  import("./invoice.css");
   return (
     <div className="ContainerWrapper">
       <div className="row">
