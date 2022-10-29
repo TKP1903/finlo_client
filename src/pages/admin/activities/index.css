@@ -1,0 +1,17 @@
+.adminbuttons{
+    margin-top: 20px;
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 300px; 
+}
+
+.adminbuttons > button{
+    height: 30px;
+    background-color: #1c76bd;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
