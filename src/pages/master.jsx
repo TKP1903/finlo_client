@@ -10,6 +10,7 @@ import Profile from "./profile/Profile";
 import { ToastContainer, toast } from "react-toastify";
 import AdminContractsPage from "./admin/contract/ContractsPage";
 import ContractsPage from "./client_contract/ContractPage";
+import Invoice from "./admin/invoice/Invoice";
 
 const Master = ({ mode }) => {
   const { type } = useParams();
@@ -28,6 +29,7 @@ const Master = ({ mode }) => {
         {/* {type === "documents" && <Docuents />} */}
         {type === "profile" && <Profile mode={mode} />}
         {type === "contract-admin" && <AdminContractsPage />}
+        {type === "invoice-admin" && <Invoice />}
         {type === "contract" && <ContractsPage />}
       </div>
       <ToastContainer />
