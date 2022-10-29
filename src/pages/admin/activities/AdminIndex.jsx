@@ -3,10 +3,12 @@ import { useState } from "react";
 import ContractPage from "./contract/ContractsPage";
 import "./index.css";
 import Invoice from "./invoice/Invoice";
+
 export const AdminIndex = () => {
   const [contract, setContract] = useState(false);
   const [invoice, setInvoice] = useState(false);
   const [flag, setFlag] = useState(false);
+  
   return (
     <>
       {!flag&&

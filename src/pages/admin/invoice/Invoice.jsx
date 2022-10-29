@@ -10,7 +10,7 @@ function Invoice() {
   const [duedate, setDueDate] = useState(false);
   const [additem, setAddItem] = useState(false);
   const [editadmin, setEditAdmin] = useState(false);
-  
+
   const [admindetails, setAdminDetails] = useState({
     contractNo: "A000001",
     address: "XYZ street LA",
@@ -30,7 +30,6 @@ function Invoice() {
     setInitialItems((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-//   import("./contracts.css");
   import("./invoice.css");
   return (
     <div className="ContainerWrapper">

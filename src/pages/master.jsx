@@ -27,12 +27,13 @@ const Master = ({ mode }) => {
         {type === "documents" && <Documents mode={mode} />}
 
         {type === "admin" && <AdminPage mode={mode} />}
-        {/* {type === "documents" && <Docuents />} */}
+
         {type === "profile" && <Profile mode={mode} />}
         {type === "contract-admin" && <AdminContractsPage />}
-        {type === "admin" && <AdminIndex/>}
-        {/* {type === "invoice-admin" && <Invoice />}
-        {type === "contract" && <ContractsPage />} */}
+        {type === "admin-index" && <AdminIndex/>}
+        
+        {/* {type === "invoice-admin" && <Invoice />} */}
+        {type === "contract" && <ContractsPage />}
       </div>
       <ToastContainer />
     </>

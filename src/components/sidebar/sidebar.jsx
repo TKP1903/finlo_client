@@ -89,7 +89,7 @@ const navlistFactory = (mode) => {
   }
 };
 
-const NavList = ({ mode, show }) => {
+const NavList = ({ mode, isExpanded }) => {
   let navlist = navlistFactory(mode);
   return (
     <div className="nav-list">
@@ -99,7 +99,7 @@ const NavList = ({ mode, show }) => {
             to={item.path}
             className="nav-link"
             style = {{
-              "--tooltip-content": `"${item.name}"`,
+              "--tooltip-content": `${!isExpanded && `"${item.name}"`}`,
             }}
             key={`menu-item-${index}`}
           >
@@ -108,7 +108,7 @@ const NavList = ({ mode, show }) => {
               style={{
                 "--transition-delay": `${index * 0.05}s`,
               }}
-              className={`nav-link-name ${!show ? "hide" : ""}`}
+              className={`nav-link-name ${!isExpanded ? "hide" : ""}`}
             >
               {item.name}
             </span>
@@ -118,7 +118,7 @@ const NavList = ({ mode, show }) => {
   );
 };
 
-const Header = ({ show, setShow, logoutHandler, mode }) => {
+const Header = ({ isExpanded, setIsExpanded, logoutHandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
   const user_role = localStorage.getItem("finlo_user_role");
   const user_name = user_role === "client" ? client_name : "Admin";
@@ -151,7 +151,7 @@ const Header = ({ show, setShow, logoutHandler, mode }) => {
   );
 };
 
-const SideNav = ({ show, setShow }) => {
+const SideNav = ({ isExpanded, setIsExpanded }) => {
   const [mode, setMode] = useState(localStorage.user_role);
 
   useEffect(() => {
@@ -161,19 +161,19 @@ const SideNav = ({ show, setShow }) => {
   return (
     <>
       <nav className={`sidebar`}>
-        <NavList mode={mode} show={show} />
-        {!show && (
+        <NavList mode={mode} isExpanded={isExpanded} />
+        {!isExpanded && (
           <div
             className={`sidebar-menu-icon`}
-            onClick={() => setShow((curr) => !curr)}
+            onClick={() => setIsExpanded((curr) => !curr)}
           >
             <BiMenu />
           </div>
         )}
-        {show && (
+        {isExpanded && (
           <div
             className="close-sidebar"
-            onClick={() => setShow((curr) => !curr)}
+            onClick={() => setIsExpanded((curr) => !curr)}
           >
             <AiFillCloseCircle />
           </div>
@@ -184,7 +184,7 @@ const SideNav = ({ show, setShow }) => {
 };
 
 const Sidebar = ({ mode }) => {
-  const [show, setShow] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
   const { type } = useParams();
 
@@ -196,13 +196,13 @@ const Sidebar = ({ mode }) => {
   return (
     <main>
       <Header
-        show={show}
-        setShow={setShow}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
         logoutHandler={logoutHandler}
         mode={mode}
       />
 
-      <SideNav show={show} setShow={setShow} mode={mode} />
+      <SideNav isExpanded={isExpanded} setIsExpanded={setIsExpanded} mode={mode} />
 
       <div className="master-wrap">
         <Master mode={mode} />
