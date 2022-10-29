@@ -20,34 +20,34 @@ function ContractPage() {
                 <span>Action</span>
                 <span>Comments</span>
               </div> */}
-              <div class="grid-container">
-                <div class="item1 h" style={{ backgroundColor: "#bde0fe" }}>
+              <div className="grid-container">
+                <div className="item1 h" style={{ backgroundColor: "#bde0fe" }}>
                   Description/Contract Proposal
                 </div>
-                <div class="item2 h" style={{ backgroundColor: "#bde0fe" }}>
+                <div className="item2 h" style={{ backgroundColor: "#bde0fe" }}>
                   Action
                 </div>
-                <div class="item3 h" style={{ backgroundColor: "#bde0fe" }}>
+                <div className="item3 h" style={{ backgroundColor: "#bde0fe" }}>
                   Comments
                 </div>
-                <div class="item4"></div>
-                <div class="item5">
+                <div className="item4"></div>
+                <div className="item5">
                   <select name="">
                     <option value="Approve">Approve</option>
                     <option value="Decline">Decline</option>
                   </select>
                 </div>
-                <div class="item6">
+                <div className="item6">
                   <input type="text" placeholder="Type here" />
                 </div>
-                <div class="item7"></div>
-                <div class="item8">
+                <div className="item7"></div>
+                <div className="item8">
                   <select name="">
                     <option value="Approve">Approve</option>
                     <option value="Decline">Decline</option>
                   </select>
                 </div>
-                <div class="item9">
+                <div className="item9">
                   <input type="text" placeholder="Type here" />
                 </div>
               </div>
@@ -106,7 +106,7 @@ function ContractPage() {
             </p>
           </div>
           <div className="submitButtondiv">
-            <button className={checkbox ? "active" : "disabled"}>Submit</button>
+            <button className={`submit-btn ${checkbox ? "active" : "disabled"}`}>Submit</button>
           </div>
         </div>
         <div>

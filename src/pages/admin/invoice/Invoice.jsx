@@ -10,6 +10,7 @@ function Invoice() {
   const [duedate, setDueDate] = useState(false);
   const [additem, setAddItem] = useState(false);
   const [editadmin, setEditAdmin] = useState(false);
+  
   const [admindetails, setAdminDetails] = useState({
     contractNo: "A000001",
     address: "XYZ street LA",

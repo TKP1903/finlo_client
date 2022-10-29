@@ -98,7 +98,6 @@ const NavList = ({ mode, show }) => {
           <NavLink
             to={item.path}
             className="nav-link"
-            activeClassName="active"
             key={`menu-item-${index}`}
           >
             <span className="nav-link-icon">{item.icon}</span>
