@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./sidebar.css";
 import { useNavigate, useParams, NavLink } from "react-router-dom";
 import logo from "../../assets/finlo_logo.png";
@@ -98,11 +98,16 @@ const NavList = ({ mode, show }) => {
           <NavLink
             to={item.path}
             className="nav-link"
+            style = {{
+              "--tooltip-content": `"${item.name}"`,
+            }}
             key={`menu-item-${index}`}
           >
             <span className="nav-link-icon">{item.icon}</span>
             <span
-              style={{ "--transition-delay": `${index * 0.05}s` }}
+              style={{
+                "--transition-delay": `${index * 0.05}s`,
+              }}
               className={`nav-link-name ${!show ? "hide" : ""}`}
             >
               {item.name}

@@ -248,7 +248,13 @@ main {
 }
 
 .nav-link {
+  --tooltip-content: "sample text";
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+
   color: var(--first-color-alt);
   padding-block: 1rem;
   padding-right: 1.5rem;
@@ -271,6 +277,35 @@ main {
   opacity: 0;
   animation: slide-in 0.5s var(--transition-delay) ease;
   animation-fill-mode: forwards;
+}
+
+.nav-link::after {
+  /* tool tip */
+  content: var(--tooltip-content);
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(0%, -50%);
+  padding: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* min-width: fit-content; */
+
+  background-color: grey;
+  color: var(--white-color);
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 10;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+  left: 110%;
 }
 
 @keyframes slide-in {
