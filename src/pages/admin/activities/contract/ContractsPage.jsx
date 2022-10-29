@@ -2,9 +2,8 @@ import React from "react";
 import { useState } from "react";
 // import "./contracts.css";  // Conditionally imported inside the component
 import { BiUserPlus } from "react-icons/bi";
-import { FaEdit , FaPlus} from "react-icons/fa";
-function ContractsPage() {
-
+import { FaEdit, FaPlus } from "react-icons/fa";
+function ContractsPage({ back, contract }) {
   const [duedate, setDueDate] = useState(false);
   const [additem, setAddItem] = useState(false);
   const [editadmin, setEditAdmin] = useState(false);
@@ -13,7 +12,7 @@ function ContractsPage() {
     address: "XYZ street LA",
     email: "finlo@gmail.com",
   });
-  
+
   const [initialitems, setInitialItems] = useState([
     {
       item: "",
@@ -22,7 +21,7 @@ function ContractsPage() {
       total: "",
     },
   ]);
-  
+
   const handleChange = (e) => {
     setInitialItems((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -59,12 +58,7 @@ function ContractsPage() {
             <div className="fields" style={{ cursor: "pointer" }}>
               <span onClick={() => setDueDate(!duedate)}>
                 Add Due Date
-                <span
-                  className="sign-plus"
-                >
-                  {" "}
-                  +{" "}
-                </span>
+                <span className="sign-plus"> + </span>
               </span>
             </div>
             {duedate && (
@@ -171,7 +165,10 @@ function ContractsPage() {
             </div>
             <div>Select a client / Business from the list</div>
             <div>or</div>
-            <button className="AddClient"><FaPlus style={{paddingTop:"3px",paddingRight:"2px"}}/>Add Client</button>
+            <button className="AddClient">
+              <FaPlus style={{ paddingTop: "3px", paddingRight: "2px" }} />
+              Add Client
+            </button>
           </div>
         </div>
       </div>
@@ -309,7 +306,15 @@ function ContractsPage() {
         </div>
       </div>
       <div className="row row6">
-        <button className="backbutton">Back</button>
+        <button
+          className="backbutton"
+          onClick={() => {
+            back(false);
+            contract(!contract);
+          }}
+        >
+          Back
+        </button>
       </div>
     </div>
   );
