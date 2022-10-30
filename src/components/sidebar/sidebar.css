@@ -288,7 +288,8 @@ main {
   transform: translate(0%, -50%);
   padding: 0.5rem;
 
-  display: flex;
+  /* display: flex; */
+  display: none;
   align-items: center;
   justify-content: center;
 
@@ -307,6 +308,7 @@ main {
 }
 
 .nav-link:hover::after {
+  display: flex;
   opacity: 1;
   left: 110%;
 }
