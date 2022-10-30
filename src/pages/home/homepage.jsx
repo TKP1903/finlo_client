@@ -8,6 +8,8 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
 import { API_URL } from "../../key";
 
+import getUserRole from "../../appFucntions/getUserRole";
+
 // const AdminButton = () => {
 //   return (
 //     <Link to="/admin" className="btn-admin" style={{ color: "white" }}>
@@ -61,7 +63,7 @@ const HomePage = ({mode}) => {
   };
 
   useEffect(() => {
-    if (localStorage.user_role === "admin") {
+    if (getUserRole () === "admin") {
       navigate("/admin");
     };
   }, [mode]);

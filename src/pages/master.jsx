@@ -8,16 +8,19 @@ import AdminPage from "./admin/admin";
 
 import Profile from "./profile/Profile";
 import { ToastContainer, toast } from "react-toastify";
-import AdminContractsPage from "./admin/activities/contract/ContractsPage";
+
 import ContractsPage from "./client_contract/ContractPage";
-import Invoice from "./admin/activities/invoice/Invoice";
-import { AdminIndex } from "./admin/activities/AdminIndex";
+
+import AdminContracts_Invoices from "./admin/contracts_invoices";
+
+import getUserRole from "../appFucntions/getUserRole";
 
 const Master = ({ mode }) => {
   const { type } = useParams();
 
   const navigate = useNavigate();
-  mode = localStorage.user_role;
+  mode = getUserRole();
+
   return (
     <>
       <div>
@@ -27,12 +30,9 @@ const Master = ({ mode }) => {
         {type === "documents" && <Documents mode={mode} />}
 
         {type === "admin" && <AdminPage mode={mode} />}
-
+        { type === "admin-contracts-invoices" && <AdminContracts_Invoices mode={mode} />}
         {type === "profile" && <Profile mode={mode} />}
-        {type === "contract-admin" && <AdminContractsPage />}
-        {type === "admin-index" && <AdminIndex/>}
-        
-        {/* {type === "invoice-admin" && <Invoice />} */}
+
         {type === "contract" && <ContractsPage />}
       </div>
       <ToastContainer />

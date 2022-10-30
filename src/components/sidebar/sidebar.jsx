@@ -19,6 +19,8 @@ import { MdPayment } from "react-icons/md";
 
 import Master from "../../pages/master";
 
+import getUserRole from "../../appFucntions/getUserRole";
+
 const navlistFactory = (mode) => {
   if (mode === "admin") {
     return [
@@ -35,12 +37,12 @@ const navlistFactory = (mode) => {
       {
         name: "Invoices/Contracts",
         icon: <FaFileContract />,
-        path: "/contract-admin",
+        path: "/admin-contracts-invoices",
       },
       {
         name: "Employees",
         icon: <AiOutlineUsergroupDelete />,
-        path: "/Employees",
+        path: "/employees",
       },
       {
         name: "Reports",
@@ -98,7 +100,7 @@ const NavList = ({ mode, isExpanded }) => {
           <NavLink
             to={item.path}
             className="nav-link"
-            style = {{
+            style={{
               "--tooltip-content": `${!isExpanded && `"${item.name}"`}`,
             }}
             key={`menu-item-${index}`}
@@ -120,7 +122,9 @@ const NavList = ({ mode, isExpanded }) => {
 
 const Header = ({ isExpanded, setIsExpanded, logoutHandler, mode }) => {
   const client_name = localStorage.getItem("finlo_user_name");
-  const user_role = localStorage.getItem("finlo_user_role");
+
+  const user_role = getUserRole();
+
   const user_name = user_role === "client" ? client_name : "Admin";
 
   return (
@@ -152,10 +156,10 @@ const Header = ({ isExpanded, setIsExpanded, logoutHandler, mode }) => {
 };
 
 const SideNav = ({ isExpanded, setIsExpanded }) => {
-  const [mode, setMode] = useState(localStorage.user_role);
+  const [mode, setMode] = useState(getUserRole());
 
   useEffect(() => {
-    setMode(localStorage.getItem("user_role"));
+    setMode(getUserRole());
   }, []);
 
   return (
@@ -202,7 +206,11 @@ const Sidebar = ({ mode }) => {
         mode={mode}
       />
 
-      <SideNav isExpanded={isExpanded} setIsExpanded={setIsExpanded} mode={mode} />
+      <SideNav
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+        mode={mode}
+      />
 
       <div className="master-wrap">
         <Master mode={mode} />

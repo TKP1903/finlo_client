@@ -6,15 +6,17 @@ import { Link, useNavigate } from "react-router-dom";
 import RegisterForm  from "./components/registerForm";
 import SearchArea from "./components/searchArea";
 
+import getUserRole from "../../appFucntions/getUserRole";
+
 const Admin = ({mode}) => {
   const navigate = useNavigate ();
 
-  const [ userRole , setUserRole ] = useState (localStorage.getItem ("user_role"));
+  const [ userRole , setUserRole ] = useState (getUserRole ());
 
   
   useEffect(
     () => {
-      setUserRole (localStorage.getItem ("user_role"));
+      setUserRole (getUserRole());
     }, []
   );
   

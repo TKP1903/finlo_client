@@ -19,6 +19,9 @@ import axios from "axios";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
 
+import getUserRole from "../../appFucntions/getUserRole"
+
+
 const makeFoldersFromRes = (data) => {
   /**
    * @param {Array} data - array of objects
@@ -125,7 +128,7 @@ const UserFoldersPage = ({ mode }) => {
   // const [userFolders, setUserFolders] = useState([]);
   // const [userFiles, setUserFiles] = useState([]);
 
-  const isAdmin = localStorage.user_role === "admin";
+  const isAdmin = getUserRole () === "admin";
 
   const client = JSON.parse(localStorage.getItem("client"));
 

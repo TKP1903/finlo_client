@@ -1,14 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContractPage from "./contract/ContractsPage";
-import "./index.css";
 import Invoice from "./invoice/Invoice";
+// import "./index.css";
+import getUserRole from "../../../appFucntions/getUserRole";
 
-export const AdminIndex = () => {
+const Contracts_Invoices = ({ mode }) => {
   const [contract, setContract] = useState(false);
   const [invoice, setInvoice] = useState(false);
   const [flag, setFlag] = useState(false);
-  
+
+  useEffect (
+    () => {
+      mode = getUserRole();
+    }, []
+  );
+
+  if (!!mode && mode != "admin") {
+    return (
+      <div>
+        <h1>not authorized</h1>
+        <h2> Please login with an admin account to access this page </h2>
+      </div>
+    );
+  };
+
+  import ("./index.css");
   return (
     <>
       {!flag&&
@@ -39,3 +56,5 @@ export const AdminIndex = () => {
     </>
   );
 };
+
+export default Contracts_Invoices;
