@@ -300,7 +300,6 @@ main {
   border-radius: 0.5rem;
   font-size: 0.75rem;
   opacity: 0;
-  transition: 1s;
   z-index: 100;
 
   cursor: default;
@@ -311,7 +310,7 @@ main {
   opacity: 1;
   left: 110%;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-  animation: navbar-tooltip-animation 0.5s ease 0s 1 forwards;
+  animation: navbar-tooltip-animation 0.3s ease-out 0s 1 forwards;
 }
 
 @keyframes navbar-tooltip-animation {
