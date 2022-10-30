@@ -300,8 +300,7 @@ main {
   border-radius: 0.5rem;
   font-size: 0.75rem;
   opacity: 0;
-  /* ! Transition is causing flickering b/w icon and tooltip */
-  /* transition: 0.5s;  */ 
+  transition: 0.5s;  
   z-index: 100;
 
   cursor: default;
