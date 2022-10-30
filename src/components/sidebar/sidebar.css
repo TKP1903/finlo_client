@@ -300,7 +300,7 @@ main {
   border-radius: 0.5rem;
   font-size: 0.75rem;
   opacity: 0;
-  transition: 0.5s;  
+  transition: 1s;
   z-index: 100;
 
   cursor: default;
@@ -310,6 +310,19 @@ main {
   display: flex;
   opacity: 1;
   left: 110%;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  animation: navbar-tooltip-animation 0.5s ease 0s 1 forwards;
+}
+
+@keyframes navbar-tooltip-animation {
+  0% {
+    opacity: 0.1;
+    left: 100%;
+  }
+  100% {
+    opacity: 1;
+    left: 110%;
+  }
 }
 
 @keyframes slide-in {
