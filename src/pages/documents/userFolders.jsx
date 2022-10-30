@@ -19,8 +19,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { API_URL } from "../../key";
 
-import getUserRole from "../../appFucntions/getUserRole"
-
+import getUserRole from "../../appFucntions/getUserRole";
 
 const makeFoldersFromRes = (data) => {
   /**
@@ -128,7 +127,7 @@ const UserFoldersPage = ({ mode }) => {
   // const [userFolders, setUserFolders] = useState([]);
   // const [userFiles, setUserFiles] = useState([]);
 
-  const isAdmin = getUserRole () === "admin";
+  const isAdmin = getUserRole() === "admin";
 
   const client = JSON.parse(localStorage.getItem("client"));
 
@@ -246,13 +245,10 @@ const UserFoldersPage = ({ mode }) => {
     }
   };
 
-  const createFolder = async (
-    folder_name, 
-    parent_folder_name
-  ) => {
-    console.log ({folder_name, parent_folder_name});
+  const createFolder = async (folder_name, parent_folder_name) => {
+    console.log({ folder_name, parent_folder_name });
     try {
-      if(parent_folder_name === "") {
+      if (parent_folder_name === "") {
         parent_folder_name = "root";
       }
       const response = await axios.post(`${API_URL}folder/create-folder`, {
@@ -438,7 +434,7 @@ const UserFoldersPage = ({ mode }) => {
       <h3 className="page_heading">
         {" "}
         {isAdmin
-          ? client.firstName + " " + client.lastName + "  Documents"
+          ? `${client.firstName} ${client.lastName}'s Documents`
           : "Documents"}{" "}
       </h3>
       <div className="documents_block">
@@ -449,7 +445,7 @@ const UserFoldersPage = ({ mode }) => {
               <>
                 <span
                   key={path + index}
-                  data-index = {index}
+                  data-index={index}
                   className="breadcrumb-item"
                   onClick={(e) => {
                     // pop the path upto the index using

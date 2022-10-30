@@ -31,6 +31,7 @@ const Master = ({ mode }) => {
 
         {type === "admin" && <AdminPage mode={mode} />}
         { type === "admin-contracts-invoices" && <AdminContracts_Invoices mode={mode} />}
+        
         {type === "profile" && <Profile mode={mode} />}
 
         {type === "contract" && <ContractsPage />}
